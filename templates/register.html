@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-3"> </div>
+<div class="col-6">
+    <div class="jumbotron">
+<h1>Registro de usuarios al sistema CAT</h1>
+            <br>
+        <form method="POST" action="">
+            <div class="form-group">
+                <label for="username">Username:</label><br>
+                <input class="form-control" type="text" id="username" name="username">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label><br>
+                <input class="form-control" type="password" id="password" name="password">
+            </div>
+            <div class="form-group">
+                <label for="re_password">Confirmar Password</label><br>
+                <input class="form-control" type="password" id="re_password" name="re_password">
+            </div>
+            <div class="form-group">
+                <label for="user_type"> Tipo de usuario </label></br>
+                <select class="form-control" name="user_type">
+                    <option value="doctor">Doctor</option>
+                    <option value="Personal administrativo">Personal Administrativo</option>
+                    <option value="Personal de Enfermeria">Personal de enfermera<option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary form-control">Crear usuario</button>
+        </form>
+        <br>
+        <h4><a href="{{ url_for('login')}}" > Ya tienes una cuenta? Ingresa aqui!</a></h4>
+        </div>
+    </div>
+    
+    <div class="col-3"></div>
+{%endblock%}

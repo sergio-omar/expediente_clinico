@@ -1,0 +1,28 @@
+{%extends "base.html" %}
+{%block content%}
+<div class="col-3"></div>
+<div class="col-6">
+    <div class="jumbotron">
+        <h1>Ingreso de paciente</h1>
+        <h1> {{patient_id}}</h1>
+        <br>
+        <form method="POST" action="">
+            <div clas="form-group">
+             <label for="patient_names">Nombres del paciente:</label><br>
+             <input class="form-control" type="text" id="nombre_paciente" name="nombre_paciente"><br>
+            </div>
+             <div clas="form-group">
+             <label for="patient_first_lastname">Apellido Paterno</label><br>
+             <input class="form-control" type="text" id="patient_first_lastname" name="patient_first_lastname"><br>
+            </div>
+            <div clas="form-group">
+             <label for="patient_second_lastname">Apellido Materno</label><br>
+             <input class="form-control" type="text" id="patient_second_lastname" name="patient_second_lastname"><br>
+            </div>
+            <button type="submit" class="btn btn-primary form-control">Login</button>            
+        </form>
+        <br>
+    </div>
+</div>
+<div class="col-3"></div>
+{%endblock%}
