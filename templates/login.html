@@ -1,5 +1,18 @@
 {%extends "base.html" %}
 {%block content%}
+{% with messages=get_flashed_messages(with_categories=true)%}
+    {% if messages%}
+        {%for category, msg in messages%}
+            <div class="col-2"></div>
+            <div class="col-8">
+                <div class="{{category}}" role="alert">
+                {{msg}}
+                </div>
+            </div>
+            <div class="col-2"></div>
+        {%endfor%}
+    {% endif %}
+{%endwith%}
 <div class="col-3"></div>
 <div class="col-6">
     <div class="jumbotron">
@@ -17,7 +30,6 @@
             <button type="submit" class="btn btn-primary form-control">Login</button>            
         </form>
         <br>
-        <h4><a href="{{ url_for('register')}}" > Aun no tienes cuenta? Registrate aqui</a></h4>
     </div>
 </div>
 <div class="col-3"></div>

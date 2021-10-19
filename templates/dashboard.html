@@ -5,9 +5,17 @@
     <div class="col-3"></div>
     <div class="col-6">
         <div class="jumbotron">
-
-         </div>
+        {% if current_user.is_authenticated %}
+        <h1>Bienvenido {{ current_user.username }}! </h1>
+        {% endif %} 
+        </div>
+        {% if current_user.username == "Administrador" %}
+        <div class="jumbotron">
+            <h2><a href="/register">Crear usuario</a> </p>
+        </div>
+        {% endif %}         
     </div>
+
     <div class="col-3"></div>
     </div>
 </div>

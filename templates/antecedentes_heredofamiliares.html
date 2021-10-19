@@ -1,0 +1,906 @@
+{%extends "base.html" %}
+{%block content%}
+<div class="col-2"></div>
+<div class="col-8">
+    <div class="jumbotron">
+        <div class="row">
+                </div>
+
+
+
+
+    <!--add -->
+
+    <table style="width:50%; margin:0 auto;">
+
+        <center><h3>ANTECEDENTES HEREDO-FAMILIARES</h3><center>
+
+        <form action="/.php">
+            <tr>
+
+
+
+                <td>
+
+
+                    <label>Familiar Informante:</label>
+
+                    <select name="FamiliarInf">
+                      <option value="Null" selected>Selecciona</option>
+                      <option value="Abuela_Materna">Abuela Materna</option>
+                      <option value="Abuela_Paterna">Abuela Paterna</option>
+                      <option value="Abuelo Materno">Abuelo Materno</option>
+                      <option value="Abuelo_Paterno">Abuelo Paterno</option>
+                      <option value="Conyugue">Cónyugue</option>
+                      <option value="El_Paciente">El Paciente</option>
+                      <option value="Hermana">Hermana</option>
+                      <option value="Hermano">Hermano</option>
+                      <option value="Hija">Hija</option>
+                      <option value="Hijo">hijo</option>
+                      <option value="Madre">Madre</option>
+                      <option value="Padre">Padre</option>
+                      <option value="Tia_Materna">Tía Materna</option>
+                      <option value="Tia_Paterna">Tía Paterna</option>
+                      <option value="Tio_Materno">Tío Materno</option>
+                      <option value="Tio_Paterno">Tío Paterno</option>
+                      <option value="Otro">Otro</option>
+                      <option value="Ninguno">Ninguno</option>
+                    </select>
+
+
+                </td>
+
+                <td>
+
+                    <label>Familiar Responsable del Paciente:</label>
+
+
+                </td>
+
+                <td>
+
+                    <select name="FamiliarResp">
+                      <option value="Null" selected>Selecciona</option>
+                      <option value="Abuela_Materna">Abuela Materna</option>
+                      <option value="Abuela_Paterna">Abuela Paterna</option>
+                      <option value="Abuelo Materno">Abuelo Materno</option>
+                      <option value="Abuelo_Paterno">Abuelo Paterno</option>
+                      <option value="Conyugue">Cónyugue</option>
+                      <option value="El_Paciente">El Paciente</option>
+                      <option value="Hermana">Hermana</option>
+                      <option value="Hermano">Hermano</option>
+                      <option value="Hija">Hija</option>
+                      <option value="Hijo">hijo</option>
+                      <option value="Madre">Madre</option>
+                      <option value="Padre">Padre</option>
+                      <option value="Tia_Materna">Tía Materna</option>
+                      <option value="Tia_Paterna">Tía Paterna</option>
+                      <option value="Tio_Materno">Tío Materno</option>
+                      <option value="Tio_Paterno">Tío Paterno</option>
+                      <option value="Otro">Otro</option>
+                      <option value="Ninguno">Ninguno</option>
+                    </select>
+
+                </td>
+
+
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>
+
+                    <label>Padecimiento:</label>
+                    <input type="radio" id="Padecimiento" name="Padecimientos" value="Padecimiento">
+                    <label>Otros:</label>
+                    <input type="radio" id="OtrosPad" name="Padecimientos" value="OtrosPad">
+
+                </td>
+
+                <td>
+
+                    <label>Familiares:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="FamiliaresPad">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Abuela_Materna">Abuela Materna</option>
+                        <option value="Abuela_Paterna">Abuela Paterna</option>
+                        <option value="Abuelo Materno">Abuelo Materno</option>
+                        <option value="Abuelo_Paterno">Abuelo Paterno</option>
+                        <option value="Conyugue">Cónyugue</option>
+                        <option value="El_Paciente">El Paciente</option>
+                        <option value="Hermana">Hermana</option>
+                        <option value="Hermano">Hermano</option>
+                        <option value="Hija">Hija</option>
+                        <option value="Hijo">hijo</option>
+                        <option value="Madre">Madre</option>
+                        <option value="Padre">Padre</option>
+                        <option value="Tia_Materna">Tía Materna</option>
+                        <option value="Tia_Paterna">Tía Paterna</option>
+                        <option value="Tio_Materno">Tío Materno</option>
+                        <option value="Tio_Paterno">Tío Paterno</option>
+                        <option value="Otro">Otro</option>
+                        <option value="Ninguno">Ninguno</option>
+                    </select>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <select name="SelecPadecimiento">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Alcoholismo">Alcoholismo</option>
+                        <option value="Alergias">Alergias</option>
+                        <option value="Cardiopatias">Cardiopatías</option>
+                        <option value="Dependencia">Dependencia a Drogas o Medicamentos</option>
+                        <option value="Diabetes">Diabetes Melitus</option>
+                        <option value="Hipertension">Hipertensión Arterial</option>
+                        <option value="Malformaciones">Malformaciones Congénitas</option>
+                        <option value="Neoplasias">Neoplasias</option>
+                        <option value="Obesidad">Obesidad</option>
+                        <option value="Tuberculosis">Tuberculosis Pulmonar</option>
+                        <option value="Tabaquismo">Tabaquismo</option>
+                        <option value="S/A">Sin Antecedentes</option>
+                    </select>
+
+                </td>
+
+                <td>
+
+                    <label>Finados:</label>
+                    <input type="checkbox" id="Finados" name="Finados" value="Finados">
+
+                </td>
+
+                <td>
+
+                    <input type="submit" value="Agregar">
+                    <input type="reset">
+
+                </td>
+
+            </tr>
+
+        </form>
+    </table>
+
+    <table style="width:50%; margin:0 auto;">
+
+
+        <center><h3>ANTECEDENTES PERSONALES NO PATOLÓGICOS</h3><center>
+        <form action="/.php">
+
+            <tr>
+
+                <td>
+
+                    <label>Fecha de nacimiento:</label>
+
+                </td>
+
+                <td>
+
+                    <input type="date" id="FechaNacimiento" name="FechaNacimiento">
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Religión:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="Religion">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Catolica">Católica</option>
+                        <option value="Protestantes">Protestantes</option>
+                        <option value="Evangelicas">Evangélicas</option>
+                        <option value="Historicas">Históricas</option>
+                        <option value="Pentecostales">Pentecostales</option>
+                        <option value="Neopentecostales">Neopentecostales</option>
+                        <option value="Iglesia del Dios Vivo">Iglesia del Dios Vivo</option>
+                        <option value="Columna de Apoyo de la Verdad">Columna de Apoyo de la Verdad</option>
+                        <option value="La Luz del Mundo">La Luz del Mundo</option>
+                        <option value="Biblicas no Evangelicas">Bíblicas no Evangélicas</option>
+                        <option value="Adventistas del Septimo Dia">Adventistas del Séptimo Día</option>
+                        <option value="Mormones">Mormones</option>
+                        <option value="Testigos de Jehova">Testigos de Jehová</option>
+                        <option value="Judaica">Judaica</option>
+                        <option value="Otras Evangelicas">Otras Evangélicas</option>
+                        <option value="Ninguna">Ninguna</option>
+                    </select>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Lugar de Nacimiento:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="LugarNacimiento">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Aguascalientes">Aguascalientes</option>
+                        <option value="Baja California">Baja California</option>
+                        <option value="Baja California Sur">Baja California Sur</option>
+                        <option value="Campeche">Campeche</option>
+                        <option value="Chiapas">Chiapas</option>
+                        <option value="Chihuahua">Chihuahua</option>
+                        <option value="CDMX">Ciudad de México</option>
+                        <option value="Coahuila">Coahuila</option>
+                        <option value="Colima">Colima</option>
+                        <option value="Durango">Durango</option>
+                        <option value="Estado de Mexico">Estado de México</option>
+                        <option value="Guanajuato">Guanajuato</option>
+                        <option value="Guerrero">Guerrero</option>
+                        <option value="Hidalgo">Hidalgo</option>
+                        <option value="Jalisco">Jalisco</option>
+                        <option value="Michoacan">Michoacán</option>
+                        <option value="Morelos">Morelos</option>
+                        <option value="Nayarit">Nayarit</option>
+                        <option value="Nuevo Leon">Nuevo León</option>
+                        <option value="Oaxaca">Oaxaca</option>
+                        <option value="Puebla">Puebla</option>
+                        <option value="Queretaro">Querétaro</option>
+                        <option value="Quintana Roo">Quintana Roo</option>
+                        <option value="San Luis Potosi">San Luis Potosí</option>
+                        <option value="Sinaloa">Sinaloa</option>
+                        <option value="Sonora">Sonora</option>
+                        <option value="Tabasco">Tabasco</option>
+                        <option value="Tamaulipas">Tamaulipas</option>
+                        <option value="Tlaxcala">Tlaxcala</option>
+                        <option value="Veracruz">Veracruz</option>
+                        <option value="Yucatan">Yucatán</option>
+                        <option value="Zacatecas">Zacatecas</option>
+                    </select>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Estado Civil:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="EstadoCivil">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Casado(a)">Casado(a)</option>
+                        <option value="Concubino(a)">Concubino(a)</option>
+                        <option value="Divorciado(a)">Divorciado(a)</option>
+                        <option value="Madre (Padre) Soltera (o)">Madre (Padre) Soltera (o)</option>
+                        <option value="Separado(a)">Separado(a)</option>
+                        <option value="Soltero(a)">Soltero(a)</option>
+                        <option value="Union Libre">Unión Libre</option>
+                        <option value="Viudo(a)">Viudo(a)</option>
+                        <option value="No Aplica">No Aplica</option>
+                    </select>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Escolaridad:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="Escolaridad">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Analfabeta">Analfabeta</option>
+                        <option value="Bachillerato">Bachillerato</option>
+                        <option value="Doctorado">Doctorado</option>
+                        <option value="Licenciatura">Licenciatura</option>
+                        <option value="Maestria">Maestría</option>
+                        <option value="Prescolar">Prescolar</option>
+                        <option value="Primaria">Primaria</option>
+                        <option value="Sabe Leer y Escribir">Sabe Leer y Escribir</option>
+                        <option value="Secundaria">Secundaria</option>
+                        <option value="Tecnico">Técnico</option>
+                        <option value="Ninguna">Ninguna</option>
+                        <option value="No Aplica">No Aplica</option>
+                        <option value="Otra">Otra</option>
+                    </select>
+
+                </td>
+
+                <td>
+
+                    <input type="radio" id="EscolaridadCompleta" name="Esc_Completa" value="Completa">
+                    <label>Completa:</label>
+
+                    <input type="radio" id="EscolaridadIncompleta" name="Esc_Completa" value="Incompleta">
+                    <label>Incompleta:</label>
+
+                </td>
+
+
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Higiene Personal:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="HigienePersonal">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Buena">Buena</option>
+                        <option value="Mala">Mala</option>
+                        <option value="Deficiente">Deficiente</option>
+                    </select>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Actividad Física:</label>
+
+                </td>
+
+                <td>
+
+                    <label>Sí:</label>
+
+                    <input type="radio" id="ActividadFisica" name="Act_Fisica" value="Si">
+
+                    <label>No:</label>
+
+                    <input type="radio" id="EscolaridadIncompleta" name="Act_Fisica" value="No">
+
+                </td>
+
+                <td>
+
+                    <label>Tipo de Actividad:</label>
+                    <select name="Tipo_Actividad">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Caminata">Caminata</option>
+                        <option value="Carrera">Carrera</option>
+                        <option value="Gimnasia">Gimnasia</option>
+                        <option value="Aerobics">Aerobics</option>
+                        <option value="Baile">Baile</option>
+                        <option value="Natacion">Natación</option>
+                        <option value="Futbol">Fútbol</option>
+                        <option value="Voleibol">Voleibol</option>
+                        <option value="Basquetbol">Basquetbol</option>
+                        <option value="Ciclismo">Ciclismo</option>
+                        <option value="Otos">Otos</option>
+                    </select>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Frecuencia:</label>
+
+                </td>
+
+                <td>
+
+                    <input type="number" id="Frecuencia" name="Frecuencia" min="1" max="10">
+
+                    <label> veces al :</label>
+
+                    <select name="Consecutivo">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Hora(s)">Hora(s)</option>
+                        <option value="Dia(s)">Día(s)</option>
+                        <option value="Semana(s)">Semana(s)</option>
+                        <option value="Mes(es)">Mes(es)</option>
+                        <option value="Año(s)">Año(s)</option>
+                    </select>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Preferencia Sexual:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="Pref_Sexual">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Heterosexual">Heterosexual</option>
+                        <option value="Homosexual">Homosexual</option>
+                        <option value="Bisexual">Bisexual</option>
+                        <option value="No Aplica">No Aplica</option>
+                    </select>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Numero de Parejas:</label>
+
+                </td>
+
+                <td>
+
+                    <input type="number" id="Num_Pareja" name="Num_Pareja" min="1" max="10">
+
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+
+                    <label>Grupo Sanguíneo:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="Grupo_Sanguineo">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="No lo Sabe">No lo Sabe</option>
+                    </select>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+
+                    <label>Calidad de Alimentación:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="Calidad_Alimentacion">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Suficiente">Suficiente</option>
+                        <option value="Insuficiente">Insuficiente</option>
+                        <option value="Balanceada">Balanceada</option>
+                        <option value="No Balanceada">No Balanceada</option>
+                    </select>
+
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <td>
+
+                    <label>Características de la Habitación:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="Calidad_Alimentacion" size="5" multiple="multiple">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Agua Intradomiciliaria">Agua Intradomiciliaria</option>
+                        <option value="Agua Extradomiciliaria Potable">Agua Extradomiciliaria Potable</option>
+                        <option value="Agua Extradomiciliaria No Potable">Agua Extradomiciliaria No Potable</option>
+                        <option value="Excretas Con Drenaje">Excretas Con Drenaje</option>
+                        <option value="Excretas sin Drenaje">Excretas sin Drenaje</option>
+                        <option value="Excretas Letrina o Fosa Septica">Excretas Letrina o Fosa Séptica</option>
+                        <option value="Excretas Fecal, al Aire Libre">Excretas Fecal, al Aire Libre</option>
+                        <option value="Pisos Mosaicos">Pisos Mosaicos</option>
+                        <option value="Pisos Cemento">Pisos Cemento</option>
+                        <option value="Pisos Tierra">Pisos Tierra</option>
+                        <option value="Pisos Otros">Pisos Otros</option>
+                        <option value="Techos Losa">Techos Losa</option>
+                        <option value="Techos Teja">Techos Teja</option>
+                        <option value="Techos Lamina">Techos Lámina</option>
+                        <option value="Techos Otros">Techos Otros</option>
+                        <option value="Luz Electrica">Luz Eléctrica</option>
+                        <option value="Animales Domesticos">Animales Domésticos</option>
+                        <option value="Ventilacion Buena">Ventilación Buena</option>
+                        <option value="Ventilacion Ninguna">Ventilación Ninguna</option>
+                        <option value="Tenencia Casa Propia">Tenencia Casa Propia</option>
+                        <option value="Tenencia Casa Rentada">Tenencia Casa Rentada</option>
+                        <option value="Tenencia Casa Prestada">Tenencia Casa Prestada</option>
+                        <option value="Tenencia Casa Hipotecada">Tenencia Casa Hipotecada</option>
+                        <option value="Tenencia Casa Otros">Tenencia Casa Otros</option>
+                        <option value="Tipo Casa Sola">Tipo Casa Sola</option>
+                        <option value="Tipo Casa - departamento">Tipo Casa - departamento</option>
+                        <option value="Tipo Casa Vecindad">Tipo Casa Vecindad</option>
+                        <option value="Tipo Casa Otras">Tipo Casa Otras</option>
+                        <option value="Hacinamiento 2 Personas/Habita">Hacinamiento 2 Personas/Habita</option>
+                        <option value="Hacimiento Mas de 2 Personas">Hacimiento Más de 2 Personas</option>
+                        <option value="Iluminacion Buena">Iluminación Buena</option>
+                        <option value="Iluminacion Mala">Iluminación Mala</option>
+                        <option value="Iluminacion Ninguna">Iluminación Ninguna</option>
+                        <option value="Combustible Gas LP">Combustible Gas LP</option>
+                        <option value="Combustible Petroleo">Combustible Petróleo</option>
+                        <option value="Combustible Leña">Combustible Leña</option>
+                        <option value="Combustible Otros">Combustible Otros</option>
+                        <option value="Tabique o Ladrillo">Tabique o Ladrillo</option>
+                        <option value="Cemento">Cemento</option>
+                        <option value="Carton">Cartón</option>
+                        <option value="Lamina">Lámina</option>
+                        <option value="Madera">Madera</option>
+                        <option value="Otro">Otro</option>
+                        <option value="Combustible Gas Natural">Combustible Gas Natural</option>
+                        <option value="Combustible Carbon">Combustible Carbón</option>
+                        <option value="CombustibleParrilla Electrica">CombustibleParrilla Eléctrica</option>
+                        <option value="Iluminacion Regular">Iluminación Regular</option>
+                        <option value="Asentamiento Irregular">Asentamiento Irregular</option>
+
+                    </select>
+
+                </td>
+
+                <td>
+
+                    <input type="submit" value="Submit">
+
+                </td>
+
+            </tr>
+
+        </form>
+
+    </table>
+
+    <table style="width:50%; margin:0 auto;">
+
+        <center><h3>ANTECEDENTES PERSONALES LABORALES</h3><center>
+
+        <form action="/.php">
+
+
+            <tr>
+
+                <td>
+
+                    <label>Nombre o Razón Social:</label>
+
+                </td>
+
+                <td>
+
+                    <input type="text" id="Nombre_RS" name="Nombre_RS" value="Ejemplo">
+
+                </td>
+
+                <td>
+
+                    <label>Días de Descanso:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="Dias_Descanso" multiple="multiple">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Lunes">Lunes</option>
+                        <option value="Martes">Martes</option>
+                        <option value="Miercoles">Miércoles</option>
+                        <option value="Jueves">Jueves</option>
+                        <option value="Viernes">Viernes</option>
+                        <option value="Sabado">Sábado</option>
+                        <option value="Domingo" selected="selected">Domingo</option>
+                        <option value="Variable">Variable</option>
+                    </select>
+
+                </td>
+
+                <td>
+
+                     <input type="submit" value="Agregar">
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Actividad Empresa:</label>
+
+                </td>
+
+                <td>
+
+                    <input type="text" id="Actividad_Empresa" name="Actividad_Empresa" value="Ejemplo">
+
+                </td>
+
+                <td>
+
+                    <input type="submit" value="Buscar">
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Producto o Serv. que se elabora:</label>
+
+                </td>
+
+                <td>
+
+                    <input type="text" id="Producto_Serv" name="Producto_Serv" value="Ejemplo">
+
+                <td>
+
+                    <label>Agente Contaminante:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="Agente_Contaminante">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Fisico">Físico</option>
+                        <option value="Quimico">Químico</option>
+                        <option value="Biologico">Biológico</option>
+                        <option value="Psicosociales">Psicosociales</option>
+                        <option value="Otros">Otros</option>
+                        <option value="Ninguno">Ninguno</option>
+                    </select>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Fecha Inicio Empresa:</label>
+
+                </td>
+
+                <td>
+
+                    <input type="date" id="FechaI_Empresa" name="FechaI_Empresa">
+
+                </td>
+
+                <td>
+
+                    <label>Fecha Final Empresa:</label>
+
+                </td>
+
+                <td>
+
+                    <input type="date" id="FechaF_Empresa" name="FechaF_Empresa">
+
+                </td>
+
+                <td>
+
+                    <label>Via de exposición:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="Via_Exposicion">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Piel">Piel</option>
+                        <option value="Mucosa y anexos">Mucosa y anexos</option>
+                        <option value="Respiratoria">Respiratoria</option>
+                        <option value="Digestiva">Digestiva</option>
+                        <option value="Auditiva">Auditiva</option>
+                        <option value="Mental">Mental</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                     <label>Ocupación:</label>
+
+                </td>
+
+                <td>
+
+                    <input type="text" id="Ocupacon" name="Ocupacion" value="Ejemplo">
+
+                <td>
+
+                <td>
+
+                    <input type="submit" value="Buscar">
+
+                </td>
+
+                <td>
+
+                     <label>Especifique:</label>
+
+                </td>
+
+                <td>
+
+                    <input type="text" id="Especifique" name="Especifique" value="Ejemplo">
+
+                <td>
+
+                <td>
+
+                    <input type="submit" value="Agregar">
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Breve Descripción de las Dctividades Laborales:</label>
+
+                </td>
+
+                <td>
+
+                    <textarea name="Breve_Descripcion" rows="5" cols="25">Escribe algo aquí.</textarea>
+
+                </td>
+
+                <td>
+
+                    <label>Tiempo al que Está Expuesto:</label>
+
+                </td>
+
+                <td>
+
+                     <input type="number" id="Tiempo_Expuesto" name="Tiempo_Expuesto" min="1" max="12"> hrs.
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Duración:</label>
+
+                </td>
+
+                <td>
+
+                     <input type="number" id="Duracion" name="Tiempo_Expuesto" min="1" max="12"> meses.
+
+                </td>
+
+                <td>
+
+                    <label>Equipo de Protección:</label>
+                    <input type="radio" id="EquipoPP" name="EPP" value="si">
+                    <label>Si</label>
+                    <input type="radio" id="EquipoPP" name="EPP" value="no">
+                    <label>No</label>
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td>
+
+                    <label>Turno Laboral:</label>
+
+                </td>
+
+                <td>
+
+                    <select name="Turno_Laboral">
+                        <option value="Null" selected>Selecciona</option>
+                        <option value="Matutino">Matutino</option>
+                        <option value="Vespertino">Vespertino</option>
+                        <option value="Nocturno">Nocturno</option>
+                        <option value="Mixto">Mixto</option>
+                    </select>
+
+                    <input type="submit" value="Agregar">
+
+                </td>
+
+                <td>
+
+                     <label>Especifique:</label>
+
+                </td>
+
+                <td>
+
+                    <input type="text" id="Especifique_turno" name="Especifique_Turno" value="Ejemplo">
+
+                <td>
+
+                <td>
+
+                </td>
+
+            </tr>
+
+
+        </form>
+
+    </table>
+    <!--add -->
+
+
+    </div>
+</div>
+<div class="col-2"></div>
+{%endblock%}

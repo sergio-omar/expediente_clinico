@@ -1,28 +1,65 @@
 {%extends "base.html" %}
 {%block content%}
-<div class="col-3"></div>
-<div class="col-6">
+<div class="col-2"></div>
+<div class="col-8">
     <div class="jumbotron">
-        <h1>Ingreso de paciente</h1>
-        <h1> {{patient_id}}</h1>
-        <br>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Ficha de ingreso</label>
+                </div>
+            </div>
+            <div class="col">
+                <div class="form-group">
+                    <input class="form-control" disabled value={{patient_id}}></input>
+                </div>
+            </div>
+        </div>
         <form method="POST" action="">
+            <!-- Nombre de la persona -->
             <div clas="form-group">
              <label for="patient_names">Nombres del paciente:</label><br>
-             <input class="form-control" type="text" id="nombre_paciente" name="nombre_paciente"><br>
+             <input class="form-control" type="text" id="nombre_paciente" name="patient_names"><br>
             </div>
-             <div clas="form-group">
-             <label for="patient_first_lastname">Apellido Paterno</label><br>
-             <input class="form-control" type="text" id="patient_first_lastname" name="patient_first_lastname"><br>
+            <div class="row">
+                <div class="col">
+                    <div clas="form-group">
+                        <label for="patient_first_lastname">Apellido Paterno</label><br>
+                        <input class="form-control" type="text" id="patient_first_lastname" name="patient_first_lastname"><br>
+                    </div>
+                </div>
+                <div class="col">
+                    <div clas="form-group">
+                        <label for="patient_second_lastname">Apellido Materno</label><br>
+                        <input class="form-control" type="text" id="patient_second_lastname" name="patient_second_lastname"><br>
+                    </div>
+                </div>
+                </div>
+            <!-- Direccion -->
+            <div class="row">
+                <div class="col">
+                    <div clas="form-group">
+                        <label for="address_street">Calle</label><br>
+                        <input class="form-control" type="text" id="addres_street" name="address_street"><br>
+                    </div>
+                </div>
+                <div class="col">
+                    <div clas="form-group">
+                        <label for="address_number">Numero</label><br>
+                        <input class="form-control" type="text" id="addres_number" name="address_number"><br>
+                    </div>
+                </div>
             </div>
-            <div clas="form-group">
-             <label for="patient_second_lastname">Apellido Materno</label><br>
-             <input class="form-control" type="text" id="patient_second_lastname" name="patient_second_lastname"><br>
-            </div>
-            <button type="submit" class="btn btn-primary form-control">Login</button>            
+
+
+            <!-- Numeros Telefonico -->
+
+            <button type="submit" class="btn btn-primary form-control">Ingreso de Paciente</button>            
+            <br>
+            <button type="submit" class="btn btn-secondary form-control">Cancelar ingreso</button>   
         </form>
         <br>
     </div>
 </div>
-<div class="col-3"></div>
+<div class="col-2"></div>
 {%endblock%}

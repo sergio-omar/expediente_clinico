@@ -21,7 +21,7 @@
             <!-- LETS USE JAVASCRIPT TO GENERATE THE USER -->
             <div class="form-group">
                 <label for="username">Nombre de Usuario:</label><br>
-                <input class="form-control" type="text" id="username" name="username" readonly="readonly">
+                <input class="form-control" type="text" id="username" name="username" readonly="readonly" value="Administrador">
             </div>
             <!-- JAVASCRIPT WILL GENERATE A RANDOM PASSWORD-->
             <div class="form-group">
@@ -31,12 +31,7 @@
 
             <div class="form-group">
                 <label for="user_type"> Tipo de usuario </label></br>
-                <select class="form-control" id="user_type" name="user_type">
-                    {% if current_user.username == "Administrador" %}
-                    <option value="Personal administrativo">Personal Administrativo</option>
-                    {%endif%}
-                    <option value="Personal de Enfermeria">Personal de enfermería</option>
-                    <option value="doctor">Doctor</option>
+                <input class="form-control" id="user_type" name="user_type" value="Administrador" readonly="readonly">
                 </select>
             </div>
             <!-- button for modal -->
@@ -62,7 +57,7 @@
           <p>Nombres:</p>
           <p id="modal-names" value=""> </p>
           <p>Apellido paterno:</p>
-          <p id="modal-first_lastname"></p>
+          <p id="modal-first_lastname" value=""></p>
           <p>Apellido materno:</p>
           <p id="modal-second_lastname" value=""></p>
           <p>Nombre de usuario en el sistema: </p>
@@ -82,25 +77,9 @@
 
     <script type="text/javascript">
         document.getElementById("password").value = 100 + Math.floor(Math.random()* 899)
-        document.getElementById("user_names").addEventListener("change", elaborate_username);
-        document.getElementById("user_first_lastname").addEventListener("change", elaborate_username);
-        document.getElementById("user_second_lastname").addEventListener("change", elaborate_username);
-
-function elaborate_username() {
-    var only_firstname;
-    var first_lastname;
-    var random;
-    var whole_username;
-    var names_array = document.getElementById("user_names").value.split(/(\s+)/);
-    only_firstname = names_array[0]
-    first_lastname = document.getElementById("user_first_lastname").value.trim()
-    random = Math.floor(Math.random() * 999);
-    whole_username = only_firstname +"." + first_lastname + random
-    document.getElementById("username").value = whole_username.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-}
-function fill_modal(){
+        function fill_modal(){
     document.getElementById("modal-names").innerText = document.getElementById("user_names").value.trim()
-    document.getElementById("modal-first_lastname").innerText = document.getElementById("user_first_lastname").value.trin()
+    document.getElementById("modal-first_lastname").innerText = document.getElementById("user_first_lastname").value.trim()
     document.getElementById("modal-second_lastname").innerText = document.getElementById("user_second_lastname").value.trim()
     document.getElementById("modal-password").innerText = document.getElementById("password").value.trim()
     document.getElementById("modal-username").innerText = document.getElementById("username").value.trim()
