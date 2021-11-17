@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-2"> </div>
+<div class="col-8">
+    <div class="jumbotron">
+<h1>Administracion de cuentas</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">id</th> 
+            <th scope="col">Acción realizada por:</th>
+            <th scope="col">Acción</th>
+            <th scope="col">Fecha/hora </th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for log in logs%}
+            <tr>
+                <th> {{log.id}}</th>
+                <th> {{log.user}}</th>
+                <th> {{log.user_action}}</th>
+                <th> {{log.log_date}}</th>
+            </form>
+            </tr>
+        {%endfor%}
+    </tbody>
+            <br>
+            <br>
+        </div>
+    </div>
+    
+    <div class="col-2"></div>
+{%endblock%}

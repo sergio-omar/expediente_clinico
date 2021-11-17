@@ -39,6 +39,17 @@
                     <option value="doctor">Doctor</option>
                 </select>
             </div>
+            <div class="form-group">
+                    <label for="cedula_profesional">Cédula Profesional</label>
+                    <input class="form-control" id="user_cedula" name="user_cedula"></input>
+                </div>
+                <div class="form-group">
+                    <label for="created_by">Usuario registrado por:</label><br>
+                    <input class="form-control" type="text" id="created_by" name="created_by" value="{{current_user.username}}" readonly="readonly">
+                </div>
+                
+
+            </div>
             <!-- button for modal -->
             <button onclick="fill_modal()" type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#exampleModal" >
   Crear usuario
@@ -60,17 +71,20 @@
       </div>
       <div class="modal-body">
           <p>Nombres:</p>
-          <p id="modal-names" value=""> </p>
+          <h3 id="modal-names" value=""> </h3>
           <p>Apellido paterno:</p>
-          <p id="modal-first_lastname"></p>
+          <h3 id="modal-first_lastname"></h3>
           <p>Apellido materno:</p>
-          <p id="modal-second_lastname" value=""></p>
+          <h3 id="modal-second_lastname" value=""></h3>
           <p>Nombre de usuario en el sistema: </p>
-          <p id="modal-username" value=""></p>
+          <h3 id="modal-username" value=""></h3>
           <p>Password temporal: </p>
-          <p id="modal-password" value=""></p>
+          <h3 id="modal-password" value=""></h3>
           <p>Tipo de usuario</p>
-          <p id="modal-type" value=""></p>
+          <h3 id="modal-type" value=""></h3>
+          <hr>
+          <p>Usuario Creado por:</p>
+          <p>{{current_user.username}}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -100,7 +114,7 @@ function elaborate_username() {
 }
 function fill_modal(){
     document.getElementById("modal-names").innerText = document.getElementById("user_names").value.trim()
-    document.getElementById("modal-first_lastname").innerText = document.getElementById("user_first_lastname").value.trin()
+    document.getElementById("modal-first_lastname").innerText = document.getElementById("user_first_lastname").value.trim()
     document.getElementById("modal-second_lastname").innerText = document.getElementById("user_second_lastname").value.trim()
     document.getElementById("modal-password").innerText = document.getElementById("password").value.trim()
     document.getElementById("modal-username").innerText = document.getElementById("username").value.trim()

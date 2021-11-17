@@ -1,7 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="col-2"> </div>
-<div class="col-8">
+    {% with messages=get_flashed_messages(with_categories=true) %}
+        <div class="col-2"></div>
+        <div class="col-8">
+        {% if messages%}
+            {% for category, msg in messages%}
+            
+                    <div class="{{category}}" role="alert">
+                        {{msg}}
+                    </div>
+            {% endfor%}
+        {% endif%}
+        </div>
+        <div class="col-2"></div>
+
+    {% endwith%}
+    <div class="col-2"></div>
+    <div class="col-8">
     <div class="jumbotron">
 <h1>Administracion de cuentas</h1>
 <table class="table">
@@ -10,6 +25,7 @@
             <th scope="col">id </th> 
             <th scope="col">Username </th>
             <th scope="col">Tipo de usuario</th>
+            <th scope="col">Registrado por </th>
             <th scope="col">Activado</th>
             <th scope="col">Fecha de registro</th>
         </tr>
@@ -20,17 +36,29 @@
                 <th> {{user.id}} </th>
                 <th> {{user.username}}</th>
                 <th> {{user.user_type}}</th>
-
+                <th> {{user.created_by}}</th>
                 <th>
                 <form method="POST">
+                <input type="hidden" name="username" value="{{user.username}}">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="check-{{user.username}}" id="gridRadios1" value="option1" checked>
+                    <input class="form-check-input" type="radio" name="user_activated" id="gridRadios1" value="true" 
+                                                                                               {%if user.active_user == true%}
+                    checked=true
+                                                                                               {%else%}
+                                                                                               {%endif%}
+                    >
                  <label class="form-check-label" for="gridRadios1">
                  Activado
                  </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="check-{{user.username}}" id="gridRadios2" value="option2">
+                    <input class="form-check-input" type="radio" name="user_activated" id="gridRadios2" value="false" 
+                    
+                    {%if user.active_user == true%}
+                                                                                               {%else%}
+                                                                                               checked=true
+                                                                                               {%endif%} 
+                    >
                 <label class="form-check-label" for="gridRadios2">
                 Desactivado
                 </label>
