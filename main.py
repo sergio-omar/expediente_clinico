@@ -57,7 +57,14 @@ class Patient(db.Model, UserMixin):
     names = db.Column(db.String(20),nullable=False,unique=False)
     first_lastname = db.Column(db.String(20),nullable=False,unique=False)
     second_lastname = db.Column(db.String(20),nullable=False,unique=False)
+    address_street = db.Column(db.String(30))
+    address_number = db.Column(db.String(30))
     gender = db.Column(db.String(20),nullable=False)
+    persona_informante = db.Column(db.String(30),nullable=False)
+    padecimientos = db.Column(db.String(250),nullable=False)
+    familiar_responsable = db.Column(db.String(30),nullable=False)
+    disfuncion_familiar = db.Column(db.String(10),nullable=False)
+
     #the user type will grant certain privileges
     #default false /// later the admin will accept the user
 
@@ -111,6 +118,26 @@ def manage_accounts():
         flash("Se modifico correctamente","alert alert-success")
     return render_template('manage_accounts.html',users=users)
 
+@app.route('/patients',methods=['GET','POST'])
+@login_required
+def patients():
+   patients = Patient.query.all()
+   print("what the fuck")
+   print(patients)
+   return render_template('patients.html',patients=patients)
+
+@app.route('/somatometria',methods=['GET','POST'])
+@login_required
+def somatometria():
+    patient="hell yeha"
+    return render_template("somatometria.html",patient=patient)
+
+@app.route('/panel_paciente',methods=['GET','POST'])
+@login_required
+def panel_paciente():
+    patient = "sergio"
+    return render_template("panel_paciente.html",patient=patient)
+
 @app.route('/ingreso_paciente',methods=['GET','POST'])
 @login_required
 def ingreso():
@@ -119,20 +146,29 @@ def ingreso():
     now = datetime.datetime.now()
     date_part = str(now.minute) + str(now.hour) + str(now.day) + str(now.month) + str(now.year)
     patient_id = str(patient_counter).rjust(3,"0") + date_part
-    return render_template('ingreso_paciente.html',patient_id = patient_id)
     if request.method == 'POST':
         data = request.form
+        for d in data:
+            print(d)
         new_patient = Patient(names=data['names'],
                 enter_id = data['enter_id'],
                 first_lastname = data['first_lastname'],
                 second_lastname = data['second_lastname'],
-                gender =data['gender'])
+                address_street = data['address_street'],
+                address_number = data['address_number'],
+                gender = data['gender'],
+                persona_informante = data['persona_informante'],
+                padecimientos = data['padecimientos'],
+                familiar_responsable = data['familiar_responsable'],
+                disfuncion_familiar = data['disfuncion_familiar']
+                )
 
-        db.session.add(new_Patient)
+        db.session.add(new_patient)
         db.session.commit()
-        return redirect(url_for('login'))
+        flash("Ingreso de paciente exitoso","alert alert-success")
+        return redirect(url_for('patients'))
 
-    return render_template('login.html')
+    return render_template('ingreso_paciente.html',patient_id = patient_id)
 
 @app.route('/set_new_password',methods=['GET','POST'])
 @login_required

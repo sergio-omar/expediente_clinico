@@ -1,0 +1,36 @@
+{%extends "base.html" %}
+{%block content%}
+<div class="col-2"></div>
+<div class="col-8">
+    <div class="jumbotron">
+        <div class="row">
+            
+            <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col"> Numero de ingreso</th>
+                    <th scope="col"> Nombre </th>
+                    <th scope="col"> Apellido Paterno </th>
+                    <th scope="col"> Apellido Materno </th>
+                    <th scope="col"> Fecha de ingreso</th>
+                    <th scope="col"> Somatometria </th>
+                </tr>
+            </thead>
+            <tbody>
+                 {% for patient in patients%}
+                 <tr>
+                 <th scope="col"> {{patient.enter_id}}</th>
+                 <th scope="col"> {{patient.names}} </th>
+                 <th scope="col"> {{patient.first_lastname}} </th>
+                 <th scope="col"> {{patient.second_lastname}} </th>
+                 <th scope="col"> {{patient.enter_date}} </th>
+                 <th scope="col"> <a href="somatometria?patient={{patient_names}}">go</a></th>
+                 </tr>
+                 {%endfor%}
+            </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-2"></div>
+{%endblock%}

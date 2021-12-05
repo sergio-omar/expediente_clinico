@@ -9,29 +9,29 @@
                     <label>Ficha de ingreso</label>
                 </div>
             </div>
-            <div class="col">
-                <div class="form-group">
-                    <input class="form-control" disabled value={{patient_id}}></input>
+            <form method="POST" id="register_patient">
+                <div class="col">
+                    <div class="form-group">
+                    <input class="form-control" type="text" id="enter_id" name="enter_id" readonly value={{patient_id}}>
+                    </div>
                 </div>
             </div>
-        </div>
-        <form method="POST" action="">
             <!-- Nombre de la persona -->
-            <div clas="form-group">
-             <label for="patient_names">Nombres del paciente:</label><br>
-             <input class="form-control" type="text" id="nombre_paciente" name="patient_names"><br>
+            <div class="form-group">
+             <label for="names">Nombres del paciente:</label><br>
+             <input class="form-control" type="text" id="names" name="names"><br>
             </div>
             <div class="row">
                 <div class="col">
                     <div clas="form-group">
                         <label for="patient_first_lastname">Apellido Paterno</label><br>
-                        <input class="form-control" type="text" id="patient_first_lastname" name="patient_first_lastname"><br>
+                        <input class="form-control" type="text" id="first_lastname" name="first_lastname"><br>
                     </div>
                 </div>
                 <div class="col">
                     <div clas="form-group">
-                        <label for="patient_second_lastname">Apellido Materno</label><br>
-                        <input class="form-control" type="text" id="patient_second_lastname" name="patient_second_lastname"><br>
+                        <label for="second_lastname">Apellido Materno</label><br>
+                        <input class="form-control" type="text" id="second_lastname" name="second_lastname"><br>
                     </div>
                 </div>
                 </div>
@@ -40,7 +40,7 @@
                 <div class="col">
                     <div clas="form-group">
                         <label for="address_street">Calle</label><br>
-                        <input class="form-control" type="text" id="addres_street" name="address_street"><br>
+                        <input class="form-control" type="text" id="address_street" name="address_street"><br>
                     </div>
                 </div>
                 <div class="col">
@@ -50,11 +50,133 @@
                     </div>
                 </div>
             </div>
+            <hr>
+            <label for="gender">Sexo</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="gender_hombre" value="Masculino" checked>
+              <label class="form-check-label" for="gender1">
+                Masculino
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="gender" id="gender_mujer" value="Femenino">
+              <label class="form-check-label" for="gender2">
+                Femenino
+              </label>
+            </div>
+            <br>
+            <hr>
+            <div class="form-group">
+                <label for="persona_informante:"> Persona informante</label>
+                <select class="form-control" name="persona_informante" id="persona_informante" aria-label="Default select example">
+                    <option value="Abuela materna">Abuela materna</option>
+                    <option value="Abuela paterna">Abuela paterna</option>
+                    <option value="Abuelo materno">Abuelo materno</option>
+                    <option value="Abuelo paterno">Abuelo paterno</option>
+                    <option value="Cónyuge">Cónyuge</option>
+                    <option value="El paciente">El paciente</option>
+                    <option value="Hermana">Hermana</option>
+                    <option value="Hermano">Hermano</option>
+                    <option value="Hijo">Hijo</option>
+                    <option value="Hija">Hija</option>
+                    <option value="Madre">Madre</option>
+                    <option value="Ninguno">Ninguno</option>
+                    <option value="Otro">Otro</option>
+                    <option value="Padre">Padre</option>
+                    <option value="Primo materno">Primo materno</option>
+                    <option value="Primo paterno">Prmo paterno</option>
+                    <option value="Primo segundo">Primo segundo</option>
+                    <option value="Tía materna">Tía materna</option>
+                    <option value="Tía paterna">Tía paterna</option>
+                    <option value="Tío materna">Tío materna</option>
+                    <option value="Tío paterno">Tío paterno</option>
+                    <option value="Sobrina">Sobrina</option>
+                    <option value="Sobrino">Sobrino</option>
+                </select>
+            </div>
+            
+            <!-- Padecimientos -->
+            <div class="form-group">
+                <label for="padecimientos:"> Padecimientos</label>
+                <input name="padecimientos" id="padecimientos" value="" hidden>
+                <div class="form-check">
+                    <div class="row">
+                    <div class="col-4">
+                    <input class="form-check-input" type="checkbox" value="Sin antecedentes" name="sin_antecedentes" id="sin_antecedentes_box">
+                    <label class="form-check-label" for="sin_antecedentes">Sin antecedentes</label><br>
+                    <input onClick="uncheck_sinantecedentes()" class="form-check-input" type="checkbox" value="Alcoholismo" name="alcholismo_box" id="alcoholismo_box">
+                    <label class="form-check-label" for="alcoholismo">Alcoholismo</label> <br>
+                    <input onclick="uncheck_sinantecedentes()" class="form-check-input" type="checkbox" value="Alergias" name="alergias" id="alergias_box">
+                    <label class="form-check-label" for="alergias">Alergias</label><br>
+                    <input onclick="uncheck_sinantecedentes()" class="form-check-input" type="checkbox" value="Diabetes mellitis" name="diavetes_mellitis" id="diabetes_box">
+                    <label class="form-check-label" for="diabetes_mellitis">Diabetes mellitis</label><br>
+                    </div>
+                    <div class="col-4">
+                    <input onclick="uncheck_sinantecedentes()" class="form-check-input" type="checkbox" value="Malformación congénita" name="malformacion_congenita" id="malformacion_box">
+                    <label class="form-check-label" for="malformacion_congenita">Malformación congénita</label><br>
+                    <input onclick="uncheck_sinantecedentes()" class="form-check-input" type="checkbox" value="Neoplasias" name="neoplasias" id="neoplasias_box">
+                    <label class="form-check-label" for="neoplasias">Neoplasias</label><br>
+
+                    <input onclick="uncheck_sinantecedentes()" class="form-check-input" type="checkbox" value="Obesidad" name="obesidad" id="obesidad_box">
+                    <label class="form-check-label" for="obesidad">Obesidad</label><br>
+                    </div>
+                    <div class="col-4">
+                    <input onclick="uncheck_sinantecedentes()" class="form-check-input" type="checkbox" value="Tabaquismo" name="tabaquismo" id="tabaquismo_box">
+                    <label class="form-check-label" for="tabaquismo">Tabaquismo</label><br>
+                    <input onclick="uncheck_sinantecedentes()" class="form-check-input" type="checkbox" value="Tuberculosis Pulmonar" name="tuberculosis_pulmonar" id="tuberculosis_box">
+                     <label class="form-check-label" for="tuberculosis_pulmonar">Tuberculosis pulmonar</label><br>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!--Familiar responsable-->
+            <div class="form-group">
+                <label for="familiar_responsable:"> Familiar Responsable del paciente</label>
+                <select class="form-control" name="familiar_responsable" id="familiar_responsable"aria-label="Default select example">
+                    <option value="Abuela materna">Abuela materna</option>
+                    <option value="Abuela paterna">Abuela paterna</option>
+                    <option value="Abuelo materno">Abuelo materno</option>
+                    <option value="Abuelo paterno">Abuelo paterno</option>
+                    <option value="Cónyuge">Cónyuge</option>
+                    <option value="El paciente">El paciente</option>
+                    <option value="Hermana">Hermana</option>
+                    <option value="Hermano">Hermano</option>
+                    <option value="Hijo">Hijo</option>
+                    <option value="Hija">Hija</option>
+                    <option value="Madre">Madre</option>
+                    <option value="Ninguno">Ninguno</option>
+                    <option value="Otro">Otro</option>
+                    <option value="Padre">Padre</option>
+                    <option value="Primo materno">Primo materno</option>
+                    <option value="Primo paterno">Prmo paterno</option>
+                    <option value="Primo segundo">Primo segundo</option>
+                    <option value="Tía materna">Tía materna</option>
+                    <option value="Tía paterna">Tía paterna</option>
+                    <option value="Tío materna">Tío materna</option>
+                    <option value="Tío paterno">Tío paterno</option>
+                    <option value="Sobrina">Sobrina</option>
+                    <option value="Sobrino">Sobrino</option>
+                </select>
+            </div>
+            <!-- Disfuncion Familiar-->
+            <hr>
+            <label for="disfuncion_familiar">Disfunción familiar</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="disfuncion_familiar" id="disfuncion_si" value="Sí">
+              <label class="form-check-label" for="disfuncion_si">
+                Sí
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="disfuncion_familiar" id="disfuncion_no" checked value="No">
+              <label class="form-check-label" for="disfuncion_no">
+                No
+              </label>
+            </div>
 
 
-            <!-- Numeros Telefonico -->
-
-            <button type="submit" class="btn btn-primary form-control">Ingreso de Paciente</button>            
+            <button onclick="collect_padecimientos(fill_modal)" type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#patient-modal">Ingreso de Paciente</button>            
+            <br>
             <br>
             <button type="submit" class="btn btn-secondary form-control">Cancelar ingreso</button>   
         </form>
@@ -62,4 +184,104 @@
     </div>
 </div>
 <div class="col-2"></div>
+
+<!--MODAL -->
+<div class="modal fade" id="patient-modal" tabindex="-1" role="dialog" aria-labelledby="patient-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registro de paciente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p>Nombres:</p>
+          <h3 id="modal-names" value=""> </h3>
+          <p>Apellido paterno:</p>
+          <h3 id="modal-first_lastname"></h3>
+          <p>Apellido materno:</p>
+          <h3 id="modal-second_lastname" value=""></h3>
+          <p>Calle: </p>
+          <h3 id="modal-street" value=""></h3>
+          <p>Sexo: </p>
+          <h3 id="modal-gender" value=""></h3>
+          <p>Persona Informante</p>
+          <h3 id="modal-persona-informante" value=""></h3>
+          <p>Padecimientos:</p>
+          <h3 id="modal-padecimientos"></h3>
+          <p>Familiar Responsable </p>
+          <h3 id="modal-responsable" value=""> </h3>
+          <hr>
+          <p>Dado de alta por:</p>
+          <p>{{current_user.username}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button onclick="send_form()" type="button" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--END MODAL-->
+<script>
+    //ucheck checkbox sin antecedentes
+    function uncheck_sinantecedentes(){
+        document.getElementById("sin_antecedentes_box").checked = false
+    }
+    function collect_padecimientos(my_callback){
+        const padecimientos = []
+        var dict = new Object()
+        dict["Sin antecedentes"] = document.getElementById("sin_antecedentes_box").checked
+        dict["Alcoholismo"] = document.getElementById("alcoholismo_box").checked
+        dict["Alergias"] = document.getElementById("alergias_box").checked
+        dict["Diabetes Mellitis"] = document.getElementById("diabetes_box").checked
+        dict["Malformación"] = document.getElementById("malformacion_box").checked
+        dict["Neoplasias"] = document.getElementById("neoplasias_box").checked
+        dict["Obesidad"] = document.getElementById("obesidad_box").checked
+        dict["Tabaquismo"] = document.getElementById("tabaquismo_box").checked
+        dict["Tuberculosis pulmonar"] = document.getElementById("tuberculosis_box").checked
+        
+        for (const [key, value] of Object.entries(dict)) {
+            if (value == true){
+                padecimientos.push(key)
+            }
+        }
+        var string_padecimientos = JSON.stringify(padecimientos)
+        document.getElementById("padecimientos").value = string_padecimientos
+        my_callback(padecimientos)
+    }
+
+function fill_modal(padecimientos){
+    //GET ALL "padecimientos"
+    console.log(padecimientos)
+    var string_padecimientos = ""
+    padecimientos.forEach( element => {string_padecimientos += element +", "})
+    document.getElementById("modal-names").innerText = document.getElementById("names").value.trim()
+    document.getElementById("modal-first_lastname").innerText = document.getElementById("first_lastname").value.trim()
+    document.getElementById("modal-second_lastname").innerText = document.getElementById("second_lastname").value.trim()
+    document.getElementById("modal-street").innerText = document.getElementById("address_street").value.trim()
+    document.getElementById("modal-gender").innerText = document.querySelector('input[name="gender"]').value.trim()
+    document.getElementById("modal-persona-informante").innerText = document.getElementById("persona_informante").value.trim()
+    document.getElementById("modal-padecimientos").innerText = string_padecimientos
+    document.getElementById("modal-responsable").innerText = document.getElementById("familiar_responsable").value.trim()
+}
+function send_form(){
+   var form = document.getElementById("register_patient")
+    form.submit()
+}
+
+// Let's add a event listener in "sin padecimientos" in order to clean if one was previously selected
+document.getElementById("sin_antecedentes_box").addEventListener('change',function(){
+    document.getElementById("alcoholismo_box").checked = false
+    document.getElementById("alergias_box").checked = false
+    document.getElementById("diabetes_box").checked = false
+    document.getElementById("malformacion_box").checked = false
+    document.getElementById("neoplasias_box").checked = false
+    document.getElementById("obesidad_box").checked = false
+    document.getElementById("tabaquismo_box").checked = false
+    document.getElementById("tuberculosis_box").checked = false
+})
+</script>
 {%endblock%}

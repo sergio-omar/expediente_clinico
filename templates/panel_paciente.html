@@ -1,0 +1,255 @@
+{%extends "base.html" %}
+{%block content%}
+<div class="col-2"></div>
+<div class="col-8">
+    
+    <!---NAV BAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+         Atención Integral 
+        </a>
+        <div class="dropdown-menu" role="menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Historia Clínica</a>
+
+          <a class="dropdown-item" href="somatometria">Somatometría</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+
+          <!-- -->
+         
+
+<li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Subsubmenu</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Subsubmenu action</a></li>
+                  <li><a class="dropdown-item" href="#">Another subsubmenu action</a></li>
+                </ul>
+              </li>
+              <li class="dropdown-submenu">
+                <a class="dropdown-item dropdown-toggle" href="#">Second subsubmenu</a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Subsubmenu action</a></li>
+                  <li><a class="dropdown-item" href="#">Another subsubmenu action</a></li>
+                </ul>
+              </li>
+
+          <!--  -->
+          
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+ </div>
+</nav>
+    <!-- -->
+    
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Ficha de ingreso</label>
+                </div>
+            </div>
+            <form method="POST" id="register_patient">
+                <div class="col">
+                    <div class="form-group">
+                    <input class="form-control" type="text" id="enter_id" name="enter_id" readonly value={{patient_id}}>
+                    </div>
+                </div>
+            </div>
+            <!-- peso de la persona -->
+            <div class="form-group">
+             <label for="peso">Peso:</label><br>
+             <input class="form-control" type="text" id="peso" name="peso"><br>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div clas="form-group">
+                        <label for="altura">Altura</label><br>
+                        <input class="form-control" type="text" id="altura" name="altura"><br>
+                    </div>
+                </div>
+                <div class="col">
+                    <div clas="form-group">
+                        <label for="sistolica">TA sistólica</label><br>
+                        <input class="form-control" type="text" id="sistolica" name="ta_sistolica"><br>
+                    </div>
+                </div>
+                </div>
+            <!-- Direccion -->
+            <div class="row">
+                <div class="col">
+                    <div clas="form-group">
+                        <label for="diastolica">TA Diastólica</label><br>
+                        <input class="form-control" type="text" id="diastolica" name="diastolica"><br>
+                    </div>
+                </div>
+                <div class="col">
+                    <div clas="form-group">
+                        <label for="cardiaca">Frecuencia Cardiaca</label><br>
+                        <input class="form-control" type="text" id="cardiaca" name="cardiaca"><br>
+                    </div>
+                </div>
+                <div class="col">
+                    <div clas="form-group">
+                        <label for="respiratoria">Frecuencia Respiratoria</label><br>
+                        <input class="form-control" type="text" id="respiratoria" name="respiratoria"><br>
+                    </div>
+                </div>
+            </div>
+            <div clas="row">
+                <div class="col">
+                    <div clas="form-group">
+                        <label for="temperatura">Temperatura</label><br>
+                        <input class="form-control" type="text" id="temperatura" name="temperatura"><br>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            
+
+            <button onclick="collect_padecimientos(fill_modal)" type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#patient-modal">Ingreso de Paciente</button>            
+            <br>
+            <br>
+            <button type="submit" class="btn btn-secondary form-control">Cancelar ingreso</button>   
+        </form>
+        <br>
+    </div>
+</div>
+<div class="col-2"></div>
+
+<!--MODAL -->
+<div class="modal fade" id="patient-modal" tabindex="-1" role="dialog" aria-labelledby="patient-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registro de paciente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p>Nombres:</p>
+          <h3 id="modal-names" value=""> </h3>
+          <p>Apellido paterno:</p>
+          <h3 id="modal-first_lastname"></h3>
+          <p>Apellido materno:</p>
+          <h3 id="modal-second_lastname" value=""></h3>
+          <p>Calle: </p>
+          <h3 id="modal-street" value=""></h3>
+          <p>Sexo: </p>
+          <h3 id="modal-gender" value=""></h3>
+          <p>Persona Informante</p>
+          <h3 id="modal-persona-informante" value=""></h3>
+          <p>Padecimientos:</p>
+          <h3 id="modal-padecimientos"></h3>
+          <p>Familiar Responsable </p>
+          <h3 id="modal-responsable" value=""> </h3>
+          <hr>
+          <p>Dado de alta por:</p>
+          <p>{{current_user.username}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button onclick="send_form()" type="button" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--END MODAL-->
+<script>
+    //ucheck checkbox sin antecedentes
+    function uncheck_sinantecedentes(){
+        document.getElementById("sin_antecedentes_box").checked = false
+    }
+    function collect_padecimientos(my_callback){
+        const padecimientos = []
+        var dict = new Object()
+        dict["Sin antecedentes"] = document.getElementById("sin_antecedentes_box").checked
+        dict["Alcoholismo"] = document.getElementById("alcoholismo_box").checked
+        dict["Alergias"] = document.getElementById("alergias_box").checked
+        dict["Diabetes Mellitis"] = document.getElementById("diabetes_box").checked
+        dict["Malformación"] = document.getElementById("malformacion_box").checked
+        dict["Neoplasias"] = document.getElementById("neoplasias_box").checked
+        dict["Obesidad"] = document.getElementById("obesidad_box").checked
+        dict["Tabaquismo"] = document.getElementById("tabaquismo_box").checked
+        dict["Tuberculosis pulmonar"] = document.getElementById("tuberculosis_box").checked
+        
+        for (const [key, value] of Object.entries(dict)) {
+            if (value == true){
+                padecimientos.push(key)
+            }
+        }
+        var string_padecimientos = JSON.stringify(padecimientos)
+        document.getElementById("padecimientos").value = string_padecimientos
+        my_callback(padecimientos)
+    }
+
+function fill_modal(padecimientos){
+    //GET ALL "padecimientos"
+    console.log(padecimientos)
+    var string_padecimientos = ""
+    padecimientos.forEach( element => {string_padecimientos += element +", "})
+    document.getElementById("modal-names").innerText = document.getElementById("names").value.trim()
+    document.getElementById("modal-first_lastname").innerText = document.getElementById("first_lastname").value.trim()
+    document.getElementById("modal-second_lastname").innerText = document.getElementById("second_lastname").value.trim()
+    document.getElementById("modal-street").innerText = document.getElementById("address_street").value.trim()
+    document.getElementById("modal-gender").innerText = document.querySelector('input[name="gender"]').value.trim()
+    document.getElementById("modal-persona-informante").innerText = document.getElementById("persona_informante").value.trim()
+    document.getElementById("modal-padecimientos").innerText = string_padecimientos
+    document.getElementById("modal-responsable").innerText = document.getElementById("familiar_responsable").value.trim()
+}
+function send_form(){
+   var form = document.getElementById("register_patient")
+    form.submit()
+}
+
+// Let's add a event listener in "sin padecimientos" in order to clean if one was previously selected
+document.getElementById("sin_antecedentes_box").addEventListener('change',function(){
+    document.getElementById("alcoholismo_box").checked = false
+    document.getElementById("alergias_box").checked = false
+    document.getElementById("diabetes_box").checked = false
+    document.getElementById("malformacion_box").checked = false
+    document.getElementById("neoplasias_box").checked = false
+    document.getElementById("obesidad_box").checked = false
+    document.getElementById("tabaquismo_box").checked = false
+    document.getElementById("tuberculosis_box").checked = false
+})
+
+$('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+  if (!$(this).next().hasClass('show')) {
+    $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
+  }
+  var $subMenu = $(this).next('.dropdown-menu');
+  $subMenu.toggleClass('show');
+
+
+  $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+    $('.dropdown-submenu .show').removeClass('show');
+  });
+
+
+  return false;
+});
+
+</script>
+
+
+{%endblock%}

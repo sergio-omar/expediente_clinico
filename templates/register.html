@@ -40,7 +40,7 @@
                 </select>
             </div>
             <div class="form-group">
-                    <label for="cedula_profesional">Cédula Profesional</label>
+                    <label for="user_cedula">Cédula Profesional</label>
                     <input class="form-control" id="user_cedula" name="user_cedula"></input>
                 </div>
                 <div class="form-group">
@@ -51,7 +51,7 @@
 
             </div>
             <!-- button for modal -->
-            <button onclick="fill_modal()" type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#exampleModal" >
+            <button onclick="fill_modal()" type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#register-modal" >
   Crear usuario
 </button>
         </form>
@@ -60,7 +60,7 @@
     </div>
     <div class="col-3"></div>
     <!--MODAL -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="register-modal" tabindex="-1" role="dialog" aria-labelledby="register-modal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -82,6 +82,8 @@
           <h3 id="modal-password" value=""></h3>
           <p>Tipo de usuario</p>
           <h3 id="modal-type" value=""></h3>
+          <p>Cédula Profesional</p>
+          <h3 id="modal-cedula" value=""> </h3>
           <hr>
           <p>Usuario Creado por:</p>
           <p>{{current_user.username}}</p>
@@ -118,7 +120,9 @@ function fill_modal(){
     document.getElementById("modal-second_lastname").innerText = document.getElementById("user_second_lastname").value.trim()
     document.getElementById("modal-password").innerText = document.getElementById("password").value.trim()
     document.getElementById("modal-username").innerText = document.getElementById("username").value.trim()
-document.getElementById("modal-type").innerText = document.getElementById("user_type").value.trim()
+    document.getElementById("modal-type").innerText = document.getElementById("user_type").value.trim()
+    document.getElementById("modal-cedula").innerText = document.getElementById("user_cedula").value.trim()
+
 
 }
 function send_form(){
