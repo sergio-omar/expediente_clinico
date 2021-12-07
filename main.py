@@ -138,6 +138,12 @@ def panel_paciente():
     patient = "sergio"
     return render_template("panel_paciente.html",patient=patient)
 
+@app.route('/antecedentes_personales_no_patologicos',methods=['GET','POST'])
+@login_required
+def antecedentes_personales_no_patologicos():
+    patient = "sergio"
+    return render_template("antecedentes_personales_no_patologicos.html",patient=patient)
+
 @app.route('/ingreso_paciente',methods=['GET','POST'])
 @login_required
 def ingreso():

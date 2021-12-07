@@ -1,15 +1,15 @@
 {%extends "base.html" %}
 {%block content%}
-<div class="col-2"></div>
-<div class="col-8">
-    <br>
-    <div class="jumbotron">
-        <div class="row">
-            <h1> here goes the name of the patient</h1>
-            <h1>{{patient}}</>
-        </div>
-    </div>
-    <div class="jumbotron">
+<div class="col-1"></div>
+<div class="col-10">
+    <!-- NAV BAR-->
+
+    {% from "patient_navbar.html" import patient_navbar with context %}
+    {{patient_navbar()}}
+    {% from "patient_navbar.html" import patient_info with context %}
+    {{patient_info()}}
+
+        <div class="jumbotron">
         <div class="row">
             <div class="col">
                 <div class="form-group">
@@ -82,7 +82,7 @@
         <br>
     </div>
 </div>
-<div class="col-2"></div>
+<div class="col-1"></div>
 
 <!--MODAL -->
 <div class="modal fade" id="patient-modal" tabindex="-1" role="dialog" aria-labelledby="patient-modal" aria-hidden="true">
