@@ -1,4 +1,4 @@
-{% macro patient_navbar() %}
+{% macro patient_navbar(enter_id) %}
 <!---NAV BAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <a class="navbar-brand" href="#">Navbar</a>
@@ -22,7 +22,7 @@ barSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <div class="dropdown-menu" role="menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="#">Historia Clínica</a>
 
-          <a class="dropdown-item" href="/somatometria">Somatometría</a>
+          <a class="dropdown-item" href="/somatometria?enter_id={{enter_id}}">Somatometría</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
@@ -35,10 +35,11 @@ barSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
  </nav>
 {%endmacro%}
 
-{% macro patient_info()%}
-<div class="jumbotron">
-    <h4> Nombre </h4>
-    <h4> Apellido  </h4>
+{% macro patient_info(names,first_lastname)%}
+<div class="jumbotron" style="padding: 25px;">
+    <h5> Datos del paciente: {{names}}</h5>
+    <h5> Apellido:{{first_lastname}}  </h5>
+
 </div>
 {% endmacro%}
 

@@ -51,23 +51,35 @@ class Log(db.Model,UserMixin):
     log_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
 class Patient(db.Model, UserMixin):
+    ct = datetime.datetime.now()
     id = db.Column(db.Integer, primary_key=True)
     enter_id = db.Column(db.Integer,nullable=False,unique=True)
-    enter_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    enter_date = db.Column(db.DateTime, default= f'{ct.year}/{ct.month}/{ct.day} {ct.hour}:{ct.minute}')
     names = db.Column(db.String(20),nullable=False,unique=False)
     first_lastname = db.Column(db.String(20),nullable=False,unique=False)
     second_lastname = db.Column(db.String(20),nullable=False,unique=False)
+    dia_nacimiento = db.Column(db.String(3))
+    mes_nacimiento = db.Column(db.String(3))
+    ano_nacimiento = db.Column(db.String(3))
     address_street = db.Column(db.String(30))
     address_number = db.Column(db.String(30))
     gender = db.Column(db.String(20),nullable=False)
-    persona_informante = db.Column(db.String(30),nullable=False)
+    prueba_covid = db.Column(db.String(20),nullable=False)
+    saturacion = db.Column(db.String(5),nullable=False)
     padecimientos = db.Column(db.String(250),nullable=False)
-    familiar_responsable = db.Column(db.String(30),nullable=False)
-    disfuncion_familiar = db.Column(db.String(10),nullable=False)
+    alergias = db.Column(db.String(40))
+    persona_responsable_nombre = db.Column(db.String(50),nullable=False)
+    persona_responsable_parentesco = db.Column(db.String(30),nullable=False)
+    persona_responsable_tel = db.Column(db.String(15))
+    persona_informante_nombre = db.Column(db.String(50),nullable=False)
+    persona_informante_parentesco = db.Column(db.String(30),nullable=False)
+    persona_informante_tel = db.Column(db.String(15))
 
     #the user type will grant certain privileges
     #default false /// later the admin will accept the user
-
+class Patient_somatometria(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key = True)
+    enter_id =db.Column(db.String(30),unique=False, nullable=False)
 #probably we wont use them
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(),Length(
@@ -122,15 +134,20 @@ def manage_accounts():
 @login_required
 def patients():
    patients = Patient.query.all()
-   print("what the fuck")
    print(patients)
    return render_template('patients.html',patients=patients)
 
 @app.route('/somatometria',methods=['GET','POST'])
 @login_required
 def somatometria():
-    patient="hell yeha"
-    return render_template("somatometria.html",patient=patient)
+    if request.method== "GET":
+        data = request.args
+        enter_id = data.get("enter_id")
+        print(enter_id)
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+        print(patient)
+
+        return render_template("somatometria.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
 
 @app.route('/panel_paciente',methods=['GET','POST'])
 @login_required
@@ -162,11 +179,20 @@ def ingreso():
                 second_lastname = data['second_lastname'],
                 address_street = data['address_street'],
                 address_number = data['address_number'],
+                dia_nacimiento = data['dia_nacimiento'],
+                mes_nacimiento = data['mes_nacimiento'],
+                ano_nacimiento = data['ano_nacimiento'],
                 gender = data['gender'],
-                persona_informante = data['persona_informante'],
+                saturacion = data['saturacion'],
+                prueba_covid = data['prueba_covid'],
+                alergias = data['alergias'],
+                persona_informante_nombre = data['persona_informante_nombre'],
+                persona_informante_parentesco = data['persona_informante_parentesco'],
+                persona_informante_tel = data['persona_informante_tel'],
+                persona_responsable_nombre = data['persona_responsable_nombre'],
+                persona_responsable_parentesco = data['persona_responsable_parentesco'],
+                persona_responsable_tel = data['persona_responsable_tel'],
                 padecimientos = data['padecimientos'],
-                familiar_responsable = data['familiar_responsable'],
-                disfuncion_familiar = data['disfuncion_familiar']
                 )
 
         db.session.add(new_patient)
