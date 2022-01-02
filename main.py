@@ -54,7 +54,7 @@ class Patient(db.Model, UserMixin):
     ct = datetime.datetime.now()
     id = db.Column(db.Integer, primary_key=True)
     enter_id = db.Column(db.Integer,nullable=False,unique=True)
-    enter_date = db.Column(db.DateTime, default= f'{ct.year}/{ct.month}/{ct.day} {ct.hour}:{ct.minute}')
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.utcnow)
     names = db.Column(db.String(20),nullable=False,unique=False)
     first_lastname = db.Column(db.String(20),nullable=False,unique=False)
     second_lastname = db.Column(db.String(20),nullable=False,unique=False)
@@ -74,6 +74,12 @@ class Patient(db.Model, UserMixin):
     persona_informante_nombre = db.Column(db.String(50),nullable=False)
     persona_informante_parentesco = db.Column(db.String(30),nullable=False)
     persona_informante_tel = db.Column(db.String(15))
+    ant_heredo_familiares = db.Column(db.Boolean(),default = False)
+    ant_personales_no_pat = db.Column(db.Boolean(),default = False)
+    ant_personales_pat = db.Column(db.Boolean(), default = False)
+    ant_pediatricos = db.Column(db.Boolean(), default = False)
+    ant_gineco = db.Column(db.String(), default = False)
+    somatometria = db.Column(db.Boolean(), default = False)
 
     #the user type will grant certain privileges
     #default false /// later the admin will accept the user
@@ -104,6 +110,65 @@ class LoginForm(FlaskForm):
 @app.route('/',methods=['GET','POST'])
 def index():
     return render_template('dashboard.html')
+#routes for "Historia Clinica"
+#Historia Clinica
+#		-Ant. Heredo Familiares
+#		-Ant. Personales No patológicos
+#		-Ant. Personales Patológicos (Super larga)
+#		-Ant. Pediatricos
+#		-Ant. Gineco Obstétricos
+
+@app.route('/antecedentes_heredo_familiares')
+def antecedentes_heredo_familiares():
+    if request.method == "GET":
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient =  Patient.query.filter_by(enter_id = enter_id).first()
+        return render_template("antecedentes_hredo_familiares.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+
+@app.route('/antecedentes_personales_no_patologicos')
+def antecedentes_personales_no_patologicos():
+    if request.method == "GET":
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient =  Patient.query.filter_by(enter_id = enter_id).first()
+        return render_template("ant_per_no_patologicos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+
+@app.route('/antecedentes_personales_patologicos')
+def antecedentes_personales_no_patologicos():
+    if request.method == "GET":
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient =  Patient.query.filter_by(enter_id = enter_id).first()
+        return render_template("ant_per_no_patologicos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+
+@app.route('/antecedentes_pediatricos')
+def antecedentes_pediatricos():
+    if request.method == "GET":
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient =  Patient.query.filter_by(enter_id = enter_id).first()
+        return render_template("antecedentes_pediatricos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+
+@app.route('/antecedentes_gineco_obstetricos')
+def antecedentes_gineco_obstetricos():
+    if request.method == "GET":
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient =  Patient.query.filter_by(enter_id = enter_id).first()
+        return render_template("antecedentes_pediatricos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+
+
+@app.route('/somatometria',methods=['GET','POST'])
+@login_required
+def somatometria():
+    if request.method== "GET":
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+
+        return render_template("somatometria.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+
 
 @app.route('/antecedentes_heredofamiliares',methods=['GET','POST'])
 def antecedentes_heredofamiliares():
@@ -137,17 +202,6 @@ def patients():
    print(patients)
    return render_template('patients.html',patients=patients)
 
-@app.route('/somatometria',methods=['GET','POST'])
-@login_required
-def somatometria():
-    if request.method== "GET":
-        data = request.args
-        enter_id = data.get("enter_id")
-        print(enter_id)
-        patient = Patient.query.filter_by(enter_id=enter_id).first()
-        print(patient)
-
-        return render_template("somatometria.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
 
 @app.route('/panel_paciente',methods=['GET','POST'])
 @login_required
@@ -157,7 +211,7 @@ def panel_paciente():
 
 @app.route('/antecedentes_personales_no_patologicos',methods=['GET','POST'])
 @login_required
-def antecedentes_personales_no_patologicos():
+def antecedentes_personales_no_patologicosi2():
     patient = "sergio"
     return render_template("antecedentes_personales_no_patologicos.html",patient=patient)
 

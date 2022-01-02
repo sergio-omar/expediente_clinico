@@ -19,12 +19,31 @@ barSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          Atención Integral
         </a>
-        <div class="dropdown-menu" role="menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Historia Clínica</a>
+        <div class="dropdown-menu dropdown-submenu" role="menu" aria-labelledby="navbarDropdown">
+        
+            <!-- this will be like the button -->
+          <a class="dropdown-item" href="#" data-toggle="dropdown" >Historia Clínica</a>
+
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-item">
+                                <a  class="text-dark text-decoration-none" href="antecedentes_heredo_familiares">Antecedentes heredo-familiares</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="text-dark text-decoration-none" href="antecedentes_personales_no_patologicos?enter_id={{enter_id}}">Antecedentes personales no patologicos</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="text-dark text-decoration-none" href="antecedentes_personales_patologicos">Antecedentes personales patologicos</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="text-dark text-decoration-none" href="antecedentes_pediatricos">Antecedentes pediatricos</a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a  class="text-dark text-decoration-none" href="antecedentes_gineco_obstreticos">Antecedentes gineco-obstreticos</a>
+                            </li>
+
+                        </ul>
 
           <a class="dropdown-item" href="/somatometria?enter_id={{enter_id}}">Somatometría</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
       <li class="nav-item">
@@ -33,6 +52,21 @@ barSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     </ul>
  </div>
  </nav>
+<link rel="stylesheet" href="static/css/master.css">
+ <script>
+    $('.dropdown-submenu > a').on("click", function(e) {
+    console.log("what the heck!");
+    var submenu = $(this);
+    $('.dropdown-submenu .dropdown-menu').removeClass('show');
+    submenu.next('.dropdown-menu').addClass('show');
+    e.stopPropagation();
+});
+
+$('.dropdown').on("hidden.bs.dropdown", function() {
+    // hide any open menus when parent closes
+    $('.dropdown-menu.show').removeClass('show');
+});
+</script>
 {%endmacro%}
 
 {% macro patient_info(names,first_lastname)%}
