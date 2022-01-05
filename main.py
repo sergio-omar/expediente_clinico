@@ -83,9 +83,18 @@ class Patient(db.Model, UserMixin):
 
     #the user type will grant certain privileges
     #default false /// later the admin will accept the user
-class Patient_somatometria(db.Model, UserMixin):
+class Somatometria(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key = True)
-    enter_id =db.Column(db.String(30),unique=False, nullable=False)
+    enter_id = db.Column(db.String(30),unique=False, nullable=False)
+    peso = db.Column(db.Float(),nullable=False)
+    altura = db.Column(db.Float(),nullable=False)
+    ta_sistolica = db.Column(db.Float(),nullable=False)
+    ta_diastolica = db.Column(db.Float(),nullable=False)
+    frecuencia_cardiaca = db.Column(db.Float(),nullable=False)
+    frecuencia_respiratoria = db.Column(db.Float(),nullable=False)
+    temperatura = db.Column(db.Float(),nullable=False)
+
+
 #probably we wont use them
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(),Length(
@@ -124,7 +133,7 @@ def antecedentes_heredo_familiares():
         data = request.args
         enter_id = data.get("enter_id")
         patient =  Patient.query.filter_by(enter_id = enter_id).first()
-        return render_template("antecedentes_hredo_familiares.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+        return render_template("antecedentes_heredo_familiares.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
 
 @app.route('/antecedentes_personales_no_patologicos')
 def antecedentes_personales_no_patologicos():
@@ -132,15 +141,15 @@ def antecedentes_personales_no_patologicos():
         data = request.args
         enter_id = data.get("enter_id")
         patient =  Patient.query.filter_by(enter_id = enter_id).first()
-        return render_template("ant_per_no_patologicos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+        return render_template("antecedentes_personales_no_patologicos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
 
 @app.route('/antecedentes_personales_patologicos')
-def antecedentes_personales_no_patologicos():
+def antecedentes_personales_patologicos():
     if request.method == "GET":
         data = request.args
         enter_id = data.get("enter_id")
         patient =  Patient.query.filter_by(enter_id = enter_id).first()
-        return render_template("ant_per_no_patologicos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+        return render_template("antecedentes_personales_patologicos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
 
 @app.route('/antecedentes_pediatricos')
 def antecedentes_pediatricos():
@@ -156,18 +165,30 @@ def antecedentes_gineco_obstetricos():
         data = request.args
         enter_id = data.get("enter_id")
         patient =  Patient.query.filter_by(enter_id = enter_id).first()
-        return render_template("antecedentes_pediatricos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+        return render_template("antecedentes_gineco_osbtetricos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
 
 
 @app.route('/somatometria',methods=['GET','POST'])
 @login_required
 def somatometria():
-    if request.method== "GET":
+    if request.method == "GET":
         data = request.args
         enter_id = data.get("enter_id")
         patient = Patient.query.filter_by(enter_id=enter_id).first()
-
         return render_template("somatometria.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+    if request.method == 'POST':
+        data = request.form
+        new_somatometria = Somatometria(enter_id = data["enter_id"],
+        peso = data['peso'],
+        altura = data['altura'],
+        ta_sistolica = data['ta_sistolica'],
+        ta_diastolica = data['ta_diastolica'],
+        frecuencia_cardiaca = data['frecuencia_cardiaca'],
+        frecuencia_respiratoria = data['frecuencia_respiratoria'],
+        temperatura = data['temperatura'])
+        db.session.add(new_somatometria)
+        db.session.commit()
+        return redirect(url_for("dashboard"))
 
 
 @app.route('/antecedentes_heredofamiliares',methods=['GET','POST'])

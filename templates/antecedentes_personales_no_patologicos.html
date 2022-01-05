@@ -2,81 +2,245 @@
 {%block content%}
 <div class="col-1"></div>
 <div class="col-10">
-    
-    <!---NAV BAR -->
+    <!-- NAV BAR-->
 
     {% from "patient_navbar.html" import patient_navbar with context %}
-    {{patient_navbar()}}
-    <!-- -->
-    <!-- patient information-->
-    {% from "patient_navbar.html" import patient_information with context%}
-    {{ patient_information()}}
-    <div class="jumbotron">
+    {{patient_navbar(id)}}
+    {% from "patient_navbar.html" import patient_info with context %}
+    {{patient_info( names,first_lastname)}}
+
+        <div class="jumbotron">
+            <div class="row">
+                    <h4>Antecedentes personales no patologicos</h4>
+                    <hr>
+            </div>
         <div class="row">
             <div class="col">
                 <div class="form-group">
                     <label>Ficha de ingreso</label>
                 </div>
             </div>
-            <form method="POST" id="register_patient">
+            <form method="POST" id="antecedentes_personales_no_patologicos_form">
                 <div class="col">
                     <div class="form-group">
-                    <input class="form-control" type="text" id="enter_id" name="enter_id" readonly value={{patient_id}}>
+                    <input class="form-control" type="text" id="enter_id" name="enter_id" readonly value={{id}}>
                     </div>
                 </div>
             </div>
             <!-- peso de la persona -->
             <div class="form-group">
-             <label for="peso">Peso:</label><br>
-             <input class="form-control" type="text" id="peso" name="peso"><br>
+             <input type="hidden" value="{{id}}">
+             <label for="religion">Religión:</label><br>
+             <select class="form-control" type="text" id="religion" name="religion"><br>
+                <option>Cristiano Católica </option>
+                <option>Cristiano protestante</option>
+                <option>Islam</option>
+                <option>Hinduismo</option>
+                <option>Judaismo</option>
+                <option>Budismo</option>
+                <option>Otra</option>
+                <option>Sin religión </option>
+             </select>
             </div>
             <div class="row">
                 <div class="col">
                     <div clas="form-group">
-                        <label for="altura">Altura</label><br>
-                        <input class="form-control" type="text" id="altura" name="altura"><br>
+                        <label for="altura">Lugar de Nacimiento</label><br>
+                        <select class="form-control" type="text" id="lugar_de_nacimiento" name="lugar_de_nacimiento"><br>
+                            <option value="Aguascalientes">Aguascalientes</option>
+                            <option value="Baja California">Baja California</option>
+                            <option value="Baja California Sur">Baja California Sur</option>
+                            <option value="Campeche">Campeche</option>
+                            <option value="Chiapas">Chiapas</option>
+                            <option value="Chihuahua">Chihuahua</option>
+                            <option value="CDMX">Ciudad de México</option>
+                            <option value="Coahuila">Coahuila</option>
+                            <option value="Colima">Colima</option>
+                            <option value="Durango">Durango</option>
+                            <option value="Estado de México">Estado de México</option>
+                            <option value="Guanajuato">Guanajuato</option>
+                            <option value="Guerrero">Guerrero</option>
+                            <option value="Hidalgo">Hidalgo</option>
+                            <option value="Jalisco">Jalisco</option>
+                            <option value="Michoacán">Michoacán</option>
+                            <option value="Morelos">Morelos</option>
+                            <option value="Nayarit">Nayarit</option>
+                            <option value="Nuevo León">Nuevo León</option>
+                            <option value="Oaxaca">Oaxaca</option>
+                            <option value="Puebla">Puebla</option>
+                            <option value="Querétaro">Querétaro</option>
+                            <option value="Quintana Roo">Quintana Roo</option>
+                            <option value="San Luis Potosí">San Luis Potosí</option>
+                            <option value="Sinaloa">Sinaloa</option>
+                            <option value="Sonora">Sonora</option>
+                            <option value="Tabasco">Tabasco</option>
+                            <option value="Tamaulipas">Tamaulipas</option>
+                            <option value="Tlaxcala">Tlaxcala</option>
+                            <option value="Veracruz">Veracruz</option>
+                            <option value="Yucatán">Yucatán</option>
+                            <option value="Zacatecas">Zacatecas</option>
+                            </select>
                     </div>
                 </div>
                 <div class="col">
-                    <div clas="form-group">
-                        <label for="sistolica">TA sistólica</label><br>
-                        <input class="form-control" type="text" id="sistolica" name="ta_sistolica"><br>
+                    <div class="form-group">
+                        <label for="estado_civil">Estado civil</label><br>
+                        <select class="form-control" type="text" id="estado_civil" name="estado_civil">
+                            <option value="Casado(a)">Casado(a)</option>
+                            <option value="Concubino(a)">Concubino(a)</option>
+                            <option value="Divorciado(a)">Divorciado(a)</option>
+                            <option value="Padre/madre soltero(a)">Padre/madre soltero(a)</option>
+                            <option value="Separado(a)">Separado(a)</option>
+                            <option value="Soltero(a)">Soltero(a)</option>
+                            <option value="Union libre">Union libre</option>
+                            <option value="Viudo(a)">Viudo(a)</option>
+                        </select>
                     </div>
                 </div>
-                </div>
+            </div>
             <!-- Direccion -->
             <div class="row">
                 <div class="col">
-                    <div clas="form-group">
-                        <label for="diastolica">TA Diastólica</label><br>
-                        <input class="form-control" type="text" id="diastolica" name="diastolica"><br>
+                    <div class="form-group">
+                        <label for="diastolica">Escolaridad</label><br>
+                        <Select class="form-control" type="text" id="escolaridad" name="escolaridad">
+                            <option value="Analfabeta">Analfabeta</option>
+                            <option value="Bachillerato">Bachillerato</option>
+                            <option value="Doctorado">Doctorado</option>
+                            <option value="Licenciatura">Licenciatura</option>
+                            <option value="Maestría">Maestría</option>
+                            <option value="Ninguna">Ninguna</option>
+                            </select>
                     </div>
                 </div>
                 <div class="col">
                     <div clas="form-group">
-                        <label for="cardiaca">Frecuencia Cardiaca</label><br>
-                        <input class="form-control" type="text" id="cardiaca" name="cardiaca"><br>
+                        <label for="higiene_personal">Igiene personal</label><br>
+                        <select class="form-control" type="text" id="igiene_personal" name="igiene_personal">
+                            <option value="Buena">Buena</option>
+                            <option value="Deficiente">Deficiente</option>
+                            <option value="Mala">Mala</option>
+                        </select>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-check">
+                      <label>Actividad Física</label>
+                      <br>
+                      <input class="form-check-input" type="radio" name="si_radio" id="si_radio" value="si" checked>
+                      <label class="form-check-label" for="exampleRadios1">
+                        Si
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="no_radio" id="no_radio" value="no">
+                      <label class="form-check-label" for="exampleRadios2">
+                        No
+                      </label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="tipo_de_actividad">Tipo de actividad</label><br>
+                        <select class="form-control">
+                            <option value="Aerobics">Aerobics</option>
+                            <option value="Basquetbol">Basquetbol</option>
+                            <option value="Baile">Baile</option>
+                            <option value="Caminata">Caminata</option>
+                            <option value="Carrera">Carrera</option>
+                            <option value="Futbol">Futbol</option>
+                            <option value="Natacion">Natación</option>
+                            <option value="Voleibol">Voleibol</option>
+                            <option value="Otro">Otro</option>
+                        </select>
                     </div>
                 </div>
                 <div class="col">
                     <div clas="form-group">
-                        <label for="respiratoria">Frecuencia Respiratoria</label><br>
-                        <input class="form-control" type="text" id="respiratoria" name="respiratoria"><br>
+                        <label for="frecuencia">Frecuencia</label><br>
+                        <select class="form-control" type="text" id="frecuencia" name="frecuencia"><br>
+                            {% for num in range(10)%}
+                            <option value{{num}}>{{num}}</option>    
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+                <div class="col">
+                    <div clas="form-group">
+                        <label for="frecuencia_unidad">por: </label><br>
+                        <select class="form-control" type="text" id="temperatura" name="temperatura"><br>
+                            <option value="Semana">Semana</option>
+                            <option value="Mes">Mes</option>
+                            <option value="Año">Año</option>
+                        </select>
                     </div>
                 </div>
             </div>
-            <div clas="row">
+            <div class="row">
                 <div class="col">
-                    <div clas="form-group">
-                        <label for="temperatura">Temperatura</label><br>
-                        <input class="form-control" type="text" id="temperatura" name="temperatura"><br>
+                    <div class="form-group">
+                     <label for="preferencia_sexual">Preferencia sexual</label>
+                     <select class="form-control" type="text" id="preferencia_sexual" name="preferencia_sexual">
+                         <option value="Heterosexual">Heterosexual</option>
+                         <option value="Homosexual">Homosexual</option>
+                         <option value="Bisexual">Bisexual</option>
+                         <option value="No aplica">No aplica</option>
+                     </select>
                     </div>
+                </div>
+                 <div class="col">
+                    <div class="form-group">
+                     <label for="numero_de_parejas">Numero de parejas</label>
+                     <select class="form-control" type="text" id="numero_de_parejas" name="numero_de_parejas">
+                         {%for parejas in range(10)%}
+                         <option value="{{parejas}}">{{parejas}}</option>
+                         {%endfor%}
+                     </select>
+                    </div>
+                </div>
+                    <div class="col">
+                    <div class="form-group">
+                     <label for="grupo_sanguineo">Grupo sanguíneo</label>
+                     <select class="form-control" type="text" id="grupo_sanguineo" name="grupo_sanguineo">
+                         <option value="A positivo">A positivo</option>
+                         <option value="A negativo">A negativo</option>
+                         <option value="B positivo">B positvo</option>
+                         <option value="B negativo">B negativo</option>
+                         <option value="AB positivo">AB positvo</option>
+                         <option value="AB negativo">AB negativo</option>
+                         <option value="O positivo">O positivo</option>
+                         <option value="O negativo">O negativo</option>
+                         <option value="No lo sabe">No lo sabe</option>
+                     </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="calidad_de_alimentacion">Calidad de alimentación</label>
+                     <select class="form-control" type="text" id="calidad_de_alimentacion" name="calidad_de_alimentacion">
+                         <option value="Muy bueno">Muy bueno</option>
+                         <option value="Regular">Regular</option>
+                         <option value="Malo">Malo</option>
+                    </select>
+                </div>
+                    <div class="col">
+                    <label for="Caracteristicas_de_la_habitacion">Características de la habitación</label>
+                     <select class="form-control" type="text" id="caracteristicas_de_la_habitacion" name="caracteristicas_de_la_habitacion">
+                         <option value="Agua introdomiciliaria">Agua intradomiciliaria</option>
+                         <option value="Agua extradomiciliaria potable">Agua extradomiciliaria potable</option>
+                         <option value="Agua extradomiciliaria no potable">Agua extradomiciliaria no potable</option>
+                         <option value="Excretas con drenaje">Excretas con drenaje</option>
+                    </select>
                 </div>
             </div>
             <hr>
             
 
-            <button onclick="collect_padecimientos(fill_modal)" type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#patient-modal">Ingreso de Paciente</button>            
+            <button onclick="fill_modal()" type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#somatometria-modal">Somatometría del paciente</button>            
             <br>
             <br>
             <button type="submit" class="btn btn-secondary form-control">Cancelar ingreso</button>   
@@ -87,7 +251,7 @@
 <div class="col-1"></div>
 
 <!--MODAL -->
-<div class="modal fade" id="patient-modal" tabindex="-1" role="dialog" aria-labelledby="patient-modal" aria-hidden="true">
+<div class="modal fade" id="somatometria-modal" tabindex="-1" role="dialog" aria-labelledby="patient-modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -97,22 +261,20 @@
         </button>
       </div>
       <div class="modal-body">
-          <p>Nombres:</p>
-          <h3 id="modal-names" value=""> </h3>
-          <p>Apellido paterno:</p>
-          <h3 id="modal-first_lastname"></h3>
-          <p>Apellido materno:</p>
-          <h3 id="modal-second_lastname" value=""></h3>
-          <p>Calle: </p>
-          <h3 id="modal-street" value=""></h3>
-          <p>Sexo: </p>
-          <h3 id="modal-gender" value=""></h3>
-          <p>Persona Informante</p>
-          <h3 id="modal-persona-informante" value=""></h3>
-          <p>Padecimientos:</p>
-          <h3 id="modal-padecimientos"></h3>
-          <p>Familiar Responsable </p>
-          <h3 id="modal-responsable" value=""> </h3>
+          <p>Peso:</p>
+          <h3 id="modal_peso" value=""> </h3>
+          <p>Altura:</p>
+          <h3 id="modal_altura"></h3>
+          <p>TA Sistólica:</p>
+          <h3 id="modal_ta_sistolica" value=""></h3>
+          <p>TA Diastólica: </p>
+          <h3 id="modal_ta_diastolica" value=""></h3>
+          <p>Frecuencia cardiaca: </p>
+          <h3 id="modal_frecuencia_cardiaca" value=""></h3>
+          <p>Frecuencia respiratoria</p>
+          <h3 id="modal_frecuencia_respiratoria" value=""></h3>
+          <p>Temperatura:</p>
+          <h3 id="modal_temperatura"></h3>
           <hr>
           <p>Dado de alta por:</p>
           <p>{{current_user.username}}</p>
@@ -128,80 +290,22 @@
 <!--END MODAL-->
 <script>
     //ucheck checkbox sin antecedentes
-    function uncheck_sinantecedentes(){
-        document.getElementById("sin_antecedentes_box").checked = false
-    }
-    function collect_padecimientos(my_callback){
-        const padecimientos = []
-        var dict = new Object()
-        dict["Sin antecedentes"] = document.getElementById("sin_antecedentes_box").checked
-        dict["Alcoholismo"] = document.getElementById("alcoholismo_box").checked
-        dict["Alergias"] = document.getElementById("alergias_box").checked
-        dict["Diabetes Mellitis"] = document.getElementById("diabetes_box").checked
-        dict["Malformación"] = document.getElementById("malformacion_box").checked
-        dict["Neoplasias"] = document.getElementById("neoplasias_box").checked
-        dict["Obesidad"] = document.getElementById("obesidad_box").checked
-        dict["Tabaquismo"] = document.getElementById("tabaquismo_box").checked
-        dict["Tuberculosis pulmonar"] = document.getElementById("tuberculosis_box").checked
-        
-        for (const [key, value] of Object.entries(dict)) {
-            if (value == true){
-                padecimientos.push(key)
-            }
-        }
-        var string_padecimientos = JSON.stringify(padecimientos)
-        document.getElementById("padecimientos").value = string_padecimientos
-        my_callback(padecimientos)
-    }
+    
 
-function fill_modal(padecimientos){
+function fill_modal(){
     //GET ALL "padecimientos"
-    console.log(padecimientos)
-    var string_padecimientos = ""
-    padecimientos.forEach( element => {string_padecimientos += element +", "})
-    document.getElementById("modal-names").innerText = document.getElementById("names").value.trim()
-    document.getElementById("modal-first_lastname").innerText = document.getElementById("first_lastname").value.trim()
-    document.getElementById("modal-second_lastname").innerText = document.getElementById("second_lastname").value.trim()
-    document.getElementById("modal-street").innerText = document.getElementById("address_street").value.trim()
-    document.getElementById("modal-gender").innerText = document.querySelector('input[name="gender"]').value.trim()
-    document.getElementById("modal-persona-informante").innerText = document.getElementById("persona_informante").value.trim()
-    document.getElementById("modal-padecimientos").innerText = string_padecimientos
-    document.getElementById("modal-responsable").innerText = document.getElementById("familiar_responsable").value.trim()
-}
-function send_form(){
-   var form = document.getElementById("register_patient")
-    form.submit()
-}
+    document.getElementById("modal_peso").innerText = document.getElementById("peso").value.trim()
+    document.getElementById("modal_altura").innerText = document.getElementById("altura").value.trim()
+    document.getElementById("modal_ta_sistolica").innerText = document.getElementById("ta_sistolica").value.trim()
+    document.getElementById("modal_ta_diastolica").innerText = document.getElementById("ta_diastolica").value.trim()
+    document.getElementById("modal_frecuencia_cardiaca").innerText = document.getElementById("frecuencia_cardiaca").value.trim()
+    document.getElementById("modal_frecuencia_respiratoria").innerText = document.getElementById("frecuencia_respiratoria").value.trim()
+    document.getElementById("modal_temperatura").innerText = document.getElementById("temperatura").value.trim()
+    }
 
-// Let's add a event listener in "sin padecimientos" in order to clean if one was previously selected
-document.getElementById("sin_antecedentes_box").addEventListener('change',function(){
-    document.getElementById("alcoholismo_box").checked = false
-    document.getElementById("alergias_box").checked = false
-    document.getElementById("diabetes_box").checked = false
-    document.getElementById("malformacion_box").checked = false
-    document.getElementById("neoplasias_box").checked = false
-    document.getElementById("obesidad_box").checked = false
-    document.getElementById("tabaquismo_box").checked = false
-    document.getElementById("tuberculosis_box").checked = false
-})
-
-$('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
-  if (!$(this).next().hasClass('show')) {
-    $(this).parents('.dropdown-menu').first().find('.show').removeClass('show');
-  }
-  var $subMenu = $(this).next('.dropdown-menu');
-  $subMenu.toggleClass('show');
-
-
-  $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
-    $('.dropdown-submenu .show').removeClass('show');
-  });
-
-
-  return false;
-});
-
+function send_form(){                                                                                               
+   var form = document.getElementById("somatometria_form")                                                           
+    form.submit()                                                                                                   
+}                                                                                                                   
 </script>
-
-
 {%endblock%}
