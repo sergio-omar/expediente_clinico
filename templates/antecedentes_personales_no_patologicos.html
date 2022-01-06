@@ -130,13 +130,13 @@
                     <div class="form-check">
                       <label>Actividad Física</label>
                       <br>
-                      <input class="form-check-input" type="radio" name="si_radio" id="si_radio" value="si" checked>
+                      <input class="form-check-input" type="radio" name="si_radio" id="actividad_fisica_si" value="si" checked>
                       <label class="form-check-label" for="exampleRadios1">
                         Si
                       </label>
                     </div>
                     <div class="form-check">
-                      <input class="form-check-input" type="radio" name="no_radio" id="no_radio" value="no">
+                      <input class="form-check-input" type="radio" name="no_radio" id="actividad_fisica_no" value="no">
                       <label class="form-check-label" for="exampleRadios2">
                         No
                       </label>
@@ -145,7 +145,7 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="tipo_de_actividad">Tipo de actividad</label><br>
-                        <select class="form-control">
+                        <select class="form-control" name="tipo_de_actividad" id="tipo_de_actividad">
                             <option value="Aerobics">Aerobics</option>
                             <option value="Basquetbol">Basquetbol</option>
                             <option value="Baile">Baile</option>
@@ -161,9 +161,9 @@
                 <div class="col">
                     <div clas="form-group">
                         <label for="frecuencia">Frecuencia</label><br>
-                        <select class="form-control" type="text" id="frecuencia" name="frecuencia"><br>
+                        <select class="form-control" type="text" id="frecuencia_num" name="frecuencia_num"><br>
                             {% for num in range(10)%}
-                            <option value{{num}}>{{num}}</option>    
+                            <option value="{{num}}">{{num}}</option>    
                             {% endfor %}
                         </select>
                     </div>
@@ -171,7 +171,7 @@
                 <div class="col">
                     <div clas="form-group">
                         <label for="frecuencia_unidad">por: </label><br>
-                        <select class="form-control" type="text" id="temperatura" name="temperatura"><br>
+                        <select class="form-control" type="text" id="frecuencia_unidad" name="frecuencia_unidad"><br>
                             <option value="Semana">Semana</option>
                             <option value="Mes">Mes</option>
                             <option value="Año">Año</option>
@@ -240,7 +240,7 @@
             <hr>
             
 
-            <button onclick="fill_modal()" type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#somatometria-modal">Somatometría del paciente</button>            
+            <button onclick="fill_modal()" type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#antecedentes-patologicos-no-patologicos-modal">Somatometría del paciente</button>            
             <br>
             <br>
             <button type="submit" class="btn btn-secondary form-control">Cancelar ingreso</button>   
@@ -251,30 +251,44 @@
 <div class="col-1"></div>
 
 <!--MODAL -->
-<div class="modal fade" id="somatometria-modal" tabindex="-1" role="dialog" aria-labelledby="patient-modal" aria-hidden="true">
+<div class="modal fade" id="antecedentes-patologicos-no-patologicos-modal" tabindex="-1" role="dialog" aria-labelledby="patient-modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Registro de paciente</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Corroborar Información</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-          <p>Peso:</p>
-          <h3 id="modal_peso" value=""> </h3>
-          <p>Altura:</p>
-          <h3 id="modal_altura"></h3>
-          <p>TA Sistólica:</p>
-          <h3 id="modal_ta_sistolica" value=""></h3>
-          <p>TA Diastólica: </p>
-          <h3 id="modal_ta_diastolica" value=""></h3>
-          <p>Frecuencia cardiaca: </p>
-          <h3 id="modal_frecuencia_cardiaca" value=""></h3>
-          <p>Frecuencia respiratoria</p>
-          <h3 id="modal_frecuencia_respiratoria" value=""></h3>
-          <p>Temperatura:</p>
-          <h3 id="modal_temperatura"></h3>
+          <p>Religión:</p>
+          <h3 id="modal_religion" value=""> </h3>
+          <p>Lugar de nacimiento:</p>
+          <h3 id="modal_lugar_de_nacimiento"></h3>
+          <p>Estado civil:</p>
+          <h3 id="modal_estado_civil" value=""></h3>
+          <p>Escolaridad: </p>
+          <h3 id="modal_escolaridad" value=""></h3>
+          <p>Igiene Personal: </p>
+          <h3 id="modal_igiene_personal" value=""></h3>
+          <p>Actividad Fisica</p>
+          <h3 id="modal_actividad_fisica" value=""></h3>
+          <p>Tipo de actividad física</p>
+          <h3 id="modal_tipo_de_actividad" value=""></h3>
+          <p>Frecuencia:</p>
+          <h3 id="modal_frecuencia_num"></h3>
+          <p>Cada:</p>
+          <h3 id="modal_frecuencia_unidad"></h3>
+          <p>Preferencia Sexual:</p>
+          <h3 id="modal_preferencia_sexual"></h3>
+          <p>Numero de parejas:</p>
+          <h3 id="modal_numero_de_parejas"></h3>
+          <p>Grupo sanguíneo:</p>
+          <h3 id="modal_grupo_sanguineo"></h3>
+          <p>Calidad de alimentación:</p>
+          <h3 id="modal_calidad_de_alimentacion"></h3>
+          <p>Características de habitación:</p>
+          <h3 id="modal_caracteristicas_de_la_habitacion"></h3>
           <hr>
           <p>Dado de alta por:</p>
           <p>{{current_user.username}}</p>
@@ -294,17 +308,33 @@
 
 function fill_modal(){
     //GET ALL "padecimientos"
-    document.getElementById("modal_peso").innerText = document.getElementById("peso").value.trim()
-    document.getElementById("modal_altura").innerText = document.getElementById("altura").value.trim()
-    document.getElementById("modal_ta_sistolica").innerText = document.getElementById("ta_sistolica").value.trim()
-    document.getElementById("modal_ta_diastolica").innerText = document.getElementById("ta_diastolica").value.trim()
-    document.getElementById("modal_frecuencia_cardiaca").innerText = document.getElementById("frecuencia_cardiaca").value.trim()
-    document.getElementById("modal_frecuencia_respiratoria").innerText = document.getElementById("frecuencia_respiratoria").value.trim()
-    document.getElementById("modal_temperatura").innerText = document.getElementById("temperatura").value.trim()
+    document.getElementById("modal_religion").innerText = document.getElementById("religion").value.trim()
+    document.getElementById("modal_lugar_de_nacimiento").innerText = document.getElementById("lugar_de_nacimiento").value.trim()
+    document.getElementById("modal_estado_civil").innerText = document.getElementById("estado_civil").value.trim()
+    document.getElementById("modal_escolaridad").innerText = document.getElementById("escolaridad").value.trim()
+    document.getElementById("modal_igiene_personal").innerText = document.getElementById("igiene_personal").value.trim()
+    if (document.getElementById("actividad_fisica_si").checked == true){
+        document.getElementById("modal_actividad_fisica").innerText = "Si tiene actividad física"
+        document.getElementById("modal_tipo_de_actividad").innerText = document.getElementById("tipo_de_actividad").value.trim()
+        document.getElementById("modal_frecuencia_num").innerText = document.getElementById("frecuencia_num").value.trim()
+        document.getElementById("modal_frecuencia_unidad").innerText = document.getElementById("frecuencia_unidad").value.trim()
+
     }
+    if (document.getElementById("actividad_fisica_no").checked == true){
+        document.getElementById("modal_actividad_fisica").innerText = "No tiene actividad física"
+        document.getElementById("modal_tipo_de_actividad").innerText = "Ninguna"
+        document.getElementById("modal_frecuencia_num").innerText = "No aplica"
+        document.getElementById("modal_frecuencia_unidad").innerText = "No aplica"
+    }
+        document.getElementById("modal_preferencia_sexual").innerText = document.getElementById("preferencia_sexual").value.trim()
+    document.getElementById("modal_numero_de_parejas").innerText = document.getElementById("numero_de_parejas").value.trim()
+    document.getElementById("modal_grupo_sanguineo").innerText = document.getElementById("grupo_sanguineo").value.trim()
+    document.getElementById("modal_calidad_de_alimentacion").innerText = document.getElementById("calidad_de_alimentacion").value.trim()
+    document.getElementById("modal_caracteristicas_de_la_habitacion").innerText = document.getElementById("caracteristicas_de_la_habitacion").value.trim()
+}
 
 function send_form(){                                                                                               
-   var form = document.getElementById("somatometria_form")                                                           
+   var form = document.getElementById("antecedentes_personales_no_patologicos_form")                                                           
     form.submit()                                                                                                   
 }                                                                                                                   
 </script>

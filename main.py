@@ -84,8 +84,7 @@ class Patient(db.Model, UserMixin):
     #the user type will grant certain privileges
     #default false /// later the admin will accept the user
 class Somatometria(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key = True)
-    enter_id = db.Column(db.String(30),unique=False, nullable=False)
+    enter_id = db.Column(db.String(30),unique=True, primary_key=True, nullable=False)
     peso = db.Column(db.Float(),nullable=False)
     altura = db.Column(db.Float(),nullable=False)
     ta_sistolica = db.Column(db.Float(),nullable=False)
@@ -94,6 +93,22 @@ class Somatometria(db.Model, UserMixin):
     frecuencia_respiratoria = db.Column(db.Float(),nullable=False)
     temperatura = db.Column(db.Float(),nullable=False)
 
+class Antecedentes_personales_no_patologicos(db.Model,UserMixin):
+    enter_id = db.Column(db.String(30),unique=True,primary_key=True,nullable=False)
+    religion = db.Column(db.String(30),unique=False, nullable=False)
+    lugar_de_nacimiento = db.Column(db.String(30),unique=False,nullable=False)
+    estado_civil = db.Column(db.String(30),unique=False,nullable=False)
+    escolaridad = db.Column(db.String(30),unique=False,nullable=False)
+    igiene_personal = db.Column(db.String(30),unique=False,nullable=False)
+    actividad_fisica = db.Column(db.String(5),unique=False,nullable=False)
+    tipo_de_actividad = db.Column(db.String(30),unique=False,nullable=True)
+    frecuencia_num = db.Column(db.String(30),unique=False,nullable=True)
+    frecuencia_unidad = db.Column(db.String(30),unique=False,nullable=False)
+    preferencia_sexual = db.Column(db.String(30),unique=False,nullable=False)
+    numero_de_parejas =db.Column(db.String(30),unique=False,nullable=False)
+    grupo_sanguineo = db.Column(db.String(30),unique=False,nullable=False)
+    calidad_de_alimentacion = db.Column(db.String(30),unique=False,nullable=False)
+    caracteristicas_de_habitacion = db.Column(db.String(30),unique=False,nullable=False)
 
 #probably we wont use them
 class RegisterForm(FlaskForm):
@@ -233,8 +248,31 @@ def panel_paciente():
 @app.route('/antecedentes_personales_no_patologicos',methods=['GET','POST'])
 @login_required
 def antecedentes_personales_no_patologicosi2():
-    patient = "sergio"
-    return render_template("antecedentes_personales_no_patologicos.html",patient=patient)
+    if request.method == "GET":
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+        return render_template("antecedentes_personales_no_patologicos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+    if request.method == 'POST':
+        data = request.form
+        new_antecedentes_personales_no_patologicos = Antecedentes_personales_no_patologicos(enter_id = data["enter_id"],
+        religion = data['religion'],
+        lugar_de_naciento = data['lugar_de_nacimiento'],
+        estado_civil = data['estado_civil'],
+        escolaridad = data['escolaridad'],
+        igiene_personal = data['igiene_personal'],
+        actividad_fisica = data['actividad_fisica'],
+        tipo_de_actividad_fisica = data['tipo_de_actividad_fisica'],
+        frecuencia_num = data['frecuencia_num'],
+        frecuencia_unidad = data['frecuencia_unidad'],
+        preferencia_sexual = data['preferencia_sexual'],
+        numero_de_parejas = data['numero_de_parejas'],
+        grupo_sanguineo = data['grupo_sanguineo'],
+        calidad_de_alimentacion = data['calidad_de_alimentacion'],
+        caracteristicas_de_habitacion = data['caracteristicas_de_habitacion'])
+        db.session.add(new_antecedentes_personales_no_patologicos)
+        db.session.commit()
+        return redirect(url_for("dashboard"))
 
 @app.route('/ingreso_paciente',methods=['GET','POST'])
 @login_required
