@@ -11,7 +11,7 @@
 
         <div class="jumbotron">
             <div class="row">
-                    <h4>Somatometria</h4>
+                    <h4>Padecimiento Actual</h4>
                     <hr>
             </div>
         <div class="row">
@@ -20,66 +20,78 @@
                     <label>Ficha de ingreso</label>
                 </div>
             </div>
-            <form method="POST" id="somatometria_form">
+            <form method="POST" id="resumen_clinico_form">
                 <div class="col">
                     <div class="form-group">
                     <input class="form-control" type="text" id="enter_id" name="enter_id" readonly value={{id}}>
                     </div>
                 </div>
             </div>
-            <!-- peso de la persona -->
-            <div class="form-group">
-             <input type="hidden" value="{{id}}">
-             <label for="peso">Peso:</label><br>
-             <input class="form-control" type="text" id="peso" name="peso"><br>
-            </div>
+            <hr>
+
             <div class="row">
-                <div class="col">
-                    <div clas="form-group">
-                        <label for="altura">Altura</label><br>
-                        <input class="form-control" type="text" id="altura" name="altura"><br>
+                <!-- we divide the entire section into two parts-->
+                <div class="col-6">
+                    <div class="form-group">
+                        <input type="hidden" value="{{id}}">
+                        <label for="peso">Padecimiento Actual:</label><br>
+                        <textarea class="form-control" rows="7" type="text" id="padecimiento_actual" name="padecimiento_actual"></textarea><br>
                     </div>
                 </div>
-                <div class="col">
-                    <div clas="form-group">
-                        <label for="sistolica">TA sistólica</label><br>
-                        <input class="form-control" type="text" id="ta_sistolica" name="ta_sistolica"><br>
+                <div class="col-6">
+
+                    <h4>Exploracion fisica</h4>
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="peso">Peso:</label><br>
+                                <input class="form-control" type="text" id="peso" name="peso"><br>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="altura">Altura</label><br>
+                                <input class="form-control" type="text" id="altura" name="altura"><br>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="sistolica">TA sistólica</label><br>
+                                <input class="form-control" type="text" id="ta_sistolica" name="ta_sistolica"><br>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="diastolica">TA Diastólica</label><br>
+                                <input class="form-control" type="text" id="ta_diastolica" name="ta_diastolica"><br>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                </div>
-            <!-- Direccion -->
-            <div class="row">
-                <div class="col">
-                    <div clas="form-group">
-                        <label for="diastolica">TA Diastólica</label><br>
-                        <input class="form-control" type="text" id="ta_diastolica" name="ta_diastolica"><br>
-                    </div>
-                </div>
-                <div class="col">
-                    <div clas="form-group">
-                        <label for="cardiaca">Frecuencia Cardiaca</label><br>
-                        <input class="form-control" type="text" id="frecuencia_cardiaca" name="frecuencia_cardiaca"><br>
-                    </div>
-                </div>
-                <div class="col">
-                    <div clas="form-group">
-                        <label for="respiratoria">Frecuencia Respiratoria</label><br>
-                        <input class="form-control" type="text" id="frecuencia_respiratoria" name="frecuencia_respiratoria"><br>
-                    </div>
-                </div>
-            </div>
-            <div clas="row">
-                <div class="col">
-                    <div clas="form-group">
-                        <label for="temperatura">Temperatura</label><br>
-                        <input class="form-control" type="text" id="temperatura" name="temperatura"><br>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="cardiaca">Frecuencia Cardiaca</label><br>
+                                <input class="form-control" type="text" id="frecuencia_cardiaca" name="frecuencia_cardiaca"><br>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="respiratoria">Frecuencia Respiratoria</label><br>
+                                <input class="form-control" type="text" id="frecuencia_respiratoria" name="frecuencia_respiratoria"><br>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="temperatura">Temperatura</label><br>
+                                <input class="form-control" type="text" id="temperatura" name="temperatura"><br>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <hr>
-            
 
-            <button onclick="fill_modal()" type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#somatometria-modal">Revisar información</button>            
+            <button onclick="fill_modal()" type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#atencion-medica-modal">Revisar información</button>            
             <br>
             <br>
             <button type="submit" class="btn btn-secondary form-control">Cancelar ingreso</button>   
@@ -90,7 +102,7 @@
 <div class="col-1"></div>
 
 <!--MODAL -->
-<div class="modal fade" id="somatometria-modal" tabindex="-1" role="dialog" aria-labelledby="patient-modal" aria-hidden="true">
+<div class="modal fade" id="atencion-medica-modal" tabindex="-1" role="dialog" aria-labelledby="patient-modal" aria-hidden="true">
     <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -100,6 +112,8 @@
         </button>
       </div>
       <div class="modal-body">
+          <p>Padecimiento Actual:</p>
+          <h3 id="modal_padecimiento_actual" value=""> </h3>
           <p>Peso:</p>
           <h3 id="modal_peso" value=""> </h3>
           <p>Altura:</p>
@@ -133,6 +147,7 @@
 
 function fill_modal(){
     //GET ALL "padecimientos"
+    document.getElementById("modal_padecimiento_actual").innerText = document.getElementById("padecimiento_actual").value.trim()
     document.getElementById("modal_peso").innerText = document.getElementById("peso").value.trim()
     document.getElementById("modal_altura").innerText = document.getElementById("altura").value.trim()
     document.getElementById("modal_ta_sistolica").innerText = document.getElementById("ta_sistolica").value.trim()
@@ -143,7 +158,7 @@ function fill_modal(){
     }
 
 function send_form(){                                                                                               
-   var form = document.getElementById("somatometria_form")                                                           
+   var form = document.getElementById("resumen_clinico_form")                                                           
     form.submit()                                                                                                   
 }                                                                                                                   
 </script>

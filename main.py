@@ -84,7 +84,20 @@ class Patient(db.Model, UserMixin):
     #the user type will grant certain privileges
     #default false /// later the admin will accept the user
 class Somatometria(db.Model, UserMixin):
+    id = db.Column(db.Integer(),primary_key=True, autoincrement=True)
     enter_id = db.Column(db.String(30),unique=True, primary_key=True, nullable=False)
+    peso = db.Column(db.Float(),nullable=False)
+    altura = db.Column(db.Float(),nullable=False)
+    ta_sistolica = db.Column(db.Float(),nullable=False)
+    ta_diastolica = db.Column(db.Float(),nullable=False)
+    frecuencia_cardiaca = db.Column(db.Float(),nullable=False)
+    frecuencia_respiratoria = db.Column(db.Float(),nullable=False)
+    temperatura = db.Column(db.Float(),nullable=False)
+
+class Atencion_medica(db.Model, UserMixin):
+    id = db.Column(db.Integer(),primary_key=True, autoincrement=True)
+    enter_id = db.Column(db.String(30),unique=True, nullable=False)
+    padecimiento_actual = db.Column(db.Text(),nullable=False)
     peso = db.Column(db.Float(),nullable=False)
     altura = db.Column(db.Float(),nullable=False)
     ta_sistolica = db.Column(db.Float(),nullable=False)
@@ -96,11 +109,11 @@ class Somatometria(db.Model, UserMixin):
 class Antecedentes_personales_no_patologicos(db.Model,UserMixin):
     enter_id = db.Column(db.String(30),unique=True,primary_key=True,nullable=False)
     religion = db.Column(db.String(30),unique=False, nullable=False)
-    lugar_de_nacimiento = db.Column(db.String(30),unique=False,nullable=False)
+    lugar_de_nacimiento = db.Column(db.String(40),unique=False,nullable=False)
     estado_civil = db.Column(db.String(30),unique=False,nullable=False)
     escolaridad = db.Column(db.String(30),unique=False,nullable=False)
     igiene_personal = db.Column(db.String(30),unique=False,nullable=False)
-    actividad_fisica = db.Column(db.String(5),unique=False,nullable=False)
+    actividad_fisica = db.Column(db.String(30),unique=False,nullable=False)
     tipo_de_actividad = db.Column(db.String(30),unique=False,nullable=True)
     frecuencia_num = db.Column(db.String(30),unique=False,nullable=True)
     frecuencia_unidad = db.Column(db.String(30),unique=False,nullable=False)
@@ -205,6 +218,30 @@ def somatometria():
         db.session.commit()
         return redirect(url_for("dashboard"))
 
+@app.route('/atencion_medica',methods=['GET','POST'])
+@login_required
+def atencion_medica():
+    if request.method == "GET":
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+        return render_template("atencion_medica.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+    if request.method == 'POST':
+        data = request.form
+        new_atencion_medica = Atencion_medica(enter_id = data["enter_id"],
+        padecimiento_actual = data["padecimiento_actual"],
+        peso = data['peso'],
+        altura = data['altura'],
+        ta_sistolica = data['ta_sistolica'],
+        ta_diastolica = data['ta_diastolica'],
+        frecuencia_cardiaca = data['frecuencia_cardiaca'],
+        frecuencia_respiratoria = data['frecuencia_respiratoria'],
+        temperatura = data['temperatura'])
+        db.session.add(new_atencion_medica)
+        db.session.commit()
+        return redirect(url_for("dashboard"))
+
+
 
 @app.route('/antecedentes_heredofamiliares',methods=['GET','POST'])
 def antecedentes_heredofamiliares():
@@ -257,19 +294,19 @@ def antecedentes_personales_no_patologicosi2():
         data = request.form
         new_antecedentes_personales_no_patologicos = Antecedentes_personales_no_patologicos(enter_id = data["enter_id"],
         religion = data['religion'],
-        lugar_de_naciento = data['lugar_de_nacimiento'],
+        lugar_de_nacimiento = data['lugar_de_nacimiento'],
         estado_civil = data['estado_civil'],
         escolaridad = data['escolaridad'],
         igiene_personal = data['igiene_personal'],
         actividad_fisica = data['actividad_fisica'],
-        tipo_de_actividad_fisica = data['tipo_de_actividad_fisica'],
+        tipo_de_actividad = data['tipo_de_actividad'],
         frecuencia_num = data['frecuencia_num'],
         frecuencia_unidad = data['frecuencia_unidad'],
         preferencia_sexual = data['preferencia_sexual'],
         numero_de_parejas = data['numero_de_parejas'],
         grupo_sanguineo = data['grupo_sanguineo'],
         calidad_de_alimentacion = data['calidad_de_alimentacion'],
-        caracteristicas_de_habitacion = data['caracteristicas_de_habitacion'])
+        caracteristicas_de_habitacion = data['caracteristicas_de_la_habitacion'])
         db.session.add(new_antecedentes_personales_no_patologicos)
         db.session.commit()
         return redirect(url_for("dashboard"))
