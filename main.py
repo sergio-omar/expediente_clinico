@@ -86,6 +86,7 @@ class Patient(db.Model, UserMixin):
 class Somatometria(db.Model, UserMixin):
     id = db.Column(db.Integer(),primary_key=True, autoincrement=True)
     enter_id = db.Column(db.String(30),unique=True, primary_key=True, nullable=False)
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
     peso = db.Column(db.Float(),nullable=False)
     altura = db.Column(db.Float(),nullable=False)
     ta_sistolica = db.Column(db.Float(),nullable=False)
@@ -96,7 +97,8 @@ class Somatometria(db.Model, UserMixin):
 
 class Atencion_medica(db.Model, UserMixin):
     id = db.Column(db.Integer(),primary_key=True, autoincrement=True)
-    enter_id = db.Column(db.String(30),unique=True, nullable=False)
+    enter_id = db.Column(db.String(30),unique=False, nullable=False)
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
     padecimiento_actual = db.Column(db.Text(),nullable=False)
     peso = db.Column(db.Float(),nullable=False)
     altura = db.Column(db.Float(),nullable=False)
@@ -143,6 +145,23 @@ class LoginForm(FlaskForm):
     password = PasswordField(validators=[InputRequired(),Length(
         min=4,max=20)],render_kw={"placeholder":"Password"})
     submit = SubmitField("Login")
+
+#this function will help us the get the current age of the person based on her
+#day of birth
+def get_age(day,month,year):
+    dt = datetime.datetime.today()
+    cur_day = dt.day
+    cur_month = dt.month
+    cur_year = dt.year
+    age = cur_year - year
+    print(f"day={day} month={month} year={year}")
+    if cur_month < month:
+        age -=1
+        return age
+    elif(cur_month==month and cur_day<=day):
+        age -= 1
+        return age
+    return age
 
 @app.route('/',methods=['GET','POST'])
 def index():
@@ -203,7 +222,8 @@ def somatometria():
         data = request.args
         enter_id = data.get("enter_id")
         patient = Patient.query.filter_by(enter_id=enter_id).first()
-        return render_template("somatometria.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        return render_template("somatometria.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age )
     if request.method == 'POST':
         data = request.form
         new_somatometria = Somatometria(enter_id = data["enter_id"],

@@ -5,18 +5,18 @@
     <!-- NAV BAR-->
 
     {% from "patient_navbar.html" import patient_navbar with context %}
-    {{patient_navbar(id)}}
+    {{patient_navbar(enter_id)}}
     {% from "patient_navbar.html" import patient_info with context %}
-    {{patient_info( names,first_lastname)}}
+    {{patient_info( names,first_lastname,gender,age,enter_id)}}
 
         <div class="jumbotron">
             <div class="row">
                     <h4>Somatometria</h4>
                     <hr>
             </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
                     <label>Ficha de ingreso</label>
                 </div>
             </div>

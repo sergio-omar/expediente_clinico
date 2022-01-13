@@ -70,10 +70,25 @@ $('.dropdown').on("hidden.bs.dropdown", function() {
 </script>
 {%endmacro%}
 
-{% macro patient_info(names,first_lastname)%}
+{% macro patient_info(names,first_lastname,gender,age,enter_id)%}
 <div class="jumbotron" style="padding: 25px;">
-    <h5> Datos del paciente: {{names}}</h5>
-    <h5> Apellido:{{first_lastname}}  </h5>
+
+    <h4> Datos del paciente:</h4>
+    <hr>
+    <div class="row">
+        <div class="col">
+            <h5> Nombre(s): {{names}}</h5>
+            <h5> Apellido: {{first_lastname}}</h5>
+        </div>
+        <div class="col">
+            <h5>Sexo: {{gender}}</h5>
+            <h5>Edad: {{age}}</h5>
+        </div>
+        <div class="col">
+            <h5>Fecha de ingreso: {{"something"}}</h5>
+            <h5>Ficha de ingreso: {{enter_id}}</h5>
+        </div>
+    </div>
 
 </div>
 {% endmacro%}
