@@ -1,3 +1,4 @@
+#covid version
 from flask import Flask
 from flask import render_template, url_for, redirect,request, flash
 from flask_sqlalchemy import SQLAlchemy
