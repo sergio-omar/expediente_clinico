@@ -214,7 +214,31 @@ def antecedentes_gineco_obstetricos():
         enter_id = data.get("enter_id")
         patient =  Patient.query.filter_by(enter_id = enter_id).first()
         return render_template("antecedentes_gineco_osbtetricos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
-
+def format_spanish_month(month):
+    if month == 1:
+        return "Enero"
+    elif month == 2:
+        return "Febrero"
+    elif month == 3:
+        return "Marzo"
+    elif month == 4:
+        return "Abril"
+    elif month == 5:
+        return "Mayo"
+    elif month == 6:
+        return "Junio"
+    elif month == 7:
+        return "Julio"
+    elif month == 8:
+        return "Agosto"
+    elif month == 9:
+        return "Septiembre"
+    elif month == 10:
+        return "Octubre"
+    elif month == 11:
+        return "Noviembre"
+    else:
+        return "Diciembre"
 
 @app.route('/somatometria',methods=['GET','POST'])
 @login_required
@@ -224,7 +248,9 @@ def somatometria():
         enter_id = data.get("enter_id")
         patient = Patient.query.filter_by(enter_id=enter_id).first()
         age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
-        return render_template("somatometria.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age )
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("somatometria.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date)
     if request.method == 'POST':
         data = request.form
         new_somatometria = Somatometria(enter_id = data["enter_id"],
