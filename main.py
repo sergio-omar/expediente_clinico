@@ -59,16 +59,16 @@ class Patient(db.Model, UserMixin):
     names = db.Column(db.String(20),nullable=False,unique=False)
     first_lastname = db.Column(db.String(30),nullable=False,unique=False)
     second_lastname = db.Column(db.String(30),nullable=False,unique=False)
-    dia_nacimiento = db.Column(db.String(3))
-    mes_nacimiento = db.Column(db.String(3))
-    ano_nacimiento = db.Column(db.String(5))
-    address_street = db.Column(db.String(30))
-    address_number = db.Column(db.String(30))
-    address_cp = db.Column(db.String(30)),
-    address_colonia = db.Column(db.String(40)),
-    address_municipio = db.Column(db.String(40)),
-    address_estado = db.Column(db.String(40)),
-    address_pais = db.Column(db.String(40)),
+    dia_nacimiento = db.Column(db.String(3),nullable=False)
+    mes_nacimiento = db.Column(db.String(3),nullable=False)
+    ano_nacimiento = db.Column(db.String(5),nullable=False)
+    address_street = db.Column(db.String(30),nullable=False)
+    address_number = db.Column(db.String(30),nullable=False)
+    address_cp = db.Column(db.String(30),nullable=False)
+    address_colonia = db.Column(db.String(40),nullable=False)
+    address_municipio = db.Column(db.String(40),nullable=False)
+    address_estado = db.Column(db.String(40),nullable=False)
+    address_pais = db.Column(db.String(40),nullable=False)
     gender = db.Column(db.String(20),nullable=False)
     prueba_covid = db.Column(db.String(20),nullable=False)
     saturacion = db.Column(db.String(5),nullable=False)
