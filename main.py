@@ -57,13 +57,18 @@ class Patient(db.Model, UserMixin):
     enter_id = db.Column(db.Integer,nullable=False,unique=True)
     enter_date = db.Column(db.DateTime, default = datetime.datetime.utcnow)
     names = db.Column(db.String(20),nullable=False,unique=False)
-    first_lastname = db.Column(db.String(20),nullable=False,unique=False)
-    second_lastname = db.Column(db.String(20),nullable=False,unique=False)
+    first_lastname = db.Column(db.String(30),nullable=False,unique=False)
+    second_lastname = db.Column(db.String(30),nullable=False,unique=False)
     dia_nacimiento = db.Column(db.String(3))
     mes_nacimiento = db.Column(db.String(3))
-    ano_nacimiento = db.Column(db.String(3))
+    ano_nacimiento = db.Column(db.String(5))
     address_street = db.Column(db.String(30))
     address_number = db.Column(db.String(30))
+    address_cp = db.Column(db.String(30)),
+    address_colonia = db.Column(db.String(40)),
+    address_municipio = db.Column(db.String(40)),
+    address_estado = db.Column(db.String(40)),
+    address_pais = db.Column(db.String(40)),
     gender = db.Column(db.String(20),nullable=False)
     prueba_covid = db.Column(db.String(20),nullable=False)
     saturacion = db.Column(db.String(5),nullable=False)
@@ -215,6 +220,7 @@ def antecedentes_gineco_obstetricos():
         patient =  Patient.query.filter_by(enter_id = enter_id).first()
         return render_template("antecedentes_gineco_osbtetricos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
 def format_spanish_month(month):
+    month = int(month)
     if month == 1:
         return "Enero"
     elif month == 2:
@@ -264,6 +270,19 @@ def somatometria():
         db.session.add(new_somatometria)
         db.session.commit()
         return redirect(url_for("dashboard"))
+
+@app.route('/patient_dashboard',methods=['GET','POST'])
+@login_required
+def patient_dashboard():
+    if request.method == "GET":
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("patient_dashboard.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month)
+    
 
 @app.route('/atencion_medica',methods=['GET','POST'])
 @login_required
@@ -376,6 +395,11 @@ def ingreso():
                 second_lastname = data['second_lastname'],
                 address_street = data['address_street'],
                 address_number = data['address_number'],
+                address_cp = data['address_cp'],
+                address_colonia = data['address_colonia'],
+                address_municipio = data['address_municipio'],
+                address_estado = data['address_estado'],
+                address_pais = data['address_pais'],
                 dia_nacimiento = data['dia_nacimiento'],
                 mes_nacimiento = data['mes_nacimiento'],
                 ano_nacimiento = data['ano_nacimiento'],
@@ -389,8 +413,7 @@ def ingreso():
                 persona_responsable_nombre = data['persona_responsable_nombre'],
                 persona_responsable_parentesco = data['persona_responsable_parentesco'],
                 persona_responsable_tel = data['persona_responsable_tel'],
-                padecimientos = data['padecimientos'],
-                )
+                padecimientos = data['padecimientos'])
 
         db.session.add(new_patient)
         db.session.commit()

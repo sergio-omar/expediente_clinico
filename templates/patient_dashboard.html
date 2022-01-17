@@ -1,0 +1,73 @@
+{%extends "base.html" %}
+{%block content%}
+<div class="col-1"></div>
+<div class="col-10">
+    <!-- NAV BAR-->
+
+    {% from "patient_navbar.html" import patient_navbar with context %}
+    {{patient_navbar(enter_id)}}
+    {% from "patient_navbar.html" import patient_info with context %}
+    {{patient_info( names,first_lastname,gender,age,enter_id,enter_date)}}
+
+        <div class="jumbotron">
+<p>
+  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Link with href
+  </a>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Button with data-target
+  </button>
+</p>
+          
+          <div class="collapse" id="collapseExample">
+  <div class="card card-body">
+   
+
+            <div class="row">
+              <div class="col">
+                <h4>Información General</h4>
+              </div>      
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6>Fecha de nacimiento</h6>
+                <p> {{patient.dia_nacimiento}} de {{format_spanish_month(patient.mes_nacimiento)}} del {{patient.ano_nacimiento}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6> Dirección del paciente</h6>
+                <p> Calle:{{patient.address_street}} #{{patient.address_number}},{{patient.municipio}}</p>
+              </div>
+            </div>
+            </div>
+
+          </div>
+</div>
+
+        </div>
+
+
+
+<!--END MODAL-->
+<script>
+    //ucheck checkbox sin antecedentes
+    
+
+function fill_modal(){
+    //GET ALL "padecimientos"
+    document.getElementById("modal_peso").innerText = document.getElementById("peso").value.trim()
+    document.getElementById("modal_altura").innerText = document.getElementById("altura").value.trim()
+    document.getElementById("modal_ta_sistolica").innerText = document.getElementById("ta_sistolica").value.trim()
+    document.getElementById("modal_ta_diastolica").innerText = document.getElementById("ta_diastolica").value.trim()
+    document.getElementById("modal_frecuencia_cardiaca").innerText = document.getElementById("frecuencia_cardiaca").value.trim()
+    document.getElementById("modal_frecuencia_respiratoria").innerText = document.getElementById("frecuencia_respiratoria").value.trim()
+    document.getElementById("modal_temperatura").innerText = document.getElementById("temperatura").value.trim()
+    }
+
+function send_form(){                                                                                               
+   var form = document.getElementById("somatometria_form")                                                           
+    form.submit()                                                                                                   
+}                                                                                                                   
+</script>
+{%endblock%}
