@@ -21,9 +21,10 @@
     <div class="col-6">
         <div class="jumbotron">
         {% if current_user.is_authenticated %}
-        <h1>Bienvenido {{ current_user.username }}! </h1>
-            {%if current_user.is_active %}
-            <h2>El personal administrativo tiene desactivada tu cuenta. Esta cuenta requiere ser reactivada. </h2>
+            {%if current_user.active_user %}
+                <h1>Bienvenido {{ current_user.username }}! </h1>
+            {%else%}
+                <h2>El personal administrativo tiene desactivada tu cuenta. Esta cuenta requiere ser reactivada. </h2>
             {%endif%}
         {%else%}
         <h2> <a href="/login">Antes de usar el sistema CAT es necesario iniciar sesión</a> </h2>

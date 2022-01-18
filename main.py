@@ -291,7 +291,10 @@ def atencion_medica():
         data = request.args
         enter_id = data.get("enter_id")
         patient = Patient.query.filter_by(enter_id=enter_id).first()
-        return render_template("atencion_medica.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("atencion_medica.html", names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month)
     if request.method == 'POST':
         data = request.form
         new_atencion_medica = Atencion_medica(enter_id = data["enter_id"],

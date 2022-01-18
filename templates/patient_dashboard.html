@@ -10,14 +10,12 @@
     {{patient_info( names,first_lastname,gender,age,enter_id,enter_date)}}
 
         <div class="jumbotron">
+            <h5>Información de ingreso</h5>
 <p>
   <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Link with href
+    Mostrar información
   </a>
-  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Button with data-target
-  </button>
-</p>
+  </p>
 
           <div class="collapse" id="collapseExample">
   <div class="card card-body">
@@ -41,7 +39,50 @@
                 {{patient.address_pais}}, {{patient.address_}}</p>
               </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Sexo</h6>
+                    <p>
+                    {{patient.gender}}
+                    </p>
+                </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Padecimientos:</h6>
+                    <p>
+                    {% set list = patient.padecimientos.split(",")%}
+                    {%for element in list %}
+                    {{element}}
+                    {%endfor%}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Persona responsable</h6>
+                    <p>
+                    Nombre: {{patient.persona_responsable_nombre}}
+                    <br>
+                    Parentesco: {{patient.persona_responsable_parentesco}}
+                    <br>
+                    Telefono: {{patient.persona_responsable_tel}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Persona informate</h6>
+                    <p>
+                    Nombre: {{patient.persona_informante_nombre}}
+                    <br>
+                    Parentesco: {{patient.persona_informante_parentesco}}
+                    <br>
+                    Telefono: {{patient.persona_informante_tel}}
+                    </p>
+                </div>
+            </div>
+
 
           </div>
 </div>

@@ -13,7 +13,7 @@
                     <th scope="col"> Apellido Paterno </th>
                     <th scope="col"> Apellido Materno </th>
                     <th scope="col"> Fecha de ingreso</th>
-                    <th scope="col"> Somatometria </th>
+                    <th scope="col"> Ver información </th>
                 </tr>
             </thead>
             <tbody>
@@ -24,7 +24,7 @@
                  <th scope="col"> {{patient.first_lastname}} </th>
                  <th scope="col"> {{patient.second_lastname}} </th>
                  <th scope="col"> {{patient.enter_date}} </th>
-                 <th scope="col"> <a href="patient_dashboard?enter_id={{patient.enter_id}}">go</a></th>
+                 <th scope="col"> <a href="patient_dashboard?enter_id={{patient.enter_id}}">Detalle</a></th>
                  </tr>
                  {%endfor%}
             </tbody>

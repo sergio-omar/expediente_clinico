@@ -7,8 +7,7 @@
     {% from "patient_navbar.html" import patient_navbar with context %}
     {{patient_navbar(id)}}
     {% from "patient_navbar.html" import patient_info with context %}
-    {{patient_info( names,first_lastname)}}
-
+    {{patient_info( names,first_lastname,gender,age,enter_id,enter_date)}} 
         <div class="jumbotron">
             <div class="row">
                     <h4>Antecedentes personales no patologicos</h4>
