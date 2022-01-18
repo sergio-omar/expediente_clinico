@@ -3,24 +3,20 @@
 <div class="col-1"></div>
 <div class="col-10">
     <!-- NAV BAR-->
-
     {% from "patient_navbar.html" import patient_navbar with context %}
     {{patient_navbar(enter_id)}}
     {% from "patient_navbar.html" import patient_info with context %}
     {{patient_info( names,first_lastname,gender,age,enter_id,enter_date)}}
+    <div class="jumbotron">
+        <h5>Información de ingreso</h5>
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Mostrar información
+        </a>
+    </p>
 
-        <div class="jumbotron">
-            <h5>Información de ingreso</h5>
-<p>
-  <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-    Mostrar información
-  </a>
-  </p>
-
-          <div class="collapse" id="collapseExample">
-  <div class="card card-body">
-   
-
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
             <div class="row">
               <div class="col">
                 <h4>Información General</h4>
@@ -82,20 +78,102 @@
                     </p>
                 </div>
             </div>
-
-
           </div>
+        
+    </div>
+
+    <nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Información General</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Somatometría</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      
+
+      <div class="card card-body">
+            <div class="row">
+              <div class="col">
+                <h4>Información General</h4>
+                <hr>
+              </div>      
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6>Fecha de nacimiento</h6>
+                <p> {{patient.dia_nacimiento}} de {{format_spanish_month(patient.mes_nacimiento)}} del {{patient.ano_nacimiento}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6> Dirección del paciente</h6>
+                <p> {{patient.address_street}} #{{patient.address_number}}, Col.{{patient.address_colonia}},{{patient.address_municipio}}, {{patient.address_estado}},
+                {{patient.address_pais}}, {{patient.address_}}</p>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Sexo</h6>
+                    <p>
+                    {{patient.gender}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Padecimientos:</h6>
+                    <p>
+                    {% set list = patient.padecimientos.split(",")%}
+                    {%for element in list %}
+                    {{element}}
+                    {%endfor%}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Persona responsable</h6>
+                    <p>
+                    Nombre: {{patient.persona_responsable_nombre}}
+                    <br>
+                    Parentesco: {{patient.persona_responsable_parentesco}}
+                    <br>
+                    Telefono: {{patient.persona_responsable_tel}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Persona informate</h6>
+                    <p>
+                    Nombre: {{patient.persona_informante_nombre}}
+                    <br>
+                    Parentesco: {{patient.persona_informante_parentesco}}
+                    <br>
+                    Telefono: {{patient.persona_informante_tel}}
+                    </p>
+                </div>
+            </div>
+          </div>
+
+
+
+
+
+
+  </div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+</div>
 </div>
 
-        </div>
 
 
-
-<!--END MODAL-->
 <script>
     //ucheck checkbox sin antecedentes
     
-
 function fill_modal(){
     //GET ALL "padecimientos"
     document.getElementById("modal_peso").innerText = document.getElementById("peso").value.trim()
