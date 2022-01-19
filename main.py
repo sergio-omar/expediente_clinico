@@ -90,7 +90,7 @@ class Patient(db.Model, UserMixin):
     #the user type will grant certain privileges
     #default false /// later the admin will accept the user
 class Somatometria(db.Model, UserMixin):
-    id = db.Column(db.Integer(),primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer(), autoincrement=True)
     enter_id = db.Column(db.String(30),unique=True, primary_key=True, nullable=False)
     enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
     peso = db.Column(db.Float(),nullable=False)
@@ -194,7 +194,10 @@ def antecedentes_personales_no_patologicos():
         data = request.args
         enter_id = data.get("enter_id")
         patient =  Patient.query.filter_by(enter_id = enter_id).first()
-        return render_template("antecedentes_personales_no_patologicos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("antecedentes_personales_no_patologicos.html", names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month)
 
 @app.route('/antecedentes_personales_patologicos')
 def antecedentes_personales_patologicos():
@@ -256,7 +259,8 @@ def somatometria():
         age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
         enter_date = patient.enter_date
         enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
-        return render_template("somatometria.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date)
+        return render_template("somatometria.html", names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month)
+
     if request.method == 'POST':
         data = request.form
         new_somatometria = Somatometria(enter_id = data["enter_id"],
@@ -278,11 +282,11 @@ def patient_dashboard():
         data = request.args
         enter_id = data.get("enter_id")
         patient = Patient.query.filter_by(enter_id=enter_id).first()
+        somatometria = Somatometria.query.filter_by(enter_id=enter_id).first()
         age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
         enter_date = patient.enter_date
         enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
-        return render_template("patient_dashboard.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month)
-    
+        return render_template("patient_dashboard.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,somatometria=somatometria)
 
 @app.route('/atencion_medica',methods=['GET','POST'])
 @login_required

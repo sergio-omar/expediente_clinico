@@ -14,10 +14,10 @@
                     <h4>Somatometria</h4>
                     <hr>
             </div>
-            
+            <form name="somatometria_form" id="somatometria_form" method="POST">
             <!-- peso de la persona -->
             <div class="form-group">
-             <input type="hidden" value="{{id}}">
+             <input type="hidden" name="enter_id" value="{{enter_id}}">
              <label for="peso">Peso:</label><br>
              <input class="form-control" type="text" id="peso" name="peso"><br>
             </div>
@@ -131,7 +131,7 @@ function fill_modal(){
     }
 
 function send_form(){                                                                                               
-   var form = document.getElementById("somatometria_form")                                                           
+   var form = document.getElementById("somatometria_form") 
     form.submit()                                                                                                   
 }                                                                                                                   
 </script>
