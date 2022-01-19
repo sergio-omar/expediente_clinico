@@ -16,30 +16,39 @@
             </div>
             <form name="somatometria_form" id="somatometria_form" method="POST">
             <!-- peso de la persona -->
-            <div class="form-group">
-             <input type="hidden" name="enter_id" value="{{enter_id}}">
-             <label for="peso">Peso:</label><br>
-             <input class="form-control" type="text" id="peso" name="peso"><br>
-            </div>
             <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="altura">Altura</label><br>
-                        <input class="form-control" type="text" id="altura" name="altura"><br>
-                    </div>
+              <div class="col">
+                <div class="form-group">
+                  <input type="hidden" name="enter_id" value="{{enter_id}}">
+                  <label for="peso">Peso: (kg)</label>
+                  <input class="form-control" type="text" id="peso" name="peso">
                 </div>
-                <div class="col">
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="altura">Altura (metros)</label><br>
+                  <input class="form-control" type="text" id="altura" name="altura">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="altura">IMC</label><br>
+                  <input class="form-control" type="text" readonly="true" id="altura" name="imc" id="imc">
+                </div>
+              </div>
+            </div>
+            <hr>
+            <h4>Signos Vitales</h4>
+            <div class="row">
+              <div class="col">
                     <div class="form-group">
-                        <label for="sistolica">TA sistólica</label><br>
+                        <label for="sistolica">TA sistólica (mmHg)</label><br>
                         <input class="form-control" type="text" id="ta_sistolica" name="ta_sistolica"><br>
                     </div>
                 </div>
-                </div>
-            <!-- Direccion -->
-            <div class="row">
                 <div class="col">
                     <div class="form-group">
-                        <label for="diastolica">TA Diastólica</label><br>
+                        <label for="diastolica">TA Diastólica (mmHg)</label><br>
                         <input class="form-control" type="text" id="ta_diastolica" name="ta_diastolica"><br>
                     </div>
                 </div>
