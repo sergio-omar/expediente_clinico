@@ -56,6 +56,7 @@ class Patient(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     enter_id = db.Column(db.Integer,nullable=False,unique=True)
     enter_date = db.Column(db.DateTime, default = datetime.datetime.utcnow)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=True)
     names = db.Column(db.String(20),nullable=False,unique=False)
     first_lastname = db.Column(db.String(30),nullable=False,unique=False)
     second_lastname = db.Column(db.String(30),nullable=False,unique=False)
@@ -389,7 +390,7 @@ def antecedentes_personales_no_patologicosi2():
         db.session.commit()
         return redirect(url_for("dashboard"))
 
-@app.route('/ingreso_paciente',methods=['GET','POST'])
+@app.route('/ingreso_paciente', methods=['GET','POST'])
 @login_required
 def ingreso():
     global patient_counter 
@@ -403,6 +404,7 @@ def ingreso():
             print(d)
         new_patient = Patient(names=data['names'],
                 enter_id = data['enter_id'],
+                informacion_introducida_por = data['informacion_introducida_por'],
                 first_lastname = data['first_lastname'],
                 second_lastname = data['second_lastname'],
                 address_street = data['address_street'],
