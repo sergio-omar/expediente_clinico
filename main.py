@@ -93,14 +93,16 @@ class Somatometria(db.Model, UserMixin):
     id = db.Column(db.Integer(), autoincrement=True)
     enter_id = db.Column(db.String(30),unique=True, primary_key=True, nullable=False)
     enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=True)
     peso = db.Column(db.Float(),nullable=False)
     altura = db.Column(db.Float(),nullable=False)
+    imc = db.Column(db.Float(),nullable=False)
     ta_sistolica = db.Column(db.Float(),nullable=False)
     ta_diastolica = db.Column(db.Float(),nullable=False)
     frecuencia_cardiaca = db.Column(db.Float(),nullable=False)
     frecuencia_respiratoria = db.Column(db.Float(),nullable=False)
     temperatura = db.Column(db.Float(),nullable=False)
-
+    
 class Atencion_medica(db.Model, UserMixin):
     id = db.Column(db.Integer(),primary_key=True, autoincrement=True)
     enter_id = db.Column(db.String(30),unique=False, nullable=False)
@@ -266,13 +268,16 @@ def somatometria():
         new_somatometria = Somatometria(enter_id = data["enter_id"],
         peso = data['peso'],
         altura = data['altura'],
+        imc = data['imc'],
         ta_sistolica = data['ta_sistolica'],
         ta_diastolica = data['ta_diastolica'],
         frecuencia_cardiaca = data['frecuencia_cardiaca'],
         frecuencia_respiratoria = data['frecuencia_respiratoria'],
-        temperatura = data['temperatura'])
+        temperatura = data['temperatura'],
+        informacion_introducida_por = data['informacion_introducida_por'])
         db.session.add(new_somatometria)
         db.session.commit()
+
         return redirect(url_for("dashboard"))
 
 @app.route('/patient_dashboard',methods=['GET','POST'])
