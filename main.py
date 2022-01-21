@@ -51,6 +51,25 @@ class Log(db.Model,UserMixin):
     user_action = db.Column(db.String(200),unique=False,nullable=False)
     log_date = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
+class Atencion_medica(db.Model, UserMixin):
+    id = db.Column(db.Integer, autoincrement=True,primary_key=True)
+    enter_id = db.Column(db.Integer, nullable=False)
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.utcnow)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False)
+    peso = db.Column(db.Float(),nullable=False)
+    altura = db.Column(db.Float(),nullable=False)
+    imc = db.Column(db.Float(),nullable=False)
+    ta_sistolica = db.Column(db.Float(),nullable=False)
+    ta_diastolica = db.Column(db.Float(),nullable=False)
+    frecuencia_cardiaca = db.Column(db.Float(),nullable=False)
+    frecuencia_respiratoria = db.Column(db.Float(),nullable=False)
+    temperatura = db.Column(db.Float(),nullable=False)
+    padecimiento_actual = db.Column(db.Text)
+    tratamiento = db.Column(db.Text)
+    nombre_del_medico = db.Column(db.String(50),nullable=False)
+    cedula = db.Column(db.String(20),nullable=False)
+
+    
 class Patient(db.Model, UserMixin):
     ct = datetime.datetime.now()
     id = db.Column(db.Integer, primary_key=True)
@@ -104,19 +123,6 @@ class Somatometria(db.Model, UserMixin):
     frecuencia_respiratoria = db.Column(db.Float(),nullable=False)
     temperatura = db.Column(db.Float(),nullable=False)
     
-class Atencion_medica(db.Model, UserMixin):
-    id = db.Column(db.Integer(),primary_key=True, autoincrement=True)
-    enter_id = db.Column(db.String(30),unique=False, nullable=False)
-    enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
-    padecimiento_actual = db.Column(db.Text(),nullable=False)
-    peso = db.Column(db.Float(),nullable=False)
-    altura = db.Column(db.Float(),nullable=False)
-    ta_sistolica = db.Column(db.Float(),nullable=False)
-    ta_diastolica = db.Column(db.Float(),nullable=False)
-    frecuencia_cardiaca = db.Column(db.Float(),nullable=False)
-    frecuencia_respiratoria = db.Column(db.Float(),nullable=False)
-    temperatura = db.Column(db.Float(),nullable=False)
-
 class Antecedentes_personales_no_patologicos(db.Model,UserMixin):
     enter_id = db.Column(db.String(30),unique=True,primary_key=True,nullable=False)
     religion = db.Column(db.String(30),unique=False, nullable=False)
@@ -308,19 +314,24 @@ def atencion_medica():
     if request.method == 'POST':
         data = request.form
         new_atencion_medica = Atencion_medica(enter_id = data["enter_id"],
+        informacion_introducida_por = data["informacion_introducida_por"],
         padecimiento_actual = data["padecimiento_actual"],
         peso = data['peso'],
         altura = data['altura'],
+        imc = data["imc"],
         ta_sistolica = data['ta_sistolica'],
         ta_diastolica = data['ta_diastolica'],
         frecuencia_cardiaca = data['frecuencia_cardiaca'],
         frecuencia_respiratoria = data['frecuencia_respiratoria'],
-        temperatura = data['temperatura'])
+        temperatura = data['temperatura'],
+        tratamiento = data["tratamiento"],
+        nombre_del_medico = data["nombre_del_medico"],
+        cedula = data["cedula"])
         db.session.add(new_atencion_medica)
         db.session.commit()
         return redirect(url_for("dashboard"))
 
-
+    
 
 @app.route('/antecedentes_heredofamiliares',methods=['GET','POST'])
 def antecedentes_heredofamiliares():

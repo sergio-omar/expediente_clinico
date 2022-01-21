@@ -22,7 +22,8 @@
             <form method="POST" id="resumen_clinico_form">
                 <div class="col">
                     <div class="form-group">
-                    <input class="form-control" type="text" id="enter_id" name="enter_id" readonly value={{id}}>
+                    <input class="form-control" type="number" id="enter_id" name="enter_id" readonly value={{id}}>
+                    <input type="hidden" name="informacion_introducida_por" id="informacion_introducida_por" value="{{current_user.username}}">
                     </div>
                 </div>
             </div>
@@ -32,34 +33,42 @@
                 <!-- we divide the entire section into two parts-->
                 <div class="col-6">
                     <div class="form-group">
-                        <input type="hidden" value="{{id}}">
                         <label for="peso">Padecimiento Actual:</label><br>
                         <textarea class="form-control" rows="7" type="text" id="padecimiento_actual" name="padecimiento_actual"></textarea><br>
                     </div>
                 </div>
                 <div class="col-6">
 
-                    <h4>Exploracion fisica</h4>
+                    <h5>Exploración física</h5>
                     <div class="row">
-                        <div class="col-3">
+                        <div class="col">
                             <div class="form-group">
                                 <label for="peso">Peso:</label><br>
                                 <input class="form-control" type="number" step=".01" id="peso" name="peso"><br>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col">
                             <div class="form-group">
                                 <label for="altura">Altura</label><br>
                                 <input class="form-control" type="number" step=".01" id="altura" name="altura"><br>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="imc">IMC:</label>
+                                <input type="number" class="form-control" name="imc" id="imc" value="" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col">
                             <div class="form-group">
                                 <label for="sistolica">TA sistólica</label><br>
                                 <input class="form-control" type="number" step=".01" id="ta_sistolica" name="ta_sistolica"><br>
                             </div>
                         </div>
-                        <div class="col-3">
+                        <div class="col">
                             <div class="form-group">
                                 <label for="diastolica">TA Diastólica</label><br>
                                 <input class="form-control" type="number" step=".01" id="ta_diastolica" name="ta_diastolica"><br>
@@ -89,7 +98,40 @@
                 </div>
             </div>
             <hr>
-
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="tratamiento">Tratamiento</label>
+                        <textarea class="form-control" rows="12" name="tratamiento" id="tratamiento">
+1.- Dieta: Ayuno, dieta para diabético, dieta para nefropata, dieta 1500 cal
+2.- Líquidos intravenosos: solución salina 500 ml p/8 hrs, solución Hartaman 1000 ml p/8 hrs
+3.-Medicamentos:
+Paracetamol tab 500 mg 1 cada 8 hrs
+Dexametasona ámpula 1 cada IM 
+Nubain 0.5 ml SC cada 4 horas
+4.-Oxigenoterapia: oxigeno por puntas nasales a razón 2 lt/min
+5.-Cuidados de enfermería: Vigilar temperatura, saturación de oxigeno, signos vitales cada hora
+6.-Signos de alarmas: temperatura mayor a 40c, convulsiona, perdida de conciencia.
+7.- Estudios de laboratorio: Biometría hemática, pruebas Covid. 
+8.-Estudios de gabinete: radiografías, tomografías, ultrasonidos, EKG.</textarea>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="medico">Nombre del Médico:</label>
+                        <input class="form-control" id="nombre_del_medico" name="nombre_del_medico" value="{{current_user.user_names}} {{current_user.user_first_lastname}} {{current_user.user_second_lastname}}"  readonly>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="cedula">Cédula:</label>
+                        <input class="form-control" name="cedula" id="cedula" value="{{current_user.user_cedula}}" readonly>
+                    </div>
+                </div>
+            </div>
             <button onclick="fill_modal()" type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#atencion-medica-modal">Revisar información</button>            
             <br>
             <br>
@@ -141,8 +183,17 @@
 
 <!--END MODAL-->
 <script>
-    //ucheck checkbox sin antecedentes
-    
+function fill_imc(){                                                                                          
+    if (document.getElementById("peso").value !=  '' && document.getElementById("altura").value != '' ){      
+        var peso = parseFloat(document.getElementById("peso").value)                                          
+        var altura = parseFloat(document.getElementById("altura").value)                                      
+        var imc = peso / (altura * altura)                                                                    
+        document.getElementById("imc").value = imc.toFixed(2)                                                 
+    }                                                                                                         
+}                                                                                                             
+                                                                                                              
+document.getElementById("peso").addEventListener("change",fill_imc)                                           
+document.getElementById("altura").addEventListener("change",fill_imc)                                          
 
 function fill_modal(){
     //GET ALL "padecimientos"
