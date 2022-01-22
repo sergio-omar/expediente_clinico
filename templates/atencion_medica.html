@@ -22,7 +22,7 @@
             <form method="POST" id="resumen_clinico_form">
                 <div class="col">
                     <div class="form-group">
-                    <input class="form-control" type="number" id="enter_id" name="enter_id" readonly value={{id}}>
+                    <input class="form-control" type="number" id="enter_id" name="enter_id" readonly value={{enter_id}}>
                     <input type="hidden" name="informacion_introducida_por" id="informacion_introducida_por" value="{{current_user.username}}">
                     </div>
                 </div>
@@ -33,7 +33,7 @@
                 <!-- we divide the entire section into two parts-->
                 <div class="col-6">
                     <div class="form-group">
-                        <label for="peso">Padecimiento Actual:</label><br>
+                        <label for="padecimiento_actual">Padecimiento Actual:</label><br>
                         <textarea class="form-control" rows="7" type="text" id="padecimiento_actual" name="padecimiento_actual"></textarea><br>
                     </div>
                 </div>

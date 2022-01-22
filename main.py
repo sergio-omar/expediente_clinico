@@ -110,10 +110,10 @@ class Patient(db.Model, UserMixin):
     #the user type will grant certain privileges
     #default false /// later the admin will accept the user
 class Somatometria(db.Model, UserMixin):
-    id = db.Column(db.Integer(), autoincrement=True)
-    enter_id = db.Column(db.String(30),unique=True, primary_key=True, nullable=False)
+    id = db.Column(db.Integer(), autoincrement=True,primary_key=True)
+    enter_id = db.Column(db.Integer, nullable=False)
     enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
-    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=True)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
     peso = db.Column(db.Float(),nullable=False)
     altura = db.Column(db.Float(),nullable=False)
     imc = db.Column(db.Float(),nullable=False)
@@ -295,10 +295,12 @@ def patient_dashboard():
         enter_id = data.get("enter_id")
         patient = Patient.query.filter_by(enter_id=enter_id).first()
         somatometria = Somatometria.query.filter_by(enter_id=enter_id).first()
+        atencion_medica = Atencion_medica.query.filter_by(enter_id=enter_id).first()
+        antecedentes_personales_no_patologicos = Antecedentes_personales_no_patologicos.query.filter_by(enter_id=enter_id).first()
         age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
         enter_date = patient.enter_date
         enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
-        return render_template("patient_dashboard.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,somatometria=somatometria)
+        return render_template("patient_dashboard.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,somatometria=somatometria,atencion_medica=atencion_medica,antecedentes_personales_no_patologicos=antecedentes_personales_no_patologicos)
 
 @app.route('/atencion_medica',methods=['GET','POST'])
 @login_required

@@ -13,13 +13,15 @@
 
     <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Información General</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Somatometría</a>
-    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Atención Médica</a>
+    <a class="nav-item nav-link active" id="informacion-general-tab" data-toggle="tab" href="#nav-informacion-general" role="tab" aria-controls="nav-home" aria-selected="true">Información General</a>
+    <a class="nav-item nav-link" id="somatometria-tab" data-toggle="tab" href="#nav-somatometria" role="tab" aria-controls="nav-profile" aria-selected="false">Somatometría</a>
+    <a class="nav-item nav-link" id="atencion-medica-tab" data-toggle="tab" href="#nav-atencion-medica" role="tab" aria-controls="nav-contact" aria-selected="false">Atención Médica</a>
+    <a class="nav-item nav-link" id="antecedentes-personales-no-patologicos-tab" data-toggle="tab" href="#nav-antecedentes-personales-no-patologicos" role="tab" aria-controls="nav-contact" aria-selected="false">Antecedentes personales no patológicos</a>
+
   </div>
 </nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+<div class="tab-content" id="nav-main">
+  <div class="tab-pane fade show active" id="nav-informacion-general" role="tabpanel" aria-labelledby="nav-home-tab">
       
 
       <div class="card card-body">
@@ -61,6 +63,7 @@
                     </p>
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col">
                     <h6>Persona responsable</h6>
@@ -73,6 +76,7 @@
                     </p>
                 </div>
             </div>
+            <hr>
             <div class="row">
                 <div class="col">
                     <h6>Persona informate</h6>
@@ -87,11 +91,8 @@
             </div>
           </div>
 
-
-
-
   </div>
-  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+  <div class="tab-pane fade" id="nav-somatometria" role="tabpanel" aria-labelledby="nav-profile-tab">
 
       <div class="card card-body">
             <div class="row">
@@ -118,7 +119,8 @@
                 <p> {{somatometria.imc}}</p>
               </div>
             </div>
-
+            <hr>
+            <h5>Signos Vitales</h5>
             <div class="row">
                 <div class="col">
                     <h6>TA Sistólica</h6>
@@ -166,9 +168,246 @@
 
           </div>
 
+  </div>
+
+  <div class="tab-pane fade" id="nav-atencion-medica" role="tabpanel" aria-labelledby="nav-contact-tab">
+   
+  
+  <div class="card card-body">
+            <div class="row">
+              <div class="col">
+                <h4>Atención Médica</h4>
+                <hr>
+              </div>      
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6>Padecimiento actual:</h6>
+                <p>{{atencion_medica.padecimiento_actual}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6>Peso:</h6>
+                <p>{{atencion_medica.peso}} kg</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6> Altura </h6>
+                <p> {{atencion_medica.altura}}m</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6> IMC </h6>
+                <p> {{atencion_medica.imc}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h6>TA Sistólica</h6>
+                    <p>
+                    {{atencion_medica.ta_sistolica}} mmHg
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>TA Diastólica:</h6>
+                    <p> {{atencion_medica.ta_diastolica}} mmHg
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Frecuencia cardiaca:</h6>
+                    <p> {{atencion_medica.frecuencia_cardiaca}} Pulsos por minuto
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Frecuencia respiratoria: </h6>
+                    <p> {{atencion_medica.frecuencia_respiratoria}} Respiraciones por minuto
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Temperatura: </h6>
+                    <p> {{atencion_medica.temperatura}} °C
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Tratamiento: </h6>
+                    <p> {{atencion_medica.tratamiento}}
+                    </p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <h6>Médico: </h6>
+                    <p> {{atencion_medica.nombre_del_medico}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Cédula del Médico: </h6>
+                    <p> {{atencion_medica.cedula}}
+                    </p>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <h6>Informacion introducida por: </h6>
+                    <p> {{atencion_medica.informacion_introducida_por}}
+                    </p>
+                </div>
+            </div>
+
+          </div>
 
   </div>
-  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+  
+  
+<div class="tab-pane fade" id="nav-antecedentes-personales-no-patologicos" role="tabpanel" aria-labelledby="nav-contact-tab">  
+  <div class="card card-body">
+            <div class="row">
+              <div class="col">
+                <h4>Antecedentes personales no patológicos</h4>
+                <hr>
+              </div>      
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6>Religion:</h6>
+                <p>{{antecedentes_personales_no_patologicos.religion}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6>Lugar de nacimiento:</h6>
+                <p>{{antecedentes_personales_no_patologicos.lugar_de_nacimiento}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6>Estado civil</h6>
+                <p> {{antecedentes_personales_no_patologicos.estado_civil}}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <h6>Escolaridad</h6>
+                <p> {{antecedentes_personales_no_patologicos.escolaridad}}</p>
+              </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h6>Igiene personal</h6>
+                    <p>
+                    {{antecedentes_personales_no_patologicos.igiene_personal}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Actividad Física</h6>
+                    <p> {{antecedentes_personales_no_patologicos.actividad_fisica}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Tipo de actividad física:</h6>
+                    <p> {{antecedentes_personales_no_patologicos.tipo_de_actividad_fisica}} 
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Frecuencia de la actividad: </h6>
+                    <p> {{antecedentes_personales_no_patologicos.frecuencia_num}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Por: </h6>
+                    <p> {{antecedentes_personales_no_patologicos.frecuencia_unidad}} 
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Preferencia Sexual:</h6>
+                    <p> {{antecedentes_personales_no_patologicos.preferencia_sexual}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Número de parejas:</h6>
+                    <p> {{antecedentes_personales_no_patologicos.numero_de_parejas}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Grupo Sanguíneo:</h6>
+                    <p> {{antecedentes_personales_no_patologicos.grupo_sanguineo}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Calidad de alimentación:</h6>
+                    <p> {{antecedentes_personales_no_patologicos.calidad_de_alimentacion}}
+                    </p>
+                </div>
+            </div>
+
+
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <h6>Médico: </h6>
+                    <p> {{atencion_medica.nombre_del_medico}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Cédula del Médico: </h6>
+                    <p> {{atencion_medica.cedula}}
+                    </p>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <h6>Informacion introducida por: </h6>
+                    <p> {{atencion_medica.informacion_introducida_por}}
+                    </p>
+                </div>
+            </div>
+
+          </div>
+
+  </div>
+  
+  
+  </div>
 </div>
 </div>
 
@@ -188,9 +427,6 @@ function fill_modal(){
     document.getElementById("modal_temperatura").innerText = document.getElementById("temperatura").value.trim()
     }
 
-function send_form(){                                                                                               
-   var form = document.getElementById("somatometria_form")                                                           
-    form.submit()                                                                                                   
-}                                                                                                                   
+                                                                                                                   
 </script>
 {%endblock%}
