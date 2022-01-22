@@ -160,7 +160,7 @@
             <hr>
             <div class="row">
                 <div class="col">
-                    <h6>Informacion introducida por: </h6>
+                    <h6>Información introducida por: </h6>
                     <p> {{somatometria.informacion_introducida_por}}
                     </p>
                 </div>
@@ -267,7 +267,7 @@
             <hr>
             <div class="row">
                 <div class="col">
-                    <h6>Informacion introducida por: </h6>
+                    <h6>Información introducida por: </h6>
                     <p> {{atencion_medica.informacion_introducida_por}}
                     </p>
                 </div>
@@ -336,14 +336,8 @@
             <div class="row">
                 <div class="col">
                     <h6>Frecuencia de la actividad: </h6>
-                    <p> {{antecedentes_personales_no_patologicos.frecuencia_num}}
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h6>Por: </h6>
-                    <p> {{antecedentes_personales_no_patologicos.frecuencia_unidad}} 
+                    <p> {{antecedentes_personales_no_patologicos.frecuencia_num}} por {{antecedentes_personales_no_patologicos.frecuencia_unidad}} 
+
                     </p>
                 </div>
             </div>
@@ -376,28 +370,11 @@
                 </div>
             </div>
 
-
             <hr>
             <div class="row">
                 <div class="col">
-                    <h6>Médico: </h6>
-                    <p> {{atencion_medica.nombre_del_medico}}
-                    </p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <h6>Cédula del Médico: </h6>
-                    <p> {{atencion_medica.cedula}}
-                    </p>
-                </div>
-            </div>
-
-            <hr>
-            <div class="row">
-                <div class="col">
-                    <h6>Informacion introducida por: </h6>
-                    <p> {{atencion_medica.informacion_introducida_por}}
+                    <h6>Información introducida por: </h6>
+                    <p> {{antecedentes_personales_no_patologicos.informacion_introducida_por}}
                     </p>
                 </div>
             </div>

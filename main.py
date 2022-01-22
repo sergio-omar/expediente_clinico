@@ -124,7 +124,10 @@ class Somatometria(db.Model, UserMixin):
     temperatura = db.Column(db.Float(),nullable=False)
     
 class Antecedentes_personales_no_patologicos(db.Model,UserMixin):
-    enter_id = db.Column(db.String(30),unique=True,primary_key=True,nullable=False)
+    id = db.Column(db.Integer(),autoincrement=True,primary_key=True)
+    enter_id = db.Column(db.Integer(),unique=True,nullable=False)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
     religion = db.Column(db.String(30),unique=False, nullable=False)
     lugar_de_nacimiento = db.Column(db.String(40),unique=False,nullable=False)
     estado_civil = db.Column(db.String(30),unique=False,nullable=False)
@@ -196,17 +199,6 @@ def antecedentes_heredo_familiares():
         enter_id = data.get("enter_id")
         patient =  Patient.query.filter_by(enter_id = enter_id).first()
         return render_template("antecedentes_heredo_familiares.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
-
-@app.route('/antecedentes_personales_no_patologicos')
-def antecedentes_personales_no_patologicos():
-    if request.method == "GET":
-        data = request.args
-        enter_id = data.get("enter_id")
-        patient =  Patient.query.filter_by(enter_id = enter_id).first()
-        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
-        enter_date = patient.enter_date
-        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
-        return render_template("antecedentes_personales_no_patologicos.html", names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month)
 
 @app.route('/antecedentes_personales_patologicos')
 def antecedentes_personales_patologicos():
@@ -297,6 +289,7 @@ def patient_dashboard():
         somatometria = Somatometria.query.filter_by(enter_id=enter_id).first()
         atencion_medica = Atencion_medica.query.filter_by(enter_id=enter_id).first()
         antecedentes_personales_no_patologicos = Antecedentes_personales_no_patologicos.query.filter_by(enter_id=enter_id).first()
+        print(antecedentes_personales_no_patologicos)
         age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
         enter_date = patient.enter_date
         enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
@@ -376,12 +369,15 @@ def panel_paciente():
 
 @app.route('/antecedentes_personales_no_patologicos',methods=['GET','POST'])
 @login_required
-def antecedentes_personales_no_patologicosi2():
+def antecedentes_personales_no_patologicos():
     if request.method == "GET":
         data = request.args
         enter_id = data.get("enter_id")
         patient = Patient.query.filter_by(enter_id=enter_id).first()
-        return render_template("antecedentes_personales_no_patologicos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("antecedentes_personales_no_patologicos.html", names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month)
     if request.method == 'POST':
         data = request.form
         new_antecedentes_personales_no_patologicos = Antecedentes_personales_no_patologicos(enter_id = data["enter_id"],
@@ -398,7 +394,8 @@ def antecedentes_personales_no_patologicosi2():
         numero_de_parejas = data['numero_de_parejas'],
         grupo_sanguineo = data['grupo_sanguineo'],
         calidad_de_alimentacion = data['calidad_de_alimentacion'],
-        caracteristicas_de_habitacion = data['caracteristicas_de_la_habitacion'])
+        caracteristicas_de_habitacion = data['caracteristicas_de_la_habitacion'],
+        informacion_introducida_por = data['informacion_introducida_por'])
         db.session.add(new_antecedentes_personales_no_patologicos)
         db.session.commit()
         return redirect(url_for("dashboard"))
