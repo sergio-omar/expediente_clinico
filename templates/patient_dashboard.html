@@ -17,6 +17,7 @@
     <a class="nav-item nav-link" id="somatometria-tab" data-toggle="tab" href="#nav-somatometria" role="tab" aria-controls="nav-profile" aria-selected="false">Somatometría</a>
     <a class="nav-item nav-link" id="atencion-medica-tab" data-toggle="tab" href="#nav-atencion-medica" role="tab" aria-controls="nav-contact" aria-selected="false">Atención Médica</a>
     <a class="nav-item nav-link" id="antecedentes-personales-no-patologicos-tab" data-toggle="tab" href="#nav-antecedentes-personales-no-patologicos" role="tab" aria-controls="nav-contact" aria-selected="false">Antecedentes personales no patológicos</a>
+    <a class="nav-item nav-link" id="antecedentes-pediatricos-tab" data-toggle="tab" href="#nav-antecedententes-pediatricos" role="tab" aria-controls="nav-contact" aria-selected="false">Antecedentes pediátricos</a>
 
   </div>
 </nav>
@@ -274,7 +275,6 @@
             </div>
 
           </div>
-
   </div>
   
   
@@ -288,7 +288,7 @@
             </div>
             <div class="row">
               <div class="col">
-                <h6>Religion:</h6>
+                <h6>Religión:</h6>
                 <p>{{antecedentes_personales_no_patologicos.religion}}</p>
               </div>
             </div>
@@ -378,11 +378,66 @@
                     </p>
                 </div>
             </div>
+          </div>
+  </div>
+  
+
+
+
+
+
+
+
+
+ 
+<div class="tab-pane fade" id="nav-antecedentes-personales-no-patologicos" role="tabpanel" aria-labelledby="nav-contact-tab">  
+  <div class="card card-body">
+           
+            <div class="row">
+                <div class="col">
+                    <h6>Antecedentes pediátricos:</h6>
+                    <p> {{antecedentes_pediatricos.antecedentes_pediatricos_entrevista}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Número de parejas:</h6>
+                    <p> {{antecedentes_personales_no_patologicos.numero_de_parejas}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Grupo Sanguíneo:</h6>
+                    <p> {{antecedentes_personales_no_patologicos.grupo_sanguineo}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h6>Calidad de alimentación:</h6>
+                    <p> {{antecedentes_personales_no_patologicos.calidad_de_alimentacion}}
+                    </p>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <h6>Información introducida por: </h6>
+                    <p> {{antecedentes_personales_no_patologicos.informacion_introducida_por}}
+                    </p>
+                </div>
+            </div>
 
           </div>
 
   </div>
-  
+
+
+
+
   
   </div>
 </div>

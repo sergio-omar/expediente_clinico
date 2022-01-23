@@ -143,6 +143,12 @@ class Antecedentes_personales_no_patologicos(db.Model,UserMixin):
     calidad_de_alimentacion = db.Column(db.String(30),unique=False,nullable=False)
     caracteristicas_de_habitacion = db.Column(db.String(30),unique=False,nullable=False)
 
+class Antecedentes_pediatricos(db.Model,UserMixin):
+    id = db.Column(db.Integer(),autoincrement=True,primary_key=True)
+    enter_id = db.Column(db.Integer(),unique=True,nullable=False)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
+    antecedentes_pediatricos_entrevista = db.Column(db.Text) 
 #probably we wont use them
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(),Length(
@@ -208,14 +214,25 @@ def antecedentes_personales_patologicos():
         patient =  Patient.query.filter_by(enter_id = enter_id).first()
         return render_template("antecedentes_personales_patologicos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
 
-@app.route('/antecedentes_pediatricos')
+@app.route('/antecedentes_pediatricos', methods=["GET","POST"])
 def antecedentes_pediatricos():
     if request.method == "GET":
         data = request.args
         enter_id = data.get("enter_id")
-        patient =  Patient.query.filter_by(enter_id = enter_id).first()
-        return render_template("antecedentes_pediatricos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
-
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("antecedentes_pediatricos.html", names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month)
+    if request.method == 'POST':
+        data = request.form
+        antecedentes_pediatricos = Antecedentes_pediatricos(enter_id = data["enter_id"],
+        antecedentes_pediatricos_entrevista = data["antecedentes_pediatricos_entrevista"], 
+        informacion_introducida_por = data['informacion_introducida_por'])
+        db.session.add(antecedentes_pediatricos)
+        db.session.commit()
+        return redirect(url_for("dashboard"))
+    
 @app.route('/antecedentes_gineco_obstetricos')
 def antecedentes_gineco_obstetricos():
     if request.method == "GET":
