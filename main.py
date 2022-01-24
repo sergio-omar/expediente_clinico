@@ -306,11 +306,11 @@ def patient_dashboard():
         somatometria = Somatometria.query.filter_by(enter_id=enter_id).first()
         atencion_medica = Atencion_medica.query.filter_by(enter_id=enter_id).first()
         antecedentes_personales_no_patologicos = Antecedentes_personales_no_patologicos.query.filter_by(enter_id=enter_id).first()
-        print(antecedentes_personales_no_patologicos)
+        antecedentes_pediatricos = Antecedentes_pediatricos.query.filter_by(enter_id=enter_id).first()
         age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
         enter_date = patient.enter_date
         enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
-        return render_template("patient_dashboard.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,somatometria=somatometria,atencion_medica=atencion_medica,antecedentes_personales_no_patologicos=antecedentes_personales_no_patologicos)
+        return render_template("patient_dashboard.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,somatometria=somatometria,atencion_medica=atencion_medica,antecedentes_personales_no_patologicos=antecedentes_personales_no_patologicos, antecedentes_pediatricos= antecedentes_pediatricos)
 
 @app.route('/atencion_medica',methods=['GET','POST'])
 @login_required
