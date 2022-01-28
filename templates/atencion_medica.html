@@ -5,7 +5,7 @@
     <!-- NAV BAR-->
 
     {% from "patient_navbar.html" import patient_navbar with context %}
-    {{patient_navbar(id)}}
+    {{patient_navbar(enter_id)}}
     {% from "patient_navbar.html" import patient_info with context %}
     {{patient_info( names,first_lastname,gender,age,enter_id,enter_date)}}  
         <div class="jumbotron">
@@ -14,15 +14,10 @@
                     <hr>
             </div>
         <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label>Ficha de ingreso</label>
-                </div>
-            </div>
             <form method="POST" id="resumen_clinico_form">
                 <div class="col">
                     <div class="form-group">
-                    <input class="form-control" type="number" id="enter_id" name="enter_id" readonly value={{enter_id}}>
+                    <input class="form-control" type="number" id="enter_id" name="enter_id" hidden="true" value="{{enter_id}}">
                     <input type="hidden" name="informacion_introducida_por" id="informacion_introducida_por" value="{{current_user.username}}">
                     </div>
                 </div>
@@ -34,13 +29,21 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="padecimiento_actual">Padecimiento Actual:</label><br>
-                        <textarea class="form-control" rows="7" type="text" id="padecimiento_actual" name="padecimiento_actual"></textarea><br>
+                        <textarea class="form-control" rows="5" type="text" id="padecimiento_actual" name="padecimiento_actual"></textarea><br>
                     </div>
-                </div>
+            
+                        <h5>Exploración física:</h5>
+                         <div class="from-group">
+                             <label for="detalles_exploracion_fisica">Detalles de exploración física:</label>
+                             <textarea rows="4" class="form-control" id="detalles_exploracion_fisica" name="detalles_exploracion_fisica"> </textarea>
+                         </div>
+                 </div>
+
+
+
                 <div class="col-6">
 
-                    <h5>Exploración física</h5>
-                    <div class="row">
+                                        <div class="row">
                         <div class="col">
                             <div class="form-group">
                                 <label for="peso">Peso:</label><br>
@@ -61,6 +64,7 @@
                         </div>
                     </div>
                     <hr>
+                    <h4>Signos Vitales</h4>
                     <div class="row">
                         <div class="col">
                             <div class="form-group">

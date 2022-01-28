@@ -5,7 +5,7 @@
     <!-- NAV BAR-->
 
     {% from "patient_navbar.html" import patient_navbar with context %}
-    {{patient_navbar(id)}}
+    {{patient_navbar(enter_id)}}
     {% from "patient_navbar.html" import patient_info with context %}
     {{patient_info( names,first_lastname,gender,age,enter_id,enter_date)}}  
         <div class="jumbotron">
@@ -22,7 +22,7 @@
             <form method="POST" id="antecedentes_pediatricos_form">
                 <div class="col">
                     <div class="form-group">
-                    <input class="form-control" type="number" id="enter_id" name="enter_id" readonly value={{enter_id}}>
+                    <input class="form-control" type="number" id="enter_id" name="enter_id" readonly value="{{enter_id}}">
                     <input type="hidden" name="informacion_introducida_por" id="informacion_introducida_por" value="{{current_user.username}}">
                     </div>
                 </div>

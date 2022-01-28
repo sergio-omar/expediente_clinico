@@ -65,6 +65,7 @@ class Atencion_medica(db.Model, UserMixin):
     frecuencia_respiratoria = db.Column(db.Float(),nullable=False)
     temperatura = db.Column(db.Float(),nullable=False)
     padecimiento_actual = db.Column(db.Text)
+    detalles_exploracion_fisica = db.Column(db.Text)
     tratamiento = db.Column(db.Text)
     nombre_del_medico = db.Column(db.String(50),nullable=False)
     cedula = db.Column(db.String(20),nullable=False)
@@ -149,6 +150,14 @@ class Antecedentes_pediatricos(db.Model,UserMixin):
     informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
     enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
     antecedentes_pediatricos_entrevista = db.Column(db.Text) 
+
+class Antecedentes_personales_patologicos(db.Model,UserMixin):
+    id = db.Column(db.Integer(),autoincrement=True,primary_key=True)
+    enter_id = db.Column(db.Integer(),unique=True,nullable=False)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
+    antecedentes_patologicos_entrevista = db.Column(db.Text) 
+
 #probably we wont use them
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(),Length(
@@ -206,13 +215,27 @@ def antecedentes_heredo_familiares():
         patient =  Patient.query.filter_by(enter_id = enter_id).first()
         return render_template("antecedentes_heredo_familiares.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
 
-@app.route('/antecedentes_personales_patologicos')
-def antecedentes_personales_patologicos():
+
+
+@app.route('/antecedentes_personales_patologicos', methods=["GET","POST"])
+def antecedentes_persolanes_patologicos():
     if request.method == "GET":
         data = request.args
         enter_id = data.get("enter_id")
-        patient =  Patient.query.filter_by(enter_id = enter_id).first()
-        return render_template("antecedentes_personales_patologicos.html",names=patient.names,id=patient.enter_id,first_lastname=patient.first_lastname)
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("antecedentes_personales_patologicos.html", names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month)
+    if request.method == 'POST':
+        data = request.form
+        antecedentes_pediatricos = Antecedentes_personales_patologicos(enter_id = data["enter_id"],
+        antecedentes_patologicos_entrevista = data["antecedentes_patologicos_entrevista"], 
+        informacion_introducida_por = data['informacion_introducida_por'])
+        db.session.add(antecedentes_pediatricos)
+        db.session.commit()
+        return redirect(url_for("dashboard"))
+
 
 @app.route('/antecedentes_pediatricos', methods=["GET","POST"])
 def antecedentes_pediatricos():
@@ -307,10 +330,11 @@ def patient_dashboard():
         atencion_medica = Atencion_medica.query.filter_by(enter_id=enter_id).first()
         antecedentes_personales_no_patologicos = Antecedentes_personales_no_patologicos.query.filter_by(enter_id=enter_id).first()
         antecedentes_pediatricos = Antecedentes_pediatricos.query.filter_by(enter_id=enter_id).first()
+        antecedentes_personales_patologicos = Antecedentes_personales_patologicos.query.filter_by(enter_id=enter_id).first()
         age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
         enter_date = patient.enter_date
         enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
-        return render_template("patient_dashboard.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,somatometria=somatometria,atencion_medica=atencion_medica,antecedentes_personales_no_patologicos=antecedentes_personales_no_patologicos, antecedentes_pediatricos= antecedentes_pediatricos)
+        return render_template("patient_dashboard.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,somatometria=somatometria,atencion_medica=atencion_medica,antecedentes_personales_no_patologicos=antecedentes_personales_no_patologicos,antecedentes_pediatricos= antecedentes_pediatricos,antecedentes_personales_patologicos=antecedentes_personales_patologicos)
 
 @app.route('/atencion_medica',methods=['GET','POST'])
 @login_required
@@ -328,6 +352,7 @@ def atencion_medica():
         new_atencion_medica = Atencion_medica(enter_id = data["enter_id"],
         informacion_introducida_por = data["informacion_introducida_por"],
         padecimiento_actual = data["padecimiento_actual"],
+        detalles_exploracion_fisica = data["detalles_exploracion_fisica"],
         peso = data['peso'],
         altura = data['altura'],
         imc = data["imc"],
