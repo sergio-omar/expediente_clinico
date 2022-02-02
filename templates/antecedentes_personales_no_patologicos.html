@@ -16,14 +16,13 @@
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label>Ficha de ingreso</label>
                 </div>
             </div>
             <form method="POST" id="antecedentes_personales_no_patologicos_form">
                 <div class="col">
                     <div class="form-group">
                     <input class="form-control" type="number" id="enter_id" name="enter_id" hidden value="{{enter_id}}">
-                    <input type="text" id="informacion_introducida_por" name="informacion_introducida_por" value="{{current_user.username}}" >
+                    <input class="form-control" type="text" id="informacion_introducida_por" name="informacion_introducida_por" value="{{current_user.username}}" readonly="true">
                     </div>
                 </div>
             </div>
@@ -115,8 +114,8 @@
                 </div>
                 <div class="col">
                     <div clas="form-group">
-                        <label for="higiene_personal">Igiene personal</label><br>
-                        <select class="form-control" type="text" id="igiene_personal" name="igiene_personal">
+                        <label for="higiene_personal">Higiene personal</label><br>
+                        <select class="form-control" type="text" id="higiene_personal" name="higiene_personal">
                             <option value="Buena">Buena</option>
                             <option value="Deficiente">Deficiente</option>
                             <option value="Mala">Mala</option>
@@ -271,7 +270,7 @@
           <p>Escolaridad: </p>
           <h3 id="modal_escolaridad" value=""></h3>
           <p>Igiene Personal: </p>
-          <h3 id="modal_igiene_personal" value=""></h3>
+          <h3 id="modal_higiene_personal" value=""></h3>
           <p>Actividad Fisica</p>
           <h3 id="modal_actividad_fisica" value=""></h3>
           <p>Tipo de actividad física</p>
@@ -313,7 +312,7 @@ function fill_modal(){
     document.getElementById("modal_lugar_de_nacimiento").innerText = document.getElementById("lugar_de_nacimiento").value.trim()
     document.getElementById("modal_estado_civil").innerText = document.getElementById("estado_civil").value.trim()
     document.getElementById("modal_escolaridad").innerText = document.getElementById("escolaridad").value.trim()
-    document.getElementById("modal_igiene_personal").innerText = document.getElementById("igiene_personal").value.trim()
+    document.getElementById("modal_higiene_personal").innerText = document.getElementById("higiene_personal").value.trim()
     if (document.getElementById("actividad_fisica_si").checked == true){
         document.getElementById("actividad_fisica").value = "Con actividad física"
         document.getElementById("modal_actividad_fisica").innerText = "Con actividad física"

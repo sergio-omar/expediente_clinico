@@ -133,7 +133,7 @@ class Antecedentes_personales_no_patologicos(db.Model,UserMixin):
     lugar_de_nacimiento = db.Column(db.String(40),unique=False,nullable=False)
     estado_civil = db.Column(db.String(30),unique=False,nullable=False)
     escolaridad = db.Column(db.String(30),unique=False,nullable=False)
-    igiene_personal = db.Column(db.String(30),unique=False,nullable=False)
+    higiene_personal = db.Column(db.String(30),unique=False,nullable=False)
     actividad_fisica = db.Column(db.String(30),unique=False,nullable=False)
     tipo_de_actividad = db.Column(db.String(30),unique=False,nullable=True)
     frecuencia_num = db.Column(db.String(30),unique=False,nullable=True)
@@ -304,6 +304,7 @@ def somatometria():
 
     if request.method == 'POST':
         data = request.form
+        patient = Patient.query.filter_by(enter_id=data["enter_id"]).first()
         new_somatometria = Somatometria(enter_id = data["enter_id"],
         peso = data['peso'],
         altura = data['altura'],
@@ -316,6 +317,7 @@ def somatometria():
         informacion_introducida_por = data['informacion_introducida_por'])
         db.session.add(new_somatometria)
         db.session.commit()
+        log_action(current_user.username,"se creo somatometria del paciente: %s %s %s"%(patient.names,patient.first_lastname,patient.second_lastname))
 
         return redirect(url_for("dashboard"))
 
@@ -427,7 +429,7 @@ def antecedentes_personales_no_patologicos():
         lugar_de_nacimiento = data['lugar_de_nacimiento'],
         estado_civil = data['estado_civil'],
         escolaridad = data['escolaridad'],
-        igiene_personal = data['igiene_personal'],
+        higiene_personal = data['higiene_personal'],
         actividad_fisica = data['actividad_fisica'],
         tipo_de_actividad = data['tipo_de_actividad'],
         frecuencia_num = data['frecuencia_num'],
