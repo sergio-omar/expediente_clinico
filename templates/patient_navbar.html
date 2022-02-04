@@ -8,7 +8,7 @@ barSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
+        <li class="nav-item">
           <a class="nav-link" role="button" href="patient_dashboard?enter_id={{patient.enter_id}}" aria-haspopup="true" aria-expanded="false">Expediente Clínico</a>
       </li>
       <li class="nav-item dropdown">
@@ -43,8 +43,19 @@ barSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <a class="dropdown-item" href="/atencion_medica?enter_id={{enter_id}}">Atención medica</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+
+        <li class="nav-item dropdown">
+            <a class="dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sergio</a>
+        </li>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div> 
+        <li class="nav-item">
+        <a class="nav-link dropdown" href="#">Disabled</a>
+            <a class="dropdown-item" href="/atencion_medica?enter_id={{enter_id}}">Atención medica</a>
+
       </li>
     </ul>
  </div>

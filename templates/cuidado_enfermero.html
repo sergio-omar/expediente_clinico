@@ -1,0 +1,136 @@
+{%extends "base.html" %}
+{%block content%}
+<div class="col-1"></div>
+<div class="col-10">
+    <!-- NAV BAR-->
+
+    {% from "patient_navbar.html" import patient_navbar with context %}
+    {{patient_navbar(enter_id)}}
+    {% from "patient_navbar.html" import patient_info with context %}
+    {{patient_info( names,first_lastname,gender,age,enter_id,enter_date)}}  
+        <div class="jumbotron">
+            <div class="row">
+                    <h4>Antecedentes Pediátricos</h4>
+                    <hr>
+            </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label>Ficha de ingreso</label>
+                </div>
+            </div>
+            <form method="POST" id="antecedentes_pediatricos_form">
+                <div class="col">
+                    <div class="form-group">
+                    <input class="form-control" type="number" id="enter_id" name="enter_id" readonly value="{{enter_id}}">
+                    <input type="hidden" name="informacion_introducida_por" id="informacion_introducida_por" value="{{current_user.username}}">
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="row">
+                <!-- we divide the entire section into two parts-->
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="padecimiento_actual">Padecimiento pediátrico:</label><br>
+                        <textarea class="form-control" rows="7" type="text" id="antecedentes_pediatricos_entrevista" name="antecedentes_pediatricos_entrevista"></textarea><br>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="medico">Nombre del Médico:</label>
+                        <input class="form-control" id="nombre_del_medico" name="nombre_del_medico" value="{{current_user.user_names}} {{current_user.user_first_lastname}} {{current_user.user_second_lastname}}"  readonly>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="cedula">Cédula:</label>
+                        <input class="form-control" name="cedula" id="cedula" value="{{current_user.user_cedula}}" readonly>
+                    </div>
+                </div>
+            </div>
+            <button onclick="fill_modal()" type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#atencion-medica-modal">Revisar información</button>            
+            <br>
+            <br>
+            <button type="submit" class="btn btn-secondary form-control">Cancelar ingreso</button>   
+        </form>
+        <br>
+    </div>
+</div>
+<div class="col-1"></div>
+
+<!--MODAL -->
+<div class="modal fade" id="atencion-medica-modal" tabindex="-1" role="dialog" aria-labelledby="patient-modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registro de paciente</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <p>Padecimiento Actual:</p>
+          <h3 id="modal_padecimiento_actual" value=""> </h3>
+          <p>Peso:</p>
+          <h3 id="modal_peso" value=""> </h3>
+          <p>Altura:</p>
+          <h3 id="modal_altura"></h3>
+          <p>TA Sistólica:</p>
+          <h3 id="modal_ta_sistolica" value=""></h3>
+          <p>TA Diastólica: </p>
+          <h3 id="modal_ta_diastolica" value=""></h3>
+          <p>Frecuencia cardiaca: </p>
+          <h3 id="modal_frecuencia_cardiaca" value=""></h3>
+          <p>Frecuencia respiratoria</p>
+          <h3 id="modal_frecuencia_respiratoria" value=""></h3>
+          <p>Temperatura:</p>
+          <h3 id="modal_temperatura"></h3>
+          <hr>
+          <p>Dado de alta por:</p>
+          <p>{{current_user.username}}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button onclick="send_form()" type="button" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--END MODAL-->
+<script>
+function fill_imc(){                                                                                          
+    if (document.getElementById("peso").value !=  '' && document.getElementById("altura").value != '' ){      
+        var peso = parseFloat(document.getElementById("peso").value)                                          
+        var altura = parseFloat(document.getElementById("altura").value)                                      
+        var imc = peso / (altura * altura)                                                                    
+        document.getElementById("imc").value = imc.toFixed(2)                                                 
+    }                                                                                                         
+}                                                                                                             
+                                                                                                              
+document.getElementById("peso").addEventListener("change",fill_imc)                                           
+document.getElementById("altura").addEventListener("change",fill_imc)                                          
+
+function fill_modal(){
+    //GET ALL "padecimientos"
+    document.getElementById("modal_padecimiento_actual").innerText = document.getElementById("padecimiento_actual").value.trim()
+    document.getElementById("modal_peso").innerText = document.getElementById("peso").value.trim()
+    document.getElementById("modal_altura").innerText = document.getElementById("altura").value.trim()
+    document.getElementById("modal_ta_sistolica").innerText = document.getElementById("ta_sistolica").value.trim()
+    document.getElementById("modal_ta_diastolica").innerText = document.getElementById("ta_diastolica").value.trim()
+    document.getElementById("modal_frecuencia_cardiaca").innerText = document.getElementById("frecuencia_cardiaca").value.trim()
+    document.getElementById("modal_frecuencia_respiratoria").innerText = document.getElementById("frecuencia_respiratoria").value.trim()
+    document.getElementById("modal_temperatura").innerText = document.getElementById("temperatura").value.trim()
+    }
+
+function send_form(){                                                                                               
+   var form = document.getElementById("antecedentes_pediatricos_form")                                                           
+    form.submit()                                                                                                   
+}                                                                                                                   
+</script>
+{%endblock%}
