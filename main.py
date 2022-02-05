@@ -208,6 +208,7 @@ def index():
 #		-Ant. Gineco Obstétricos
 
 @app.route('/antecedentes_heredo_familiares')
+@login_required
 def antecedentes_heredo_familiares():
     if request.method == "GET":
         data = request.args
@@ -218,6 +219,7 @@ def antecedentes_heredo_familiares():
 
 
 @app.route('/antecedentes_personales_patologicos', methods=["GET","POST"])
+@login_required
 def antecedentes_persolanes_patologicos():
     if request.method == "GET":
         data = request.args
@@ -229,15 +231,16 @@ def antecedentes_persolanes_patologicos():
         return render_template("antecedentes_personales_patologicos.html", names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month)
     if request.method == 'POST':
         data = request.form
-        antecedentes_pediatricos = Antecedentes_personales_patologicos(enter_id = data["enter_id"],
+        antecedentes_patologicos = Antecedentes_personales_patologicos(enter_id = data["enter_id"],
         antecedentes_patologicos_entrevista = data["antecedentes_patologicos_entrevista"], 
         informacion_introducida_por = data['informacion_introducida_por'])
-        db.session.add(antecedentes_pediatricos)
+        db.session.add(antecedentes_patologicos)
         db.session.commit()
         return redirect(url_for("dashboard"))
 
 
 @app.route('/antecedentes_pediatricos', methods=["GET","POST"])
+@login_required
 def antecedentes_pediatricos():
     if request.method == "GET":
         data = request.args
@@ -255,8 +258,30 @@ def antecedentes_pediatricos():
         db.session.add(antecedentes_pediatricos)
         db.session.commit()
         return redirect(url_for("dashboard"))
-    
+
+@app.route('/cuidado_enfermero', methods=["GET","POST"])
+@login_required
+def cuidado_enfermero():
+    if request.method == "GET":
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("cuidado_enfermero.html", names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month)
+    if request.method == 'POST':
+        data = request.form
+        new_cuidado_enfermero = Cuidado_enfermero(enter_id = data["enter_id"],
+        antecedentes_pediatricos_entrevista = data["antecedentes_pediatricos_entrevista"], 
+        informacion_introducida_por = data['informacion_introducida_por'])
+        db.session.add(new_cuidado_enfermero)
+        db.session.commit()
+        return redirect(url_for("dashboard"))
+
+
 @app.route('/antecedentes_gineco_obstetricos')
+@login_required
 def antecedentes_gineco_obstetricos():
     if request.method == "GET":
         data = request.args
@@ -370,7 +395,6 @@ def atencion_medica():
         db.session.commit()
         return redirect(url_for("dashboard"))
 
-    
 
 @app.route('/antecedentes_heredofamiliares',methods=['GET','POST'])
 def antecedentes_heredofamiliares():
@@ -388,10 +412,8 @@ def manage_accounts():
         print(user_to_modify.username)
         if data["user_activated"] == "true":
             activated = True
-            print("------------The user is now activated ------")
         else:
             activated = False
-            print("-----The user is DESACTIVATED----")
         user_to_modify.active_user = activated
         db.session.commit()
         flash("Se modifico correctamente","alert alert-success")
