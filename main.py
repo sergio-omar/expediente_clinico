@@ -76,7 +76,7 @@ class Patient(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     enter_id = db.Column(db.Integer,nullable=False,unique=True)
     enter_date = db.Column(db.DateTime, default = datetime.datetime.utcnow)
-    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=True)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
     names = db.Column(db.String(20),nullable=False,unique=False)
     first_lastname = db.Column(db.String(30),nullable=False,unique=False)
     second_lastname = db.Column(db.String(30),nullable=False,unique=False)
@@ -149,7 +149,105 @@ class Antecedentes_pediatricos(db.Model,UserMixin):
     enter_id = db.Column(db.Integer(),unique=True,nullable=False)
     informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
     enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
-    antecedentes_pediatricos_entrevista = db.Column(db.Text) 
+    antecedentes_pediatricos_entrevista = db.Column(db.Text)
+    
+#ce = cuidado_enfermero
+class Ce_diagnosticos_enfermeria(db.Model,UserMixin):
+    id = db.Column(db.Integer(),autoincrement=True,primary_key=True)
+    enter_id = db.Column(db.Integer(),unique=False,nullable=False)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
+    turno = db.Column(db.String(20),unique=False,nullable=False)
+    hora= db.Column(db.Integer(),unique=False)
+    minuto = db.Column(db.Integer(),unique=False)
+    day = db.Column(db.Integer(),unique=False)
+    month = db.Column(db.Integer(),unique=False)
+    year = db.Column(db.Integer(),unique=False)
+    diagnosticos_enfermeria = db.Column(db.Text())
+    resultados_esperados = db.Column(db.Text())
+
+class Ce_prevencion_caidas(db.Model,UserMixin):
+    id = db.Column(db.Integer(),autoincrement=True,primary_key=True)
+    enter_id = db.Column(db.Integer(),unique=False,nullable=False)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
+    turno = db.Column(db.String(20),unique=False,nullable=False)
+    hora= db.Column(db.Integer(),unique=False)
+    minuto = db.Column(db.Integer(),unique=False)
+    day = db.Column(db.Integer(),unique=False)
+    month = db.Column(db.Integer(),unique=False)
+    year = db.Column(db.Integer(),unique=False)
+    tipo_prevencion = db.Column(db.String(60))
+
+class Ce_prevencion_ulceras(db.Model,UserMixin):
+    id = db.Column(db.Integer(),autoincrement=True,primary_key=True)
+    enter_id = db.Column(db.Integer(),unique=False,nullable=False)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
+    turno = db.Column(db.String(20),unique=False,nullable=False)
+    hora= db.Column(db.Integer(),unique=False)
+    minuto = db.Column(db.Integer(),unique=False)
+    day = db.Column(db.Integer(),unique=False)
+    month = db.Column(db.Integer(),unique=False)
+    year = db.Column(db.Integer(),unique=False)
+    tipo_prevencion = db.Column(db.String(60))
+
+class Ce_cuidado_heridas(db.Model,UserMixin):
+    id = db.Column(db.Integer(),autoincrement=True,primary_key=True)
+    enter_id = db.Column(db.Integer(),unique=False,nullable=False)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
+    turno = db.Column(db.String(20),unique=False,nullable=False)
+    hora= db.Column(db.Integer(),unique=False)
+    minuto = db.Column(db.Integer(),unique=False)
+    day = db.Column(db.Integer(),unique=False)
+    month = db.Column(db.Integer(),unique=False)
+    year = db.Column(db.Integer(),unique=False)
+    tipo_cuidado = db.Column(db.String(60))
+
+class Ce_cuidado_acceso(db.Model,UserMixin):
+    id = db.Column(db.Integer(),autoincrement=True,primary_key=True)
+    enter_id = db.Column(db.Integer(),unique=False,nullable=False)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
+    turno = db.Column(db.String(20),unique=False,nullable=False)
+    hora= db.Column(db.Integer(),unique=False)
+    minuto = db.Column(db.Integer(),unique=False)
+    day = db.Column(db.Integer(),unique=False)
+    month = db.Column(db.Integer(),unique=False)
+    year = db.Column(db.Integer(),unique=False)
+    tipo_cuidado = db.Column(db.String(60))
+    lugar_anatomico = db.Column(db.String(60))
+
+class Ce_oxigenoterapia(db.Model,UserMixin):
+    id = db.Column(db.Integer(),autoincrement=True,primary_key=True)
+    enter_id = db.Column(db.Integer(),unique=False,nullable=False)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
+    turno = db.Column(db.String(20),unique=False,nullable=False)
+    hora= db.Column(db.Integer(),unique=False)
+    minuto = db.Column(db.Integer(),unique=False)
+    day = db.Column(db.Integer(),unique=False)
+    month = db.Column(db.Integer(),unique=False)
+    year = db.Column(db.Integer(),unique=False)
+
+class Ce_constantes_vitales(db.Model,UserMixin):
+    id = db.Column(db.Integer(),autoincrement=True,primary_key=True)
+    enter_id = db.Column(db.Integer(),unique=False,nullable=False)
+    informacion_introducida_por = db.Column(db.String(20),nullable=False,unique=False)
+    enter_date = db.Column(db.DateTime, default = datetime.datetime.now)
+    turno = db.Column(db.String(20),unique=False,nullable=False)
+    hora= db.Column(db.Integer(),unique=False)
+    minuto = db.Column(db.Integer(),unique=False)
+    day = db.Column(db.Integer(),unique=False)
+    month = db.Column(db.Integer(),unique=False)
+    year = db.Column(db.Integer(),unique=False)
+    ta_sistolica = db.Column(db.Float(),unique=False)
+    ta_diastolica = db.Column(db.Float(),unique=False)
+    frecuencia_cardiaca = db.Column(db.Float(),unique=False)
+    frecuencia_respiratoria = db.Column(db.Float(),unique=False)
+    temperatura = db.Column(db.Float(),unique=False)
+    oximetria = db.Column(db.Float(),unique=False)
 
 class Antecedentes_personales_patologicos(db.Model,UserMixin):
     id = db.Column(db.Integer(),autoincrement=True,primary_key=True)
@@ -263,21 +361,206 @@ def antecedentes_pediatricos():
 @login_required
 def cuidado_enfermero():
     if request.method == "GET":
+        today = datetime.date.today()
         data = request.args
         enter_id = data.get("enter_id")
         patient = Patient.query.filter_by(enter_id=enter_id).first()
         age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
         enter_date = patient.enter_date
         enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
-        return render_template("cuidado_enfermero.html", names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month)
+        return render_template("cuidado_enfermero.html", names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,today=today)
     if request.method == 'POST':
         data = request.form
-        new_cuidado_enfermero = Cuidado_enfermero(enter_id = data["enter_id"],
-        antecedentes_pediatricos_entrevista = data["antecedentes_pediatricos_entrevista"], 
+        new_ce_diagnostico_enfermeria = Ce_diagnosticos_enfermeria(enter_id = data["enter_id"],
+        turno = data['turno'],
+        hora = data['hora'],
+        minuto = data['minuto'],
+        day = data["day"],
+        month = data["month"],
+        year = data["year"],
+        diagnosticos_enfermeria = data['diagnosticos_enfermeria'],
+        resultados_esperados = data['resultados_esperados'],
         informacion_introducida_por = data['informacion_introducida_por'])
-        db.session.add(new_cuidado_enfermero)
+        db.session.add(new_ce_diagnostico_enfermeria)
         db.session.commit()
-        return redirect(url_for("dashboard"))
+        flash("Información guardada exitosamente.","alert alert-success") 
+        return redirect(url_for("cuidado_enfermero",enter_id=data["enter_id"]))
+
+@app.route('/prevencion_caidas', methods=["GET","POST"])
+@login_required
+def prevencion_caidas():
+    if request.method == "GET":
+        today = datetime.date.today()
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("prevencion_caidas.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,today = today)
+    if request.method == 'POST':
+        data = request.form
+        new_ce_prevencion_caidas = Ce_prevencion_caidas(enter_id = data["enter_id"],
+        turno = data['turno'],
+        hora = data['hora'],
+        minuto = data['minuto'],
+        day = data["day"],
+        month = data["month"],
+        year = data["year"],
+        tipo_prevencion = data['tipo_prevencion'],
+        informacion_introducida_por = data['informacion_introducida_por'])
+        db.session.add(new_ce_prevencion_caidas)
+        db.session.commit()
+        flash("Información guardada exitosamente.","alert alert-success")
+        return redirect(url_for("prevencion_caidas",enter_id=data["enter_id"]))
+
+@app.route('/prevencion_ulceras', methods=["GET","POST"])
+@login_required
+def prevencion_ulceras():
+    if request.method == "GET":
+        today = datetime.date.today()
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("prevencion_ulceras.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,today = today)
+    if request.method == 'POST':
+        data = request.form
+        new_ce_prevencion_ulceras = Ce_prevencion_ulceras(enter_id = data["enter_id"],
+        turno = data['turno'],
+        hora = data['hora'],
+        minuto = data['minuto'],
+        day = data["day"],
+        month = data["month"],
+        year = data["year"],
+        tipo_prevencion = data['tipo_prevencion'],
+        informacion_introducida_por = data['informacion_introducida_por'])
+        db.session.add(new_ce_prevencion_ulceras)
+        db.session.commit()
+        flash("Información guardada exitosamente.","alert alert-success")
+        return redirect(url_for("prevencion_ulceras",enter_id=data["enter_id"]))
+
+@app.route('/cuidado_heridas', methods=["GET","POST"])
+@login_required
+def cuidado_heridas():
+    if request.method == "GET":
+        today = datetime.date.today()
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("cuidado_heridas.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,today = today)
+    if request.method == 'POST':
+        data = request.form
+        new_ce_cuidado_heridas = Ce_cuidado_heridas(enter_id = data["enter_id"],
+        turno = data['turno'],
+        hora = data['hora'],
+        minuto = data['minuto'],
+        day = data["day"],
+        month = data["month"],
+        year = data["year"],
+        tipo_cuidado = data['tipo_cuidado'],
+        informacion_introducida_por = data['informacion_introducida_por'])
+        db.session.add(new_ce_cuidado_heridas)
+        db.session.commit()
+        flash("Información guardada exitosamente.","alert alert-success")
+        return redirect(url_for("cuidado_heridas",enter_id=data["enter_id"]))
+
+@app.route('/cuidado_accesos', methods=["GET","POST"])
+@login_required
+def cuidado_accesos():
+    if request.method == "GET":
+        today = datetime.date.today()
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("cuidado_accesos.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,today = today)
+
+    if request.method == 'POST':
+        data = request.form
+        new_ce_cuidado_heridas = Ce_cuidado_heridas(enter_id = data["enter_id"],
+        turno = data['turno'],
+        hora = data['hora'],
+        minuto = data['minuto'],
+        day = data["day"],
+        month = data["month"],
+        year = data["year"],
+        tipo_cuidado = data['tipo_cuidado'],
+        lugar_anatomico = data['lugar_anatomico'],
+        informacion_introducida_por = data['informacion_introducida_por'])
+        db.session.add(new_ce_cuidado_heridas)
+        db.session.commit()
+        flash("Información guardada exitosamente.","alert alert-success")
+        return redirect(url_for("cuidado_accesos",enter_id=data["enter_id"]))
+
+
+@app.route('/oxigenoterapia', methods=["GET","POST"])
+@login_required
+def oxigenoterapia():
+    if request.method == "GET":
+        today = datetime.date.today()
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("oxigenoterapia.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,today = today)
+
+    if request.method == 'POST':
+        data = request.form
+        new_oxigenoterapia = Ce_oxigenoterapia(enter_id = data["enter_id"],
+        turno = data['turno'],
+        hora = data['hora'],
+        minuto = data['minuto'],
+        day = data["day"],
+        month = data["month"],
+        year = data["year"],
+        informacion_introducida_por = data['informacion_introducida_por'])
+        db.session.add(new_oxigenoterapia)
+        db.session.commit()
+        flash("Información guardada exitosamente.","alert alert-success")
+        return redirect(url_for("oxigenoterapia",enter_id=data["enter_id"]))
+
+@app.route('/constantes_vitales', methods=["GET","POST"])
+@login_required
+def constantes_vitales():
+    if request.method == "GET":
+        today = datetime.date.today()
+        data = request.args
+        enter_id = data.get("enter_id")
+        patient = Patient.query.filter_by(enter_id=enter_id).first()
+        age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
+        enter_date = patient.enter_date
+        enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
+        return render_template("constantes_vitales.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,today = today)
+    if request.method == 'POST':
+        data = request.form
+        new_constantes_vitales = Ce_constantes_vitales(enter_id = data["enter_id"],
+        turno = data['turno'],
+        hora = data['hora'],
+        minuto = data['minuto'],
+        day = data["day"],
+        month = data["month"],
+        year = data["year"],
+        informacion_introducida_por = data['informacion_introducida_por'],
+        ta_sistolica = data['ta_sistolica'],
+        ta_diastolica = data['ta_diastolica'],
+        frecuencia_cardiaca = data['frecuencia_cardiaca'],
+        frecuencia_respiratoria = data['frecuencia_respiratoria'],
+        temperatura = data['temperatura'],
+        oximetria = data['oximetria'])
+        db.session.add(new_constantes_vitales)
+        db.session.commit()
+        flash("Información guardada exitosamente.","alert alert-success")
+        return redirect(url_for("constantes_vitales",enter_id=data["enter_id"]))
 
 
 @app.route('/antecedentes_gineco_obstetricos')
@@ -357,11 +640,40 @@ def patient_dashboard():
         atencion_medica = Atencion_medica.query.filter_by(enter_id=enter_id).first()
         antecedentes_personales_no_patologicos = Antecedentes_personales_no_patologicos.query.filter_by(enter_id=enter_id).first()
         antecedentes_pediatricos = Antecedentes_pediatricos.query.filter_by(enter_id=enter_id).first()
+        ce_diagnosticos_enfermeria = Ce_diagnosticos_enfermeria.query.filter_by(enter_id=enter_id).all()
+        ce_prevencion_caidas = Ce_prevencion_caidas.query.filter_by(enter_id=enter_id).all()
+        ce_prevencion_ulceras = Ce_prevencion_ulceras.query.filter_by(enter_id=enter_id).all()
+        ce_cuidado_heridas = Ce_cuidado_heridas.query.filter_by(enter_id=enter_id).all()
+        ce_oxigenoterapia = Ce_oxigenoterapia.query.filter_by(enter_id=enter_id).all()
+        ce_constantes_vitales = Ce_constantes_vitales.query.filter_by(enter_id=enter_id).all()
+        label_chart = create_label_chart(ce_constantes_vitales)
+        print(label_chart)
+        temp_chart = create_data_chart(ce_constantes_vitales,"temperatura")
+        oximetria_chart = create_data_chart(ce_constantes_vitales,"oximetria")
         antecedentes_personales_patologicos = Antecedentes_personales_patologicos.query.filter_by(enter_id=enter_id).first()
         age = get_age(int(patient.dia_nacimiento),int(patient.mes_nacimiento),int(patient.ano_nacimiento))
         enter_date = patient.enter_date
         enter_date = f"{enter_date.day} de {format_spanish_month(enter_date.month)} {enter_date.year} "
-        return render_template("patient_dashboard.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,somatometria=somatometria,atencion_medica=atencion_medica,antecedentes_personales_no_patologicos=antecedentes_personales_no_patologicos,antecedentes_pediatricos= antecedentes_pediatricos,antecedentes_personales_patologicos=antecedentes_personales_patologicos)
+        return render_template("patient_dashboard.html",names=patient.names,enter_id=patient.enter_id,first_lastname=patient.first_lastname,gender=patient.gender,age=age,enter_date=enter_date,patient=patient,format_spanish_month=format_spanish_month,somatometria=somatometria,atencion_medica=atencion_medica,antecedentes_personales_no_patologicos=antecedentes_personales_no_patologicos,antecedentes_pediatricos=antecedentes_pediatricos,antecedentes_personales_patologicos=antecedentes_personales_patologicos,ce_diagnosticos_enfermeria=ce_diagnosticos_enfermeria,ce_prevencion_caidas=ce_prevencion_caidas,ce_prevencion_ulceras=ce_prevencion_ulceras,ce_cuidado_heridas=ce_cuidado_heridas,ce_oxigenoterapia=ce_oxigenoterapia,ce_constantes_vitales=ce_constantes_vitales,label_chart=label_chart,temp_chart=temp_chart,oximetria_chart=oximetria_chart)
+
+def create_label_chart(input):
+    output = []
+    for e in input:
+        label = "`{h}:{m} {d}-{mon}`".format(h=str(e.hora).zfill(2),m=str(e.minuto).zfill(2),d=e.day,mon=e.month)
+        output.append(label)
+        output_string = ",".join(output)
+        output_string = "["+ output_string + "]"
+    return output_string
+
+def create_data_chart(input,data):
+    output = []
+    for e in input:
+        output.append(str(getattr(e,data)))
+        output_string = ",".join(output)
+        output_string = "[" + output_string +"]"
+    return output_string
+
+
 
 @app.route('/atencion_medica',methods=['GET','POST'])
 @login_required

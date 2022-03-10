@@ -1,5 +1,7 @@
 {%extends "base.html" %}
 {%block content%}
+<script src="static/chart/chart.js"></script>
+
 <div class="col-1"></div>
 <div class="col-10">
     <!-- NAV BAR-->
@@ -11,6 +13,7 @@
     
         <h3>Expediente Clínico</h3> 
         <hr>
+    <div class="row">
     <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <a class="nav-item nav-link active" id="informacion-general-tab" data-toggle="tab" href="#nav-informacion-general" role="tab" aria-controls="nav-home" aria-selected="true">Información General</a>
@@ -19,8 +22,11 @@
     <a class="nav-item nav-link" id="antecedentes-personales-no-patologicos-tab" data-toggle="tab" href="#nav-antecedentes-personales-no-patologicos" role="tab" aria-controls="nav-contact" aria-selected="false">Antecedentes personales no patológicos</a>
     <a class="nav-item nav-link" id="antecedentes-pediatricos-tab" data-toggle="tab" href="#nav-antecedentes-pediatricos" role="tab" aria-controls="nav-contact" aria-selected="false">Antecedentes pediátricos</a>
     <a class="nav-item nav-link" id="antecedentes-personales-patologicos-tab" data-toggle="tab" href="#nav-antecedentes-personales-patologicos" role="tab" aria-controls="nav-contact" aria-selected="false">Antecedentes personales patológicos</a>
+<a class="nav-item nav-link" id="cuidado_enfermero-tab" data-toggle="tab" href="#nav-cuidado_enfermero" role="tab" aria-controls="nav-contact" aria-selected="false">Cuidado Enfermero</a>
   </div>
 </nav>
+</div>
+<br>
 <div class="tab-content" id="nav-main">
   <div class="tab-pane fade show active" id="nav-informacion-general" role="tabpanel" aria-labelledby="nav-home-tab">
 
@@ -390,10 +396,6 @@
 
 
 
-
-
-
-
 <div class="tab-pane fade" id="nav-antecedentes-pediatricos" role="tabpanel" aria-labelledby="nav-contact-tab">  
   <div class="card card-body">
            
@@ -420,10 +422,6 @@
 
 
 
-
-
-
-
 <div class="tab-pane fade" id="nav-antecedentes-personales-patologicos" role="tabpanel" aria-labelledby="nav-contact-tab">  
   <div class="card card-body">
             <div class="row">
@@ -444,9 +442,358 @@
             </div>
 
           </div>
-
   </div>
 
+
+
+<div class="tab-pane fade" id="nav-cuidado_enfermero" role="tabpanel" aria-labelledby="nav-contact-tab">  
+  <div class="card card-body">
+      <h3>Cuidado Enfermero</h3>
+      <nav>
+
+<div class="nav nav-tabs" id="nav-tab" role="tablist">
+<a class="nav-item nav-link" id="ce-tab" data-toggle="tab" href="#nav-ce" role="tab" aria-controls="nav-contact" aria-selected="false">Diagnosticos</a>
+<a class="nav-item nav-link" id="ce-tab" data-toggle="tab" href="#nav-prevencion_caidas" role="tab" aria-controls="nav-contact" aria-selected="false">Prevencion de caidas</a>
+<a class="nav-item nav-link" id="prevencion_ulceras-tab" data-toggle="tab" href="#nav-prevencion_ulceras" role="tab" aria-controls="nav-contact" aria-selected="false">Prevención de úlceras</a>
+<a class="nav-item nav-link" id="cuidado_heridas-tab" data-toggle="tab" href="#nav-cuidado_heridas" role="tab" aria-controls="nav-contact" aria-selected="false">Cuidado de heridas</a>
+<a class="nav-item nav-link" id="oxigenoterapia-tab" data-toggle="tab" href="#nav-oxigenoterapia" role="tab" aria-controls="nav-contact" aria-selected="false">Oxigenoterapia</a>
+<a class="nav-item nav-link" id="constantes_vitales-tab" data-toggle="tab" href="#nav-constantes_vitales" role="tab" aria-controls="nav-contact" aria-selected="false">Constantes vitales</a>
+
+  </div>
+    </nav>
+        <div class="tab-content" id="nav-cuidado_enfermero">
+            <div class="tab-pane fade show active" id="nav-ce" role="tabpanel" aria-labelledby="nav-contact-tab">  
+                <div class="card card-body">
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                     <div class="col">
+                         <h5>Fecha/Hora:</h5>
+                     </div>
+                     <div class="col">
+                         <h5>Turno:</h5>
+                     </div>
+                     <div class="col">
+                         <h5>Información introducida por:</h5>
+                     </div>
+                    </div>
+                </div>    
+                <div class="col-6">
+                    <div class="col">
+                        <h5>Diagnóstico:</h5>
+                    </div>
+                </div>
+            </div> 
+            <hr>
+                {%for element in ce_diagnosticos_enfermeria %}
+                <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                     <div class="col">
+                        <p>{{element.day}}/{{element.month}}/{{element.year}} {{element.hora}}:{{element.minuto}}</p>
+
+                     </div>
+                     <div class="col">
+                         <p>{{element.turno}}</p>
+                     </div>
+                     <div class="col">
+                         <p>{{element.informacion_introducida_por}}</p>
+                     </div>
+                    </div>
+                </div>    
+                <div class="col-6">
+                    <div class="col">
+                        <p>{{element.diagnosticos_enfermeria}}</p>
+                    </div>
+                </div>
+            </div> 
+
+                {%endfor%} 
+          </div>
+  </div>
+  
+
+<div class="tab-pane fade" id="nav-prevencion_caidas" role="tabpanel" aria-labelledby="nav-contact-tab">  
+  <div class="card card-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                     <div class="col">
+                         <h5>Fecha/Hora:</h5>
+                     </div>
+                     <div class="col">
+                         <h5>Turno:</h5>
+                     </div>
+                     <div class="col">
+                         <h5>Información introducida por:</h5>
+                     </div>
+                    </div>
+                </div>    
+                <div class="col-6">
+                    <div class="col">
+                        <h5>Tipo de prevención:</h5>
+                    </div>
+                </div>
+            </div> 
+            <hr>
+                {%for element in ce_prevencion_caidas %}
+                <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                     <div class="col">
+                         <p>{{element.day}}/{{element.month}}/{{element.year}} {{element.hora}}:{{element.minuto}}</p>
+                     </div>
+                     <div class="col">
+                         <p>{{element.turno}}</p>
+                     </div>
+                     <div class="col">
+                         <p>{{element.informacion_introducida_por}}</p>
+                     </div>
+                    </div>
+                </div>    
+                <div class="col-6">
+                    <div class="col">
+                        <p>{{element.tipo_prevencion}}</p>
+                    </div>
+                </div>
+            </div> 
+
+                {%endfor%} 
+          </div>
+  </div>
+  
+
+
+<div class="tab-pane fade" id="nav-prevencion_ulceras" role="tabpanel" aria-labelledby="nav-contact-tab">  
+  <div class="card card-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                     <div class="col">
+                         <h5>Fecha/Hora:</h5>
+                     </div>
+                     <div class="col">
+                         <h5>Turno:</h5>
+                     </div>
+                     <div class="col">
+                         <h5>Información introducida por:</h5>
+                     </div>
+                    </div>
+                </div>    
+                <div class="col-6">
+                    <div class="col">
+                        <h5>Tipo de prevención:</h5>
+                    </div>
+                </div>
+            </div> 
+            <hr>
+                {%for element in ce_prevencion_ulceras %}
+                <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                     <div class="col">
+                         <p>{{element.day}}/{{element.month}}/{{element.year}} {{element.hora}}:{{element.minuto}}</p>
+                     </div>
+                     <div class="col">
+                         <p>{{element.turno}}</p>
+                     </div>
+                     <div class="col">
+                         <p>{{element.informacion_introducida_por}}</p>
+                     </div>
+                    </div>
+                </div>    
+                <div class="col-6">
+                    <div class="col">
+                        <p>{{element.tipo_prevencion}}</p>
+                    </div>
+                </div>
+            </div> 
+
+                {%endfor%} 
+          </div>
+  </div>
+
+
+
+
+
+<div class="tab-pane fade" id="nav-cuidado_heridas" role="tabpanel" aria-labelledby="nav-contact-tab">  
+  <div class="card card-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                     <div class="col">
+                         <h5>Fecha/Hora:</h5>
+                     </div>
+                     <div class="col">
+                         <h5>Turno:</h5>
+                     </div>
+                     <div class="col">
+                         <h5>Información introducida por:</h5>
+                     </div>
+                    </div>
+                </div>    
+                <div class="col-6">
+                    <div class="col">
+                        <h5>Tipo de cuidado:</h5>
+                    </div>
+                </div>
+            </div> 
+            <hr>
+                {%for element in ce_cuidado_heridas %}
+                <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                     <div class="col">
+                         <p>{{element.day}}/{{element.month}}/{{element.year}} {{element.hora}}:{{element.minuto}}</p>
+                     </div>
+                     <div class="col">
+                         <p>{{element.turno}}</p>
+                     </div>
+                     <div class="col">
+                         <p>{{element.informacion_introducida_por}}</p>
+                     </div>
+                    </div>
+                </div>    
+                <div class="col-6">
+                    <div class="col">
+                        <p>{{element.tipo_cuidado}}</p>
+                    </div>
+                </div>
+            </div> 
+
+                {%endfor%} 
+          </div>
+  </div>
+
+
+
+
+
+
+<div class="tab-pane fade" id="nav-oxigenoterapia" role="tabpanel" aria-labelledby="nav-contact-tab">  
+  <div class="card card-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                     <div class="col">
+                         <h5>Fecha/Hora:</h5>
+                     </div>
+                     <div class="col">
+                         <h5>Turno:</h5>
+                     </div>
+                     <div class="col">
+                         <h5>Información introducida por:</h5>
+                     </div>
+                    </div>
+                </div>    
+                <div class="col-6">
+                    <div class="col">
+                        <h5>Tipo de cuidado:</h5>
+                    </div>
+                </div>
+            </div> 
+            <hr>
+                {%for element in ce_oxigenoterapia %}
+                <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                     <div class="col">
+                         <p>{{element.day}}/{{element.month}}/{{element.year}} {{element.hora}}:{{element.minuto}}</p>
+                     </div>
+                     <div class="col">
+                         <p>{{element.turno}}</p>
+                     </div>
+                     <div class="col">
+                         <p>{{element.informacion_introducida_por}}</p>
+                     </div>
+                    </div>
+                </div>    
+                <div class="col-6">
+                    <div class="col">
+                        <p>{{element.tipo_cuidado}}</p>
+                    </div>
+                </div>
+            </div> 
+
+                {%endfor%} 
+          </div>
+  </div>
+
+
+
+
+<div class="tab-pane fade" id="nav-constantes_vitales" role="tabpanel" aria-labelledby="nav-contact-tab">  
+  <div class="card card-body">
+
+            <div class="row">
+            <canvas id="temp_chart"></canvas>
+            <canvas id="oximetria_chart"></canvas>
+            </div>
+            <br>
+            <br>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-4">
+                            <h5>Fecha/Hora:</h5>
+                        </div>
+                        <div class="col-4">
+                             <h5>Turno:</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5>Información introducida por:</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row">
+                    <div class="col-6">
+                        <h5>Temperatura:</h5>
+                    </div>
+                    <div class="col-6">
+                        <h5>Oximetría:</h5>
+                    </div>
+                </div>
+                </div>
+            </div> 
+            <hr>
+                {%for element in ce_constantes_vitales %}
+                <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                     <div class="col-4">
+                         <p>{{element.day}}/{{element.month}}/{{element.year}} {{element.hora}}:{{element.minuto}}</p>
+                     </div>
+                     <div class="col-4">
+                         <p>{{element.turno}}</p>
+                     </div>
+                     <div class="col-4">
+                         <p>{{element.informacion_introducida_por}}</p>
+                     </div>
+                    </div>
+                </div>    
+                <div class="col-6">
+                    <div class="row">
+                    <div class="col-6">
+                        <p>{{element.temperatura}}</p>
+                    </div>
+                    <div class="col-6">
+                        <p>{{element.oximetria}}</p>
+                    </div>
+                    </div>
+                </div>
+            </div> 
+
+                {%endfor%} 
+  
+
+</div>
+  </div>
+
+  </div>
 
 
 
@@ -474,4 +821,56 @@ function fill_modal(){
 
                                                                                                                    
 </script>
+
+<script>
+ 
+    const labels = {{label_chart}} ;
+
+  const data_temp = {
+    labels: labels,
+    datasets: [{
+      label: 'Temperatura (°C)',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+        data: {{temp_chart}},
+    }]
+  };
+
+  const config_temp = {
+    type: 'bar',
+    data: data_temp,
+    options: {}
+  };
+
+  const data_oximetria = {
+    labels: labels,
+    datasets: [{
+      label: 'Oximetría (%)',
+      backgroundColor: 'rgb(99, 180, 255)',
+      borderColor: 'rgb(99, 180, 255)',
+        data: {{oximetria_chart}},
+    }]
+  };
+    
+
+  const config_oximetria = {
+    type: 'line',
+    data: data_oximetria,
+    options: {}
+  };
+</script>
+
+
+<script>
+  const new_temp_chart = new Chart(
+    document.getElementById('temp_chart'),
+    config_temp
+  );
+const new_oximetria_chart = new Chart(
+    document.getElementById('oximetria_chart'),
+    config_oximetria
+  );
+
+</script>
+
 {%endblock%}

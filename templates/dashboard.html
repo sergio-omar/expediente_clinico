@@ -1,6 +1,26 @@
 {%extends "base.html"%}
 {%block content%}
 
+      <style type="text/css">
+        body, html {
+        height: 100%;
+        }
+        .bg {
+          /* ruta de imagen dentro de Tag Background/Image */
+          background-image: url("static/images/background.jpg");
+          /* Altura Maxima*/
+          height: 100%;
+
+          /* Centrar y escalar imagen */
+          background-position: center;
+          background-repeat: no-repeat;
+          background-size: cover;
+        }
+      </style>
+
+
+      <div class="bg">
+    </div>
 <div style="background-image: url('static/images/background.jpg');width: 100%; height:800px;">
     <div class="row">
 {% with messages=get_flashed_messages(with_categories=true)%}
